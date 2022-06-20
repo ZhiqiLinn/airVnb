@@ -1,0 +1,62 @@
+
+Table users {
+  id integer
+  username varchar
+  profilePic url
+  email varchar
+  hashedPassword varchar
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+
+Table listings {
+  id integer
+  userId integer
+  name varchar
+  about text 
+  address varchar 
+  city varchar 
+  state varchar 
+  price varchar 
+  serviceFee varchar 
+  img1 varchar 
+  img2 varchar 
+  img3 varchar 
+  created_at timeStamp 
+  updated_at timeStamp 
+  
+}
+Table bookings {
+  id integer 
+  userId integer 
+  listingId integer 
+  checkIn date 
+  checkOut date 
+  created_at timeStamp 
+  updated_at timeStamp 
+  }
+
+Table reviews {
+  id integer
+  userId integer
+  listingId integer
+  rating integer
+  content text
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+
+
+
+
+
+Ref: "users"."id" < "listings"."userId"
+
+Ref: "users"."id" < "bookings"."userId"
+
+Ref: "users"."id" < "reviews"."userId"
+
+Ref: "listings"."id" < "bookings"."listingId"
+
