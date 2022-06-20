@@ -15,18 +15,7 @@ Login Page:
 
 Signup Page:
 
-Posting Your Spot:
+Listing Feature:
 
-Check Your Spot:
+Bookings Feature:
 
-Edit Your Spot:
-
-Delete Your Spot:
-
-Posting Your Bookings:
-
-Check Your Bookings:
-
-Edit Your Booking:
-
-Delete Your Booking:
