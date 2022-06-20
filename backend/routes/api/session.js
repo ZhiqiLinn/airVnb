@@ -7,7 +7,7 @@ const { User } = require('../../db/models');
 const router = express.Router();
 
 
-// ----------------------------Log in----------------------------
+// ----------------------------LOG IN----------------------------
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
@@ -39,4 +39,48 @@ router.post(
 //     },
 //     body: JSON.stringify({ credential: 'Demo-lition', password: 'password' })
 //   }).then(res => res.json()).then(data => console.log(data));
+
+
+
+
+
+// ----------------------------LOG OUT----------------------------
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
+);
+
+
+// fetch('/api/session', {
+//   method: 'DELETE',
+//   headers: {
+//     "Content-Type": "application/json",
+//     "XSRF-TOKEN": `K1ZlZVNJ-evFYsJiwnOdeaPrvQjiUHLvXWbA`
+//   }
+// }).then(res => res.json()).then(data => console.log(data));
+
+
+
+//----------------------------RESTORE SESSION USER------------------
+
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject()
+      });
+    } else return res.json({});
+  }
+);
+
+
 module.exports = router;
+
+
+
