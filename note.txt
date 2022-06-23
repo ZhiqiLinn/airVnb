@@ -1,0 +1,59 @@
+Front-End Routes
+
+## Home Page '/'
+> This page displays the splash page.
+#### Link:
+> * /login
+> * /signup
+> * /listings
+
+## Log-in Page'/login'
+This page displays a log in form and allows user to log in.
+#### API:
+> * POST /login
+
+
+## Sign-up Page '/signup'
+This page displays a sign up form and allows user to sign up.
+#### API:
+> * POST /signup
+
+## Listings Page '/listings/new'
+This page displays a listing posting form and allows user to post a listing.
+#### API:
+> * POST /listings/new
+
+## Listings Page '/listings'
+This page displays all the Listings.
+#### Link:
+> * /listings/:id
+#### API:
+> * POST /listings/:id/bookings
+
+## User Listings Page '/user/:id/listings'
+This page displays all the Listings that were posted by the logged in user.
+#### Link:
+> * listings/:id
+> * DELETE /listings/:id
+
+## User Listing Detail Page '/listings/:id'
+#### Link:
+> * /user/:id/bookings
+#### API:
+> * PUT /listings/:id
+> * POST /bookings
+
+## User Bookings Page '/user/:id/bookings'
+This page displays all the bookings that were reserved by the logged in user.
+#### Link:
+> * /bookings/:id
+#### API:
+> * PUT /bookings/:id
+> * DELETE /bookings/:id
+
+## User Bookings Detail Page '/bookingss/:id'
+#### Link:
+> * /user/:id/bookings
+#### API:
+> * PUT /bookings/:id
+> * POST /bookings
