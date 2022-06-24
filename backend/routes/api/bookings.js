@@ -45,7 +45,7 @@ router.get('/', asyncHandler(async (_req, res) => {
 
 
 
-//------------------------------------------------POST A LISTING----------------------------------------------
+//------------------------------------------------POST A BOOKING----------------------------------------------
 router.post(
     '/',
     validateBooking,
@@ -87,6 +87,71 @@ router.post(
         //     })
         //     }).then(res => res.json()).then(data => console.log(data));
 
-
+//---------------------------------------------------EDIT A BOOKING---------------------------------------------------
+router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) {
+    const bookingId = parseInt(req.params.id, 10);
+    let currBooking = await Booking.findByPk(bookingId);
+    const validationErrors = validationResult(req);
+    const {
+        userId,
+        listingId,
+        checkIn,
+        checkOut
+    } = req.body;
+      
+  
+    if (validationErrors.isEmpty()) {
+      await currBooking.update({
+        userId,
+        listingId,
+        checkIn,
+        checkOut
+    })
+      const newBooking = await Booking.findByPk(bookingId);
+    res.json({newBooking});
+  } else {
+    res.status(422).json({ errors: validationErrors.array() });
+  }
+  }));
+  
+      // --FETCH TEST:
+        //   fetch('/api/Bookings/1', {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //       "XSRF-TOKEN": ``
+        //     },
+        //     body: JSON.stringify({
+        //         userId:"1",
+        //         listingId:"1",
+        //         checkIn:"2022-08-01",
+        //         checkOut:"2022-08-03"
+        //   })
+        //   }).then(res => res.json()).then(data => console.log(data));
+  
+  
+  
+  
+  //----------------------------------------------DELETE A BOOKING---------------------------------------------
+  router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
+    const booking = await Booking.findByPk(req.params.id)
+    if (booking) {
+        await booking.destroy()
+        res.json({ message: 'Success' })
+    } else {
+        res.json({ message: 'Fail' })
+    }
+  }))
+  
+  // FETCH TEST
+    // fetch('/api/bookings/1', { 
+    //   method: "DELETE",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "XSRF-TOKEN": `oRyFhSGl-iDVtRlNy16zLRIFqLoUC0gHzLzA`
+    //   }
+    // }).then(res => res.json()).then(data => console.log(data));
+  
+  
 
     module.exports = router;

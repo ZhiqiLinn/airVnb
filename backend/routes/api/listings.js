@@ -106,7 +106,7 @@ router.post(
 
     // --FETCH TEST:
       //   fetch('/api/listings', {
-      //     method: "PUT",
+      //     method: "POST",
       //     headers: {
       //       "Content-Type": "application/json",
       //       "XSRF-TOKEN": ``
@@ -168,7 +168,7 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
 
     // --FETCH TEST:
       //   fetch('/api/listings/1', {
-      //     method: "POST",
+      //     method: "PUT",
       //     headers: {
       //       "Content-Type": "application/json",
       //       "XSRF-TOKEN": ``
