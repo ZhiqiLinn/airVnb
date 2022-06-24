@@ -6,7 +6,7 @@ const { Listing } = require("../../db/models")
 
 const router = express.Router();
 
-//-------------------VALIDATION FOR POSTING A LISTING----------------------
+//--------------------------------------VALIDATION FOR POSTING A LISTING---------------------------------------
 const validateListing = [
     check('name')
       .exists({ checkFalsy: true })
@@ -39,7 +39,7 @@ const validateListing = [
     handleValidationErrors
   ];
 
-//-------------------GET TO LISTINGS PAGE--------------------------
+//-----------------------------------------------GET TO LISTINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
     const listing = await Listing.findAll({
         order:[['createdAt', 'ASC']]
@@ -47,8 +47,17 @@ router.get('/', asyncHandler(async (_req, res) => {
     return res.json(listing);
   }));
 
+    // --FETCH TEST:
+      //fetch('/api/listings', {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "XSRF-TOKEN": `APdIoYf6-5GVtVCwNjx53Mu_BKL_QR5FP0u8`
+      //   }
+      // }).then(res => res.json()).then(data => console.log(data));
 
-  //-------------------POST A LISTING----------------------------------
+
+  //------------------------------------------------POST A LISTING----------------------------------------------
 router.post(
     '/',
     validateListing,
@@ -87,25 +96,106 @@ router.post(
       }
 }));
 
-// --FETCH TEST:
-//   fetch('/api/listing', {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "XSRF-TOKEN": ``
-//     },
-//     body: JSON.stringify({
-//         userId:"2",
-//         name:"newListing",
-//         about:"newListing",
-//         city:"newListing",
-//         state:"newListing",
-//         price:"100",
-//         serviceFee:"25",
-//         img1:"https://a0.muscache.com/im/pictures/prohost-api/Hosting-50634369/original/ddbbcb9a-0b44-4677-a194-f032d7bbb0d6.jpeg?im_w=1200",
-//         img2:null,
-//         img3:null,
-//   })
-//   }).then(res => res.json()).then(data => console.log(data));
+    // --FETCH TEST:
+      //   fetch('/api/listings', {
+      //     method: "PUT",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "XSRF-TOKEN": ``
+      //     },
+      //     body: JSON.stringify({
+      //         userId:"2",
+      //         name:"EditnewListing",
+      //         about:"newListing",
+      //         city:"newListing",
+      //         state:"newListing",
+      //         price:"100",
+      //         serviceFee:"25",
+      //         img1:"https://a0.muscache.com/im/pictures/prohost-api/Hosting-50634369/original/ddbbcb9a-0b44-4677-a194-f032d7bbb0d6.jpeg?im_w=1200",
+      //         img2:null,
+      //         img3:null,
+      //   })
+      //   }).then(res => res.json()).then(data => console.log(data));
+
+//---------------------------------------------------EDIT A LISTING---------------------------------------------------
+router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) {
+  const listingId = parseInt(req.params.id, 10);
+  let currListing = await Listing.findByPk(listingId);
+  const validationErrors = validationResult(req);
+  const {
+    userId,
+    name,
+    about,
+    city,
+    state,
+    price,
+    serviceFee,
+    img1,
+    img2,
+    img3} = req.body;
+    
+
+  if (validationErrors.isEmpty()) {
+    await currListing.update({
+      userId,
+      name,
+      about,
+      city,
+      state,
+      price,
+      serviceFee,
+      img1,
+      img2,
+      img3})
+    const newListing = await Listing.findByPk(listingId);
+  res.json({newListing});
+} else {
+  res.status(422).json({ errors: validationErrors.array() });
+}
+}));
+
+    // --FETCH TEST:
+      //   fetch('/api/listings/1', {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "XSRF-TOKEN": ``
+      //     },
+      //     body: JSON.stringify({
+      //         userId:"2",
+      //         name:"newListing",
+      //         about:"newListing",
+      //         city:"newListing",
+      //         state:"newListing",
+      //         price:"100",
+      //         serviceFee:"25",
+      //         img1:"https://a0.muscache.com/im/pictures/prohost-api/Hosting-50634369/original/ddbbcb9a-0b44-4677-a194-f032d7bbb0d6.jpeg?im_w=1200",
+      //         img2:null,
+      //         img3:null,
+      //   })
+      //   }).then(res => res.json()).then(data => console.log(data));
+
+
+//----------------------------------------------DELETE A LISTING---------------------------------------------
+router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
+  const listing = await Listing.findByPk(req.params.id)
+  if (listing) {
+      await listing.destroy()
+      res.json({ message: 'Success' })
+  } else {
+      res.json({ message: 'Fail' })
+  }
+}))
+
+// FETCH TEST
+  // fetch('/api/listings/6', {
+  //   method: "DELETE",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "XSRF-TOKEN": `oRyFhSGl-iDVtRlNy16zLRIFqLoUC0gHzLzA`
+  //   }
+  // }).then(res => res.json()).then(data => console.log(data));
+
+
 
 module.exports = router;
