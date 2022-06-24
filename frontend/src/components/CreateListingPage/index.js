@@ -19,7 +19,8 @@ const CreateListingPage = () => {
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const currentSessionUser = useSelector(state => state.session.user)
+    const currentSessionUser = useSelector(state => state.session.user.id)
+    console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     useEffect( () => {
         let errors = []
         if (!name.length) errors.push("Name is required");
@@ -152,7 +153,7 @@ const CreateListingPage = () => {
                 <br></br>
                 <h3>Upload images for your listing:</h3>
                 <label>
-                    Image 1:
+                    Image 1 (Required):
                     <input
                         type='text'
                         value={img1}
@@ -162,22 +163,20 @@ const CreateListingPage = () => {
                 </label>
                 <br></br>
                 <label>
-                    Image 2:
+                    Image 2 (Optional):
                     <input
                         type='text'
                         value={img2}
                         onChange={(e) => setImg2(e.target.value)}
-                        required
                     />
                 </label>
                 <br></br>
                 <label>
-                    Image 3:
+                    Image 3 (Optional):
                     <input
                         type='text'
                         value={img3}
                         onChange={(e) => setImg3(e.target.value)}
-                        required
                     />
                      
                 </label>

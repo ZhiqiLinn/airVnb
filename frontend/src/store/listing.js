@@ -46,7 +46,7 @@ export const getOneListing = (listingId) => async (dispatch) => {
 //----------------------- THUNK : CREATE ONE LISTING--------------------
 export const createAListing = (data) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/listings`, {
+    const response = await csrfFetch(`/api/listings`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
