@@ -39,6 +39,10 @@ const validateListing = [
     handleValidationErrors
   ];
 
+
+
+
+
 //-----------------------------------------------GET TO LISTINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
     const listing = await Listing.findAll({
@@ -57,7 +61,11 @@ router.get('/', asyncHandler(async (_req, res) => {
       // }).then(res => res.json()).then(data => console.log(data));
 
 
-  //------------------------------------------------POST A LISTING----------------------------------------------
+
+
+
+
+//------------------------------------------------POST A LISTING----------------------------------------------
 router.post(
     '/',
     validateListing,
@@ -117,6 +125,10 @@ router.post(
       //   })
       //   }).then(res => res.json()).then(data => console.log(data));
 
+
+
+
+
 //---------------------------------------------------EDIT A LISTING---------------------------------------------------
 router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) {
   const listingId = parseInt(req.params.id, 10);
@@ -174,6 +186,8 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
       //         img3:null,
       //   })
       //   }).then(res => res.json()).then(data => console.log(data));
+
+
 
 
 //----------------------------------------------DELETE A LISTING---------------------------------------------
