@@ -11,7 +11,7 @@ const ListingDetailPage = () => {
     const {id} = useParams();
     // console.log("-----THIS IS LISTING ID", id) 
     const currentListing = useSelector(state => state.listingState.listingData[id])
-    console.log("THIS IS CURR LISTING", currentListing)
+    // console.log("THIS IS CURR LISTING", currentListing)
 
     useEffect(() => {
         dispatch(getAllListings())
@@ -22,6 +22,15 @@ const ListingDetailPage = () => {
         <div>
             {currentListing && 
             <>
+                <div className='detail-page-title-container'>
+                    <h2>
+                        {currentListing.name}
+                    </h2>
+                    <p>
+                        {`${currentListing.city}, ${currentListing.state}, US`}
+                    </p>
+
+                </div>
                 <div className='detail-page-imgs-container'>
                     <div>
                         <img src={currentListing.img1}></img>
@@ -55,6 +64,9 @@ const ListingDetailPage = () => {
                         <br></br>Beach access
                         <br></br>Kitchen
                         <br></br>Wifi
+                </div>
+                <div className='detail-page-booking-container'>
+
                 </div>
 
             </>

@@ -15,10 +15,16 @@ const load = (allListings) => ({
   });
   
 
-//----------------------- ACTION CREATOR : LOAD ALL LISTINGS--------------------
+//----------------------- ACTION CREATOR : ADD A LISTING--------------------
 const add = (addedListing) => ({
   type: ADD_Listing,
   addedListing
+});
+
+//----------------------- ACTION CREATOR : EDIT A LISTING--------------------
+const edit = (editedListing) => ({
+  type: EDIT_Listing,
+  editedListing
 });
 
 
@@ -43,8 +49,43 @@ export const getOneListing = (listingId) => async (dispatch) => {
   }
 };
 
+//----------------------- THUNK : EDIT ONE LISTING--------------------
+export const editOneListing = (data) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/listings/${data.id}`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      let error;
+      if (response.status === 422) {
+        error = await response.json();
+        throw new ValidationError(error.errors, response.statusText);
+      } else {
+        let errorJSON;
+        error = await response.text();
+        try {
+          errorJSON = JSON.parse(error);
+        } catch {
+          throw new Error(error);
+        }
+        throw new Error(`${errorJSON.title}: ${errorJSON.message}`);
+      }
+    }
+    const listing = await response.json();
+    dispatch(edit(listing));
+    return listing;
+  } catch (error) {
+    throw error;
+  }
+};
+
 //----------------------- THUNK : CREATE ONE LISTING--------------------
-export const createAListing = (data) => async (dispatch) => {
+export const createOneListing = (data) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/listings`, {
       method: "post",
@@ -77,6 +118,7 @@ export const createAListing = (data) => async (dispatch) => {
     throw error;
   }
 };
+
 //---------------------------REDUCER---------------------------------------------
 const initialState = { listingData: {}};
 
@@ -84,7 +126,7 @@ const listingReducer = (state = initialState, action) => {
     switch (action.type) {
       //--------------------CASE FOR LOAD ALL LISTINGS-------------------------------
       case LOAD_Listing:
-        let newState = {
+        const newState = {
           ...state, 
           listingData: { ...state.listingData } 
         };
@@ -95,7 +137,7 @@ const listingReducer = (state = initialState, action) => {
 
       //--------------------CASE FOR LOAD ONE LISTING-------------------------------
       case ADD_Listing:
-        let addedState = {
+        const addedState = {
           ...state, 
           listingData: { 
             ...state.listingData,
@@ -103,6 +145,15 @@ const listingReducer = (state = initialState, action) => {
           } 
         }
         return addedState;
+      case EDIT_Listing:
+        console.log(action.editedListing)
+        const editedState = {
+          ...state, 
+          listingData: { 
+            [action.editedListing.id]:action.editedListing
+          } 
+        }
+        return editedState;
 
     default:
         return state;

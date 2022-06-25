@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createAListing } from "../../store/listing";
+import { createOneListing } from "../../store/listing";
 // import { getOneListing } from "../store/listing";
 // import ErrorMessage from "./ErrorMessage";
 
@@ -20,6 +20,7 @@ const CreateListingPage = () => {
     const [img3, setImg3] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const currentSessionUser = useSelector(state => state.session.user.id)
+
     console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     useEffect( () => {
         let errors = []
@@ -53,7 +54,7 @@ const CreateListingPage = () => {
             img3
 
         };
-        dispatch(createAListing(payload))
+        dispatch(createOneListing(payload))
         reset();
         setHasSubmitted(false);
         history.push('/')
