@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getAllListings, getOneListing } from '../../store/listing';
 import DeleteListingModal from '../DeleteListingModal';
 import EditListingModal from '../EditListingModal';
@@ -19,7 +19,7 @@ const ListingDetailPage = () => {
     useEffect(() => {
         dispatch(getAllListings())
         dispatch(getOneListing(id))
-    },[dispatch])
+    },[dispatch, id])
 
     //-------------EDIT AND DELETE SECTION FOR OWNER--------------
 
@@ -28,7 +28,7 @@ const ListingDetailPage = () => {
         ownerSection=(
             <div className='detail-page-own-section'>
                 <h4>Owner Actions:</h4>
-                {/* <EditListingModal /> */}
+                <EditListingModal currentListing={currentListing}/>
                 <DeleteListingModal currentListing={currentListing}/>
             </div>
         )
@@ -50,13 +50,13 @@ const ListingDetailPage = () => {
                 </div>
                 <div className='detail-page-imgs-container'>
                     <div>
-                        <img src={currentListing.img1}></img>
+                        <img src={currentListing.img1} alt={currentListing.name}></img>
                     </div>
                     <div>
-                        <img src={currentListing.img2}></img>
+                        <img src={currentListing.img2} alt={currentListing.name}></img>
                     </div>
                     <div>
-                        <img src={currentListing.img3}></img>
+                        <img src={currentListing.img3} alt={currentListing.name}></img>
                     </div>
                 </div>
                 {ownerSection}

@@ -145,16 +145,13 @@ const listingReducer = (state = initialState, action) => {
           } 
         }
         return addedState;
-      // case EDIT_Listing:
-      //   console.log(action.editedListing)
-      //   const editedState = {
-      //     ...state, 
-      //     listingData: { 
-      //       ...state,
-      //       ...action.editedListing
-      //     } 
-      //   }
-      //   return editedState;
+      case EDIT_Listing:
+        console.log(action.editedListing)
+        const editedState = {
+          ...state, 
+          ...[action.editedListing.id]
+          } 
+        return editedState;
       case DELETE_Listing:
         const deletedState = {...state};
         delete deletedState[action.deletedListing.id];

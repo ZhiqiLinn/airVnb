@@ -1,16 +1,20 @@
-import { useDispatch } from "react-redux"
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom";
 import { deleteOneListing } from "../../store/listing";
 
 
 const DeleteListing = ({currentListing, setShowModal}) => {
     console.log("currentListing PROPS", currentListing)
     console.log("showModal PROPS", setShowModal)
+
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const currentSessionUser = useSelector(state => state.session.user.id)
+
     const handleDelete = () => {
         dispatch(deleteOneListing(currentListing))
-        history.go(`/listings/delete`);
+        history.push(`/listings`)
     }
 
     const handleCancel = (e) => {

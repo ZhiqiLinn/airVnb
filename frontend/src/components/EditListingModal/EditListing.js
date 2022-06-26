@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { editOneListing } from "../../store/listing";
+import { editOneListing, getAllListings } from "../../store/listing";
 // import { getOneListing } from "../store/listing";
 // import ErrorMessage from "./ErrorMessage";
 
-const EditListingPage = () => {
+const EditListingPage = ({currentListing}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
@@ -42,6 +42,7 @@ const EditListingPage = () => {
         if (errors.length) return alert(`Cannot Submit`);
     
         const payload = {
+            id:currentListing.id,
             userId:currentSessionUser,
             name,
             about,
@@ -54,6 +55,7 @@ const EditListingPage = () => {
             img3
 
         };
+        dispatch(getAllListings())
         dispatch(editOneListing(payload))
         reset();
         setHasSubmitted(false);
