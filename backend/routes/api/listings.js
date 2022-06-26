@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Listing } = require("../../db/models")
+const { Listing, Booking} = require("../../db/models")
 
 const router = express.Router();
 
@@ -64,7 +64,24 @@ router.get('/', asyncHandler(async (_req, res) => {
 
 
 
+//------------------------------------------------GET A LISTING----------------------------------------------
+router.get('/:id(\\d+)', asyncHandler(async function(req, res) {
+  const listing = await Listing.findByPk(req.params.id, {
+    include:Booking
+  });
+  return res.json(listing);
+}));
 
+//FETCH TEST
+  // fetch('/api/business/4', {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "XSRF-TOKEN": `oRyFhSGl-iDVtRlNy16zLRIFqLoUC0gHzLzA`
+  //   }
+  // }).then(res => res.json()).then(data => console.log(data));
+
+  
 //------------------------------------------------POST A LISTING----------------------------------------------
 router.post(
     '/',
