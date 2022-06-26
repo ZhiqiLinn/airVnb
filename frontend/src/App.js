@@ -7,6 +7,7 @@ import ListingsPage from "./components/ListingsPage";
 import CreateListingPage from "./components/CreateListingPage";
 import HomePage from "./components/HomePage"
 import ListingDetailPage from "./components/ListingDetailPage";
+import DeleteMsgPage from "./components/DeleteListingModal/DeleteMsgPage";
 // import LoginFormPage from "./components/LoginFormPage";
 // import SignupFormPage from "./components/SignupFormPage";
 
@@ -33,8 +34,11 @@ function App() {
           <Route path="/listings/new" exact>
             <CreateListingPage />
           </Route>
-          <Route path="/listings/:id">
+          <Route path="/listings/:id" exact>
             <ListingDetailPage />
+          </Route>
+          <Route path="/listings/delete" exact>
+            <DeleteMsgPage />
           </Route>
         </Switch>
       )}

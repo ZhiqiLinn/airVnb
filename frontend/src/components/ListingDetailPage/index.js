@@ -3,12 +3,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { getAllListings, getOneListing } from '../../store/listing';
+import DeleteListingModal from '../DeleteListingModal';
+import EditListingModal from '../EditListingModal';
 
 
 
 const ListingDetailPage = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
+    const currentSessionUser = useSelector(state => state.session.user.id)
     // console.log("-----THIS IS LISTING ID", id) 
     const currentListing = useSelector(state => state.listingState.listingData[id])
     // console.log("THIS IS CURR LISTING", currentListing)
@@ -18,8 +21,22 @@ const ListingDetailPage = () => {
         dispatch(getOneListing(id))
     },[dispatch])
 
+    //-------------EDIT AND DELETE SECTION FOR OWNER--------------
+
+    let ownerSection;
+    if(currentListing.userId === currentSessionUser){
+        ownerSection=(
+            <div className='detail-page-own-section'>
+                <h4>Owner Actions:</h4>
+                {/* <EditListingModal /> */}
+                <DeleteListingModal currentListing={currentListing}/>
+            </div>
+        )
+    }
+
     return(
         <div>
+
             {currentListing && 
             <>
                 <div className='detail-page-title-container'>
@@ -42,6 +59,7 @@ const ListingDetailPage = () => {
                         <img src={currentListing.img3}></img>
                     </div>
                 </div>
+                {ownerSection}
                 <hr></hr>
                 <div className='detail-page-listing-requirements'>
                     <div>
