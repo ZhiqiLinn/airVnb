@@ -150,9 +150,9 @@ const bookingReducer = (state = initialState, action) => {
           ...state, 
           bookingData: { 
             ...state.bookingData,
-            [action.addedBooking.id]:action.addedBooking
           } 
         }
+        addedState.bookingData[action.addedBooking.id]=action.addedBooking
         return addedState;
       case DELETE_Booking:
         const deletedState = {...state};
