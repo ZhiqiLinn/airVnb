@@ -26,12 +26,19 @@ const BookingsPage = ({allListings, allBookings, sessionUser}) => {
             <div>
             {Object.values(allBookings).map(booking => (
                 <div>
+                    <hr></hr>
                     <div>
-                        <p>{allListings[booking.listingId]}</p>
+                        <img src={booking.Listing.img1} height="100px" width="100px"></img>
+                        <p>{booking.Listing.name}</p>
                     </div>
                     <div>
                         <p>Check In Date : {booking.checkIn}</p>
                         <p>Check Out Date : {booking.checkOut}</p>
+                    </div>
+                    <div>
+                        <button>VIEW DETAILS</button>
+                        <button>EDIT</button>
+                        <button>DELETE</button>
                     </div>
                 </div>
             )
