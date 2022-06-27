@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, Redirect, useHistory } from "react-router-dom";
-import { createOneListing } from "../../store/listing";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { editOneListing, getAllListings } from "../../store/listing";
 // import { getOneListing } from "../store/listing";
 // import ErrorMessage from "./ErrorMessage";
 
-const CreateListingPage = ({sessionUser}) => {
+const EditListingPage = ({currentListing, hideForm}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState ] = useState('');
-    const [price, setPrice] = useState('0');
-    const [serviceFee, setServiceFee] = useState('0');
-    const [img1, setImg1] = useState('');
-    const [img2, setImg2] = useState('');
-    const [img3, setImg3] = useState('');
+    const [name, setName] = useState(currentListing.name);
+    const [about, setAbout] = useState(currentListing.about);
+    const [city, setCity] = useState(currentListing.city);
+    const [state, setState ] = useState(currentListing.state);
+    const [price, setPrice] = useState(`${currentListing.price}`);
+    const [serviceFee, setServiceFee] = useState(`${currentListing.serviceFee}`);
+    const [img1, setImg1] = useState(currentListing.img1);
+    const [img2, setImg2] = useState(currentListing.img2);
+    const [img3, setImg3] = useState(currentListing.img3);
+
+
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const currentSessionUser = useSelector(state => state.session.user.id)
+    
+    console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
 
-    const currentSessionUser = sessionUser.id
+    useEffect(() => {
+        dispatch(getAllListings());
+      }, [dispatch]);
 
-    // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     useEffect( () => {
         let errors = []
         if (!name.length) errors.push("Name is required");
@@ -31,11 +37,11 @@ const CreateListingPage = ({sessionUser}) => {
         if (!state.length) errors.push("State is required");
         if (!price.length) errors.push("Price is required");
         if (!serviceFee.length) errors.push("Service Fee is required");
-        if (!img1) errors.push("Minium of one image is required");
+        if (!img1) errors.push("Minimum of one image is required");
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 
-    let createdListing;
+
     const handleSubmit = e => {
         e.preventDefault();
         
@@ -43,6 +49,7 @@ const CreateListingPage = ({sessionUser}) => {
         if (errors.length) return alert(`Cannot Submit`);
     
         const payload = {
+            id:currentListing.id,
             userId:currentSessionUser,
             name,
             about,
@@ -55,10 +62,12 @@ const CreateListingPage = ({sessionUser}) => {
             img3
 
         };
-        createdListing = dispatch(createOneListing(payload))
+        dispatch(getAllListings())
+        dispatch(editOneListing(payload))
         reset();
         setHasSubmitted(false);
-        window.open('/listings','_self')
+        hideForm();
+        history.push(`/listings/${currentListing.id}`)
       }
     const reset = () => {
         setName('');
@@ -74,7 +83,8 @@ const CreateListingPage = ({sessionUser}) => {
     const handleCancelClick = (e) => {
         e.preventDefault();
         setErrors({});
-        history.push(`/listings`);
+        hideForm();
+        history.push(`/listings/${currentListing.id}`);
     };
 
 
@@ -184,8 +194,8 @@ const CreateListingPage = ({sessionUser}) => {
                 </label>
                 <br></br>
                 <div className='listing-form-btns-div'>
-                    <button className="btn"type='submit' >
-                            Submit Listing
+                    <button className="btn"type='submit'>
+                        Submit Listing
                     </button>
                     <button className="btn"type='button' onClick={handleCancelClick}>
                         Cancel Listing
@@ -196,4 +206,4 @@ const CreateListingPage = ({sessionUser}) => {
     )
 }
 
-export default CreateListingPage;
+export default EditListingPage;

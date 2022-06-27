@@ -1,25 +1,42 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getAllListings, getOneListing } from '../../store/listing';
+import DeleteListingModal from '../DeleteListingModal';
+import EditListingModal from '../EditListingModal';
 
 
 
-const ListingDetailPage = () => {
+const ListingDetailPage = ({sessionUser, allListings}) => {
     const dispatch = useDispatch();
     const {id} = useParams();
+    const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
-    const currentListing = useSelector(state => state.listingState.listingData[id])
+    const currentListing = allListings[id]
     // console.log("THIS IS CURR LISTING", currentListing)
 
     useEffect(() => {
         dispatch(getAllListings())
         dispatch(getOneListing(id))
-    },[dispatch])
+    },[dispatch, id])
+
+    //-------------EDIT AND DELETE SECTION FOR OWNER--------------
+
+    let ownerSection;
+    if(currentListing?.userId === currentSessionUser){
+        ownerSection=(
+            <div className='detail-page-own-section'>
+                <h4>Owner Actions:</h4>
+                <EditListingModal currentListing={currentListing}/>
+                <DeleteListingModal currentListing={currentListing}/>
+            </div>
+        )
+    }
 
     return(
         <div>
+
             {currentListing && 
             <>
                 <div className='detail-page-title-container'>
@@ -33,15 +50,16 @@ const ListingDetailPage = () => {
                 </div>
                 <div className='detail-page-imgs-container'>
                     <div>
-                        <img src={currentListing.img1}></img>
+                        <img src={currentListing.img1} alt={currentListing.name}></img>
                     </div>
                     <div>
-                        <img src={currentListing.img2}></img>
+                        <img src={currentListing.img2} alt={currentListing.name}></img>
                     </div>
                     <div>
-                        <img src={currentListing.img3}></img>
+                        <img src={currentListing.img3} alt={currentListing.name}></img>
                     </div>
                 </div>
+                {ownerSection}
                 <hr></hr>
                 <div className='detail-page-listing-requirements'>
                     <div>

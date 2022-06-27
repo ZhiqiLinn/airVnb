@@ -27,6 +27,13 @@ const edit = (editedListing) => ({
   editedListing
 });
 
+//----------------------- ACTION CREATOR : DELETE A LISTING--------------------
+const remove = (deletedListing) => ({
+  type: DELETE_Listing,
+  deletedListing
+});
+
+
 
 //----------------------- THUNK : GET ALL LISTINGS--------------------
 export const getAllListings = () => async (dispatch) => {
@@ -51,7 +58,6 @@ export const getOneListing = (listingId) => async (dispatch) => {
 
 //----------------------- THUNK : EDIT ONE LISTING--------------------
 export const editOneListing = (data) => async (dispatch) => {
-  try {
     const response = await csrfFetch(`/api/listings/${data.id}`, {
       method: "put",
       headers: {
@@ -59,30 +65,12 @@ export const editOneListing = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     });
-
-    if (!response.ok) {
-      let error;
-      if (response.status === 422) {
-        error = await response.json();
-        throw new ValidationError(error.errors, response.statusText);
-      } else {
-        let errorJSON;
-        error = await response.text();
-        try {
-          errorJSON = JSON.parse(error);
-        } catch {
-          throw new Error(error);
-        }
-        throw new Error(`${errorJSON.title}: ${errorJSON.message}`);
-      }
+    
+    if (response.ok) {
+      const listing = await response.json();
+      dispatch(edit(listing));
     }
-    const listing = await response.json();
-    dispatch(edit(listing));
-    return listing;
-  } catch (error) {
-    throw error;
-  }
-};
+}
 
 //----------------------- THUNK : CREATE ONE LISTING--------------------
 export const createOneListing = (data) => async (dispatch) => {
@@ -119,6 +107,18 @@ export const createOneListing = (data) => async (dispatch) => {
   }
 };
 
+//----------------------- THUNK : DELETE ONE LISTING--------------------
+export const deleteOneListing = (data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/listings/${data.id}`, {
+    method: "delete",
+
+  });
+  
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(remove(listing));
+  }
+}
 //---------------------------REDUCER---------------------------------------------
 const initialState = { listingData: {}};
 
@@ -149,16 +149,17 @@ const listingReducer = (state = initialState, action) => {
         console.log(action.editedListing)
         const editedState = {
           ...state, 
-          listingData: { 
-            [action.editedListing.id]:action.editedListing
+          ...[action.editedListing.id]
           } 
-        }
         return editedState;
-
+      case DELETE_Listing:
+        const deletedState = {...state};
+        delete deletedState[action.deletedListing.id];
+        return deletedState;
     default:
         return state;
 
         
     };
-}
+  }
 export default listingReducer;

@@ -3,19 +3,16 @@ import { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllListings } from '../../store/listing';
-import LoginFormModal from '../LoginFormModal';
 
-const ListingsPage = () => {
+const ListingsPage = ({allListings, sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const allListings = useSelector(state => state.listingState.listingData)
     // console.log("---------THIS IS ALL LISTINGS FROM ListingPage COMPONENT", allListings)
-    const sessionUser = useSelector(state => state.session.user);    
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     
     useEffect(()=>{
         dispatch(getAllListings())
-    },[])
+    },[dispatch])
 
     
     //--------LINK TO POST LISTING WHEN SESSION USER EXISTS---------
@@ -34,6 +31,8 @@ const ListingsPage = () => {
         </div>
         )
     }
+    //-------LINK TO DETAIL PAGE------------------------------------
+
 
     //--------------------------------------------------------------
     
@@ -44,7 +43,7 @@ const ListingsPage = () => {
             {Object.values(allListings).map(({ id, name, img1 }) => (
                 <div>
                     <img src={img1} alt={name}></img>
-                    <li key={id}><NavLink to={`/listings/${id}`}>{name}</NavLink></li>
+                    <NavLink to={`/listings/${id}`}>{name}</NavLink>
                 </div>
             ))}
             </div>
