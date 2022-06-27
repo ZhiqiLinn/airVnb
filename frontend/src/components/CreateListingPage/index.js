@@ -58,7 +58,8 @@ const CreateListingPage = ({sessionUser}) => {
         createdListing = dispatch(createOneListing(payload))
         reset();
         setHasSubmitted(false);
-        window.open('/listings','_self')
+        // window.open('/listings','_self')
+        history.push(`/listings`);
       }
     const reset = () => {
         setName('');

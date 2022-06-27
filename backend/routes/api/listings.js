@@ -177,7 +177,8 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
       img2,
       img3})
     const newListing = await Listing.findByPk(listingId);
-  res.json({newListing});
+    // console.log("!!!!!THIS IS NEW LISTING", newListing)
+  res.json(newListing);
 } else {
   res.status(422).json({ errors: validationErrors.array() });
 }

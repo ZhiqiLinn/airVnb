@@ -14,7 +14,7 @@ const DeleteListing = ({currentListing, setShowModal}) => {
 
     const handleDelete = () => {
         dispatch(deleteOneListing(currentListing))
-        window.open('/listings/delete', '_blank')
+        history.push('/listings/delete')
     }
 
     const handleCancel = (e) => {

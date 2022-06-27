@@ -19,7 +19,6 @@ function App() {
   const sessionUser = useSelector(state => state?.session?.user);    
 
   const allListings = useSelector(state => state.listingState.listingData)  
-
   //RESTORE USER SO THAT YOUR WEBSITE REMEMBER THE LOGGED IN USER
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));

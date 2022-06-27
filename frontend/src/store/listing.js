@@ -65,10 +65,12 @@ export const editOneListing = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     });
-    
+    console.log("~~~RESPONSE", response)
     if (response.ok) {
       const listing = await response.json();
-      dispatch(add(listing));
+      console.log("~~~LISTING", listing)
+      await dispatch(add(listing));
+      return listing
     }
 }
 
@@ -140,11 +142,12 @@ const listingReducer = (state = initialState, action) => {
         const addedState = {
           ...state, 
           listingData: { 
-            ...state.listingData,
-            [action.addedListing.id]:action.addedListing
+            ...state.listingData
           } 
         }
+        addedState.listingData[action.addedListing.id]=action.addedListing
         return addedState;
+        
       // case EDIT_Listing:
       //   console.log(action.editedListing)
       //   const editedState = { 

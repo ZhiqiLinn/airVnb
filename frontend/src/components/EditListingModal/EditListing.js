@@ -19,14 +19,14 @@ const EditListingPage = ({currentListing, hideForm}) => {
     const [img2, setImg2] = useState(currentListing.img2);
     const [img3, setImg3] = useState(currentListing.img3);
 
-    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [hasSubmitted, setHasSubmitted] = useState(true);
     const currentSessionUser = useSelector(state => state.session.user.id)
     
-    console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+    // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
 
-    useEffect(() => {
-        console.log("CURRENTLISTING", currentListing.name)
-    }, [currentListing]);
+    // useEffect(() => {
+    //     console.log("CURRENTLISTING", currentListing.name)
+    // }, [currentListing]);
 
     useEffect(() => {
         dispatch(getAllListings());
@@ -45,10 +45,10 @@ const EditListingPage = ({currentListing, hideForm}) => {
     }, [name, about, city, state, price, serviceFee, img1]);
 
 
-    const handleSubmit = e => {
+    async function handleSubmit(e) {
         e.preventDefault();
-        
-        setHasSubmitted(true);
+        console.log("---------HANDLE SUBMI TOP")
+        // setHasSubmitted(true);
         if (errors.length) return alert(`Cannot Submit`);
     
         const payload = {
@@ -65,11 +65,13 @@ const EditListingPage = ({currentListing, hideForm}) => {
             img3
 
         };
-        dispatch(editOneListing(payload))
-
+        console.log("---------HANDLE SUBMIT", payload)
+        await dispatch(editOneListing(payload))
+        
         reset();
-        setHasSubmitted(false);
+        // setHasSubmitted(false);
         hideForm();
+        history.push(`/listings/${currentListing.id}`);
       }
     const reset = () => {
         setName('');
