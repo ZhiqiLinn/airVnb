@@ -19,7 +19,7 @@ const ListingDetailPage = ({sessionUser, allListings}) => {
     useEffect(() => {
         dispatch(getAllListings())
         dispatch(getOneListing(id))
-    },[dispatch, id])
+    },[dispatch])
 
     //-------------EDIT AND DELETE SECTION FOR OWNER--------------
 

@@ -68,7 +68,7 @@ export const editOneListing = (data) => async (dispatch) => {
     
     if (response.ok) {
       const listing = await response.json();
-      dispatch(edit(listing));
+      dispatch(add(listing));
     }
 }
 
@@ -145,13 +145,16 @@ const listingReducer = (state = initialState, action) => {
           } 
         }
         return addedState;
-      case EDIT_Listing:
-        console.log(action.editedListing)
-        const editedState = {
-          ...state, 
-          ...[action.editedListing.id]
-          } 
-        return editedState;
+      // case EDIT_Listing:
+      //   console.log(action.editedListing)
+      //   const editedState = { 
+      //     ...state, 
+      //     listingData: { 
+      //       ...state.listingData,
+      //       [action.addedListing.id]:action.addedListing
+      //     } 
+      //   }
+      //   return editedState;
       case DELETE_Listing:
         const deletedState = {...state};
         delete deletedState[action.deletedListing.id];
