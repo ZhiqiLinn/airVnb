@@ -19,7 +19,7 @@ const EditListingPage = ({currentListing, hideForm}) => {
     const [img2, setImg2] = useState(currentListing.img2);
     const [img3, setImg3] = useState(currentListing.img3);
 
-    const [hasSubmitted, setHasSubmitted] = useState(true);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
     const currentSessionUser = useSelector(state => state.session.user.id)
     
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)

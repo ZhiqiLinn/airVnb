@@ -15,17 +15,12 @@ const loadBooking = (allBookings) => ({
   });
   
 
-//----------------------- ACTION CREATOR : ADD A BOOKING--------------------
+//----------------------- ACTION CREATOR : ADD/UPDATE A BOOKING--------------------
 const addBooking = (addedBooking) => ({
   type: ADD_Booking,
   addedBooking
 });
 
-//----------------------- ACTION CREATOR : EDIT A BOOKING--------------------
-const editBooking = (editedBooking) => ({
-  type: EDIT_Booking,
-  editedBooking
-});
 
 //----------------------- ACTION CREATOR : DELETE A BOOKING--------------------
 const removeBooking = (deletedBooking) => ({
@@ -77,7 +72,7 @@ export const editOneBooking = (data) => async (dispatch) => {
     
     if (response.ok) {
       const booking = await response.json();
-      dispatch(editBooking(booking));
+      dispatch(addBooking(booking));
     }
 }
 

@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBookingsFromOneUser, getAllBookings} from '../../store/booking';
 import { getAllListings } from '../../store/listing';
-import ListingDetailPage from '../ListingDetailPage';
 import HomePage from '../HomePage'
-
+import EditBookingModal from '../EditBookingModal';
+import DeleteBookingModal from '../DeleteBookingModal';
 const BookingsPage = ({allListings, allBookings}) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -46,8 +46,8 @@ const BookingsPage = ({allListings, allBookings}) => {
                 </div>
                 <div>
                     <button>VIEW DETAILS</button>
-                    <button>EDIT</button>
-                    <button>DELETE</button>
+                    <EditBookingModal booking={booking}/>
+                    <DeleteBookingModal booking={booking}/>
                 </div>
             </div>
         ))}   
