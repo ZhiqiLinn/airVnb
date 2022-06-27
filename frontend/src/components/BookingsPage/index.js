@@ -2,40 +2,43 @@ import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBookings } from '../../store/booking';
+import { getAllBookingsFromOneUser, getAllBookings} from '../../store/booking';
+import { getAllListings } from '../../store/listing';
+import ListingDetailPage from '../ListingDetailPage';
 
-const BookingsPage = () => {
+const BookingsPage = ({allListings, allBookings, sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const allBookings = useSelector(state => state.bookingState.bookingData)
-    const allListings = useSelector(state => state.listingState.listingData)
 
-    console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allBookings)
-    const currentSessionUser = useSelector(state => state.session.user.id);    
-    console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+    // console.log("---------THIS IS ALL BOOKINGS FROM BookingPage COMPONENT", allBookings)
+    // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
+    // console.log("----THIS CURRENT USER ", sessionUser.id)
     
-    const sessionUserBookings = Object.values(allBookings).filter(({userId}) => userId === currentSessionUser)
-    console.log("----THIS user's booking ", sessionUserBookings)
-    
-    const bookingListingId = sessionUserBookings.listingId
-
-
-    
-    console.log("----THIS user's booking's listing ", bookingListingId)
+    // const currentListing = allListings[]
 
     useEffect(()=>{
-        dispatch(getAllBookings())
+        dispatch(getAllListings())
+        dispatch(getAllBookingsFromOneUser(sessionUser.id))
     },[dispatch])
 
     return(
         <>
             <div>
-            {Object.values(sessionUserBookings).map((booking) => (
+            {Object.values(allBookings).map(booking => (
                 <div>
-                    
+                    <div>
+                        <p>{allListings[booking.listingId]}</p>
+                    </div>
+                    <div>
+                        <p>Check In Date : {booking.checkIn}</p>
+                        <p>Check Out Date : {booking.checkOut}</p>
+                    </div>
                 </div>
-            ))}
-            </div>
+            )
+
+            )
+            }   
+            </div>   
         </>
     )
 

@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage"
 import ListingDetailPage from "./components/ListingDetailPage";
 import DeleteMsgPage from "./components/DeleteListingModal/DeleteMsgPage";
 import BookingsPage from "./components/BookingsPage";
+import UserProfile from "./components/Navigation/UserProfile";
 // import LoginFormPage from "./components/LoginFormPage";
 // import SignupFormPage from "./components/SignupFormPage";
 
@@ -17,7 +18,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const sessionUser = useSelector(state => state?.session?.user);    
-
+  const allBookings = useSelector(state => state.bookingState.bookingData)
   const allListings = useSelector(state => state.listingState.listingData)  
   //RESTORE USER SO THAT YOUR WEBSITE REMEMBER THE LOGGED IN USER
   useEffect(() => {
@@ -41,8 +42,11 @@ function App() {
           <Route path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
           </Route>
-          <Route path="/bookings" exact>
-            <BookingsPage />
+          <Route path="/users/:id" exact>
+            <UserProfile/>
+          </Route>
+          <Route path="/users/:id/bookings">
+            <BookingsPage allListings={allListings} allBookings={allBookings} sessionUser={sessionUser}/>
           </Route>
         </Switch>
       )}

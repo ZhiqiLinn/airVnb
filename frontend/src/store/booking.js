@@ -34,10 +34,19 @@ const removeBooking = (deletedBooking) => ({
 });
 
 
-
 //----------------------- THUNK : GET ALL BOOKINGS--------------------
 export const getAllBookings = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings`);
+  const response = await csrfFetch(`/api/bookings`);
+  if (response.ok) {
+      const allBookings = await response.json();
+      // console.log("GET ALL BOOKING THUNK WORKS")
+    dispatch(loadBooking(allBookings));
+  }
+};
+
+//----------------------- THUNK : GET ALL BOOKINGS--------------------
+export const getAllBookingsFromOneUser = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}/bookings`);
     if (response.ok) {
         const allBookings = await response.json();
         // console.log("GET ALL BOOKING THUNK WORKS")

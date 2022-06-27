@@ -115,7 +115,7 @@ router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) 
         checkOut
     })
       const newBooking = await Booking.findByPk(bookingId);
-    res.json({newBooking});
+    res.json(newBooking);
   } else {
     res.status(422).json({ errors: validationErrors.array() });
   }
