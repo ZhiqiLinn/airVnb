@@ -4,12 +4,10 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllListings } from '../../store/listing';
 
-const ListingsPage = () => {
+const ListingsPage = ({allListings, sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const allListings = useSelector(state => state.listingState.listingData)
     // console.log("---------THIS IS ALL LISTINGS FROM ListingPage COMPONENT", allListings)
-    const sessionUser = useSelector(state => state.session.user);    
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     
     useEffect(()=>{

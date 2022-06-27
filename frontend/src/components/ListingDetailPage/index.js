@@ -8,12 +8,12 @@ import EditListingModal from '../EditListingModal';
 
 
 
-const ListingDetailPage = () => {
+const ListingDetailPage = ({sessionUser, allListings}) => {
     const dispatch = useDispatch();
     const {id} = useParams();
-    const currentSessionUser = useSelector(state => state.session.user.id)
+    const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
-    const currentListing = useSelector(state => state.listingState.listingData[id])
+    const currentListing = allListings[id]
     // console.log("THIS IS CURR LISTING", currentListing)
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const ListingDetailPage = () => {
     //-------------EDIT AND DELETE SECTION FOR OWNER--------------
 
     let ownerSection;
-    if(currentListing.userId === currentSessionUser){
+    if(currentListing?.userId === currentSessionUser){
         ownerSection=(
             <div className='detail-page-own-section'>
                 <h4>Owner Actions:</h4>

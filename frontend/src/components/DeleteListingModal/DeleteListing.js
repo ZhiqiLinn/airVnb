@@ -4,8 +4,8 @@ import { deleteOneListing } from "../../store/listing";
 
 
 const DeleteListing = ({currentListing, setShowModal}) => {
-    console.log("currentListing PROPS", currentListing)
-    console.log("showModal PROPS", setShowModal)
+    // console.log("currentListing PROPS", currentListing)
+    // console.log("showModal PROPS", setShowModal)
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const DeleteListing = ({currentListing, setShowModal}) => {
 
     const handleDelete = () => {
         dispatch(deleteOneListing(currentListing))
-        history.push(`/listings`)
+        window.open('/listings/delete', '_blank')
     }
 
     const handleCancel = (e) => {

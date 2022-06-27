@@ -5,23 +5,30 @@ import { editOneListing, getAllListings } from "../../store/listing";
 // import { getOneListing } from "../store/listing";
 // import ErrorMessage from "./ErrorMessage";
 
-const EditListingPage = ({currentListing}) => {
+const EditListingPage = ({currentListing, hideForm}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState ] = useState('');
-    const [price, setPrice] = useState('0');
-    const [serviceFee, setServiceFee] = useState('0');
-    const [img1, setImg1] = useState('');
-    const [img2, setImg2] = useState('');
-    const [img3, setImg3] = useState('');
+    const [name, setName] = useState(currentListing.name);
+    const [about, setAbout] = useState(currentListing.about);
+    const [city, setCity] = useState(currentListing.city);
+    const [state, setState ] = useState(currentListing.state);
+    const [price, setPrice] = useState(`${currentListing.price}`);
+    const [serviceFee, setServiceFee] = useState(`${currentListing.serviceFee}`);
+    const [img1, setImg1] = useState(currentListing.img1);
+    const [img2, setImg2] = useState(currentListing.img2);
+    const [img3, setImg3] = useState(currentListing.img3);
+
+
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const currentSessionUser = useSelector(state => state.session.user.id)
     
     console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+
+    useEffect(() => {
+        dispatch(getAllListings());
+      }, [dispatch]);
+
     useEffect( () => {
         let errors = []
         if (!name.length) errors.push("Name is required");
@@ -30,7 +37,7 @@ const EditListingPage = ({currentListing}) => {
         if (!state.length) errors.push("State is required");
         if (!price.length) errors.push("Price is required");
         if (!serviceFee.length) errors.push("Service Fee is required");
-        if (!img1) errors.push("Minium of one image is required");
+        if (!img1) errors.push("Minimum of one image is required");
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 
@@ -59,7 +66,8 @@ const EditListingPage = ({currentListing}) => {
         dispatch(editOneListing(payload))
         reset();
         setHasSubmitted(false);
-        history.push('/')
+        hideForm();
+        history.push(`/listings/${currentListing.id}`)
       }
     const reset = () => {
         setName('');
@@ -75,7 +83,8 @@ const EditListingPage = ({currentListing}) => {
     const handleCancelClick = (e) => {
         e.preventDefault();
         setErrors({});
-        history.push(`/listings`);
+        hideForm();
+        history.push(`/listings/${currentListing.id}`);
     };
 
 

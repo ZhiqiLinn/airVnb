@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking } = require("../../db/models")
+const { User,Booking } = require("../../db/models")
 
 const router = express.Router();
 
@@ -26,6 +26,7 @@ const validateBooking = [
 //-----------------------------------------------GET TO BOOKINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
     const booking = await Booking.findAll({
+        // where: {userId:},
         order:[['createdAt', 'ASC']]
     })
     return res.json(booking);
@@ -41,8 +42,14 @@ router.get('/', asyncHandler(async (_req, res) => {
       // }).then(res => res.json()).then(data => console.log(data));
 
 
-
-
+//-----------------------------------------------GET TO BOOKING DETAIL PAGE---------------------------------------------
+      router.get('/:id(\\d+)', asyncHandler(async function(req, res) {
+        const booking = await Booking.findByPk(req.params.id, {
+          include:User
+        });
+        return res.json(booking);
+      }));
+      
 
 
 //------------------------------------------------POST A BOOKING----------------------------------------------
@@ -134,7 +141,7 @@ router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) 
   
   //----------------------------------------------DELETE A BOOKING---------------------------------------------
   router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const booking = await Booking.findByPk(req.params.id)
+    const booking = await Booking.findByPk(req.params.id)  
     if (booking) {
         await booking.destroy()
         res.json({ message: 'Success' })

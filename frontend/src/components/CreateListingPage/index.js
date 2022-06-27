@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { createOneListing } from "../../store/listing";
 // import { getOneListing } from "../store/listing";
 // import ErrorMessage from "./ErrorMessage";
 
-const CreateListingPage = () => {
+const CreateListingPage = ({sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
@@ -19,9 +19,10 @@ const CreateListingPage = () => {
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    const currentSessionUser = useSelector(state => state.session.user.id)
 
-    console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+    const currentSessionUser = sessionUser.id
+
+    // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     useEffect( () => {
         let errors = []
         if (!name.length) errors.push("Name is required");
@@ -34,7 +35,7 @@ const CreateListingPage = () => {
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 
-
+    let createdListing;
     const handleSubmit = e => {
         e.preventDefault();
         
@@ -54,10 +55,10 @@ const CreateListingPage = () => {
             img3
 
         };
-        dispatch(createOneListing(payload))
+        createdListing = dispatch(createOneListing(payload))
         reset();
         setHasSubmitted(false);
-        history.push('/')
+        window.open('/listings','_self')
       }
     const reset = () => {
         setName('');
@@ -183,8 +184,8 @@ const CreateListingPage = () => {
                 </label>
                 <br></br>
                 <div className='listing-form-btns-div'>
-                    <button className="btn"type='submit'>
-                        Submit Listing
+                    <button className="btn"type='submit' >
+                            Submit Listing
                     </button>
                     <button className="btn"type='button' onClick={handleCancelClick}>
                         Cancel Listing
