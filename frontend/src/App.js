@@ -46,7 +46,7 @@ function App() {
             <UserProfile/>
           </Route>
           <Route path="/users/:id/bookings">
-            <BookingsPage allListings={allListings} allBookings={allBookings}/>
+            <BookingsPage allListings={allListings} />
           </Route>
         </Switch>
       )}

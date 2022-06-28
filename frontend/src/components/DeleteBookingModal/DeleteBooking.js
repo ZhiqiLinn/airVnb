@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { deleteOneBooking } from "../../store/booking";
+import { deleteOneBooking, getAllBookings} from "../../store/booking";
+import { useEffect } from "react";
 
 
 const DeleteBooking = ({booking, hideForm}) => {
@@ -10,17 +11,17 @@ const DeleteBooking = ({booking, hideForm}) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const currentSessionUser = useSelector(state => state.session.user.id)
 
+      
     const handleDelete = () => {
         dispatch(deleteOneBooking(booking))
-        history.push('/')
+        hideForm();
+        history.push(`/users/${booking.userId}/bookings`)
     }
 
     const handleCancel = (e) => {
         e.preventDefault();
         hideForm();
-        history.push(`/bookings/${booking.id}`);
     };
 
     return(
