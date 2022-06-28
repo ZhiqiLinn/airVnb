@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { User,Booking } = require("../../db/models")
+const { User,Booking, Listing } = require("../../db/models")
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ const validateBooking = [
 //-----------------------------------------------GET TO BOOKINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
     const booking = await Booking.findAll({
-        // where: {userId:},
+        include: Listing,
         order:[['createdAt', 'ASC']]
     })
     return res.json(booking);
@@ -115,7 +115,7 @@ router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) 
         checkOut
     })
       const newBooking = await Booking.findByPk(bookingId);
-    res.json({newBooking});
+    res.json(newBooking);
   } else {
     res.status(422).json({ errors: validationErrors.array() });
   }

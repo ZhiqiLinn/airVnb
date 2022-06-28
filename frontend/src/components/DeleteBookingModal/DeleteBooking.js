@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { deleteOneListing } from "../../store/listing";
+import { deleteOneBooking } from "../../store/booking";
 
 
-const DeleteListing = ({currentListing, setShowModal}) => {
-    // console.log("currentListing PROPS", currentListing)
+const DeleteBooking = ({booking, hideForm}) => {
+    console.log("currentBooking PROPS", booking)
     // console.log("showModal PROPS", setShowModal)
 
     const history = useHistory();
@@ -13,20 +13,20 @@ const DeleteListing = ({currentListing, setShowModal}) => {
     const currentSessionUser = useSelector(state => state.session.user.id)
 
     const handleDelete = () => {
-        dispatch(deleteOneListing(currentListing))
-        history.push('/listings/delete')
+        dispatch(deleteOneBooking(booking))
+        history.push('/')
     }
 
     const handleCancel = (e) => {
         e.preventDefault();
-        setShowModal(false)
-        history.push(`/listings/${currentListing.id}`);
+        hideForm();
+        history.push(`/bookings/${booking.id}`);
     };
 
     return(
         <div>
             <div>
-                <h2>Do you really want to delete your listing? This process cannot be undone.</h2>
+                <h2>Do you really want to delete your booking? This process cannot be undone.</h2>
                 <div>
                     <button className="btn" type="button" onClick={handleDelete}>
                         Delete
@@ -42,4 +42,4 @@ const DeleteListing = ({currentListing, setShowModal}) => {
     )
 }
 
-export default DeleteListing
+export default DeleteBooking

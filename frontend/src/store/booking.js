@@ -15,17 +15,12 @@ const loadBooking = (allBookings) => ({
   });
   
 
-//----------------------- ACTION CREATOR : ADD A BOOKING--------------------
+//----------------------- ACTION CREATOR : ADD/UPDATE A BOOKING--------------------
 const addBooking = (addedBooking) => ({
   type: ADD_Booking,
   addedBooking
 });
 
-//----------------------- ACTION CREATOR : EDIT A BOOKING--------------------
-const editBooking = (editedBooking) => ({
-  type: EDIT_Booking,
-  editedBooking
-});
 
 //----------------------- ACTION CREATOR : DELETE A BOOKING--------------------
 const removeBooking = (deletedBooking) => ({
@@ -34,10 +29,19 @@ const removeBooking = (deletedBooking) => ({
 });
 
 
-
 //----------------------- THUNK : GET ALL BOOKINGS--------------------
 export const getAllBookings = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings`);
+  const response = await csrfFetch(`/api/bookings`);
+  if (response.ok) {
+      const allBookings = await response.json();
+      // console.log("GET ALL BOOKING THUNK WORKS")
+    dispatch(loadBooking(allBookings));
+  }
+};
+
+//----------------------- THUNK : GET ALL BOOKINGS--------------------
+export const getAllBookingsFromOneUser = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}/bookings`);
     if (response.ok) {
         const allBookings = await response.json();
         // console.log("GET ALL BOOKING THUNK WORKS")
@@ -68,7 +72,7 @@ export const editOneBooking = (data) => async (dispatch) => {
     
     if (response.ok) {
       const booking = await response.json();
-      dispatch(editBooking(booking));
+      dispatch(addBooking(booking));
     }
 }
 
@@ -141,9 +145,9 @@ const bookingReducer = (state = initialState, action) => {
           ...state, 
           bookingData: { 
             ...state.bookingData,
-            [action.addedBooking.id]:action.addedBooking
           } 
         }
+        addedState.bookingData[action.addedBooking.id]=action.addedBooking
         return addedState;
       case DELETE_Booking:
         const deletedState = {...state};

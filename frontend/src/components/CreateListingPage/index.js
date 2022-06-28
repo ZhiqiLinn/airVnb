@@ -25,13 +25,13 @@ const CreateListingPage = ({sessionUser}) => {
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
     useEffect( () => {
         let errors = []
-        if (!name.length) errors.push("Name is required");
-        if (!about.length) errors.push("Description is required");
+        if (!name.length >3) errors.push("Name is required");
+        if (!about.length > 10) errors.push("Description is required");
         if (!city.length) errors.push("City is required");
-        if (!state.length) errors.push("State is required");
+        if (!state.length === 2 ) errors.push("State is required");
         if (!price.length) errors.push("Price is required");
         if (!serviceFee.length) errors.push("Service Fee is required");
-        if (!img1) errors.push("Minium of one image is required");
+        if (!img1) errors.push("Minimum of one image is required");
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 
@@ -40,7 +40,6 @@ const CreateListingPage = ({sessionUser}) => {
         e.preventDefault();
         
         setHasSubmitted(true);
-        if (errors.length) return alert(`Cannot Submit`);
     
         const payload = {
             userId:currentSessionUser,
@@ -58,7 +57,8 @@ const CreateListingPage = ({sessionUser}) => {
         createdListing = dispatch(createOneListing(payload))
         reset();
         setHasSubmitted(false);
-        window.open('/listings','_self')
+        // window.open('/listings','_self')
+        history.push(`/listings`);
       }
     const reset = () => {
         setName('');
