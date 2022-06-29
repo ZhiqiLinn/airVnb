@@ -46,7 +46,7 @@ const EditBooking = ({booking, hideForm}) => {
         e.preventDefault();
         setErrors({});
         hideForm();
-        history.push(`/users/${booking.userId}/bookings`);
+        history.push(`/users/bookings`);
     };
 
     return (
