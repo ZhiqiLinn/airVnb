@@ -12,7 +12,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     let dd = ("0" + today.getDate()).slice(-2)
     let yyyy = today.getFullYear();
     let todayDate = yyyy + '-' + mm + '-' + dd;
-    console.log('TODAY DATE ', todayDate)
+    // console.log('TODAY DATE ', todayDate)
     
     //1000*3600*24 = seconds in a day
 
@@ -25,8 +25,8 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     
     const checkInDate = new Date(checkIn)
     const checkOutDate = new Date(checkOut)
-    console.log("THIS IS CHECKIN DATE", checkInDate)
-    console.log("THIS IS CHECKIN DATE", checkOutDate)
+    // console.log("THIS IS CHECKIN DATE", checkInDate)
+    // console.log("THIS IS CHECKIN DATE", checkOutDate)
     const night = (checkOutDate-checkInDate)/(1000*3600*24)
 
     //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------

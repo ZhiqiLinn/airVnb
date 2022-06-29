@@ -118,12 +118,12 @@ export const deleteOneBooking = (data) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/${data.id}`, {
     method: "delete"
   });
-  console.log("DELETE ONE BOOKING THUNK RESPONSE", response)
 
   if (response.ok) {
-    const booking = await response.json();
-    dispatch(removeBooking(booking));
-    console.log("DELETE ONE BOOKING THUNK RESPONSE", booking)
+    const msg = await response.json();
+    if(msg.message === "Success"){
+      dispatch(removeBooking(data));
+    }
   }
 }
 //---------------------------REDUCER---------------------------------------------
@@ -156,8 +156,12 @@ const bookingReducer = (state = initialState, action) => {
         console.log("AFTER ADDEDSTATE", addedState)
         return addedState;
       case DELETE_Booking:
-        const deletedState = {...state};
-        delete deletedState[action.deletedBooking.id];
+        const deletedState = {
+          ...state,
+          bookingData:{...state.bookingData}};
+        // console.log("!-----DELETEDSATE BEFORE DELETE", action)
+        delete deletedState.bookingData[action.deletedBooking.id];
+        // console.log("!--------THIS IS DELETEDSTATE after dewlet,", deletedState)
         return deletedState;
     default:
         return state;
