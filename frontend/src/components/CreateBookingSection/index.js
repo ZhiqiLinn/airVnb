@@ -2,16 +2,24 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { createOneBooking } from "../../store/booking";
-
+import { Calendar } from "react-calendar"
+import 'react-calendar/dist/Calendar.css';
 
 const CreateBookingPage = ({currentSessionUser, currentListing}) => {
+    //-----------------TOTAL PRICE CALCULATION-------------------
+    let today = new Date();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+    let yyyy = today.getFullYear();
+    let todayDate = yyyy + '-' + mm + '-' + dd;
+    console.log('TODAY DATE ', todayDate)
+    
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    
     
     //-----------------ERROR HANDLING----------------------------
     // useEffect( () => {
@@ -60,11 +68,16 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
             }
             <form className='Booking-form' onSubmit={handleSubmit}>
                 <h2>Tell Us About Your Booking</h2>
+                {/* <Calendar 
+                    value={new Date()}
+                    minDate={new Date()}
+                    defaultActiveStartDate={new Date()}
+                    onChange={(e) => setCheckIn(e.target.value)}/> */}
                 <label>
                     Check In
                     <input
                         type='date'
-                        value={checkIn}
+                        value={todayDate}
                         onChange={(e) => setCheckIn(e.target.value)}
                         required
                     />
@@ -79,6 +92,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                         required
                     />
                 </label>
+                <p>{(checkOut-checkIn)*(currentListing.price + currentListing.serviceFee)}</p>
                 <div className='Booking-form-btns-div'>
                     <button className="btn" type='submit' >
                             Reserve
