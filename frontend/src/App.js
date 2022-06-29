@@ -10,8 +10,8 @@ import ListingDetailPage from "./components/ListingDetailPage";
 import DeleteMsgPage from "./components/DeleteListingModal/DeleteMsgPage";
 import BookingsPage from "./components/BookingsPage";
 import UserProfile from "./components/Navigation/UserProfile";
-// import LoginFormPage from "./components/LoginFormPage";
-// import SignupFormPage from "./components/SignupFormPage";
+import UserListingsPage from "./components/UserListingsPage";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -39,14 +39,20 @@ function App() {
           <Route path="/listings/new" exact>
             <CreateListingPage sessionUser={sessionUser}/>
           </Route>
+          <Route path="/listings/delete" exact>
+            <DeleteMsgPage />
+          </Route>
           <Route path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
           </Route>
-          <Route path="/users/:id" exact>
+          <Route path="/users" allListings={allListings} exact>
             <UserProfile/>
           </Route>
-          <Route path="/users/:id/bookings">
-            <BookingsPage allListings={allListings} allBookings={allBookings}/>
+          <Route path="/users/listings" exact>
+            <UserListingsPage/>
+          </Route>
+          <Route path="/users/bookings" exact>
+            <BookingsPage allListings={allListings} />
           </Route>
         </Switch>
       )}

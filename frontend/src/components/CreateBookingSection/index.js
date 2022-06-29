@@ -10,27 +10,54 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     const [errors, setErrors] = useState([]);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    console.log("THIS IS CURRENT LISTING ID FOR BOOKIGN", currentListing.id)
-
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    
+    
+    //-----------------ERROR HANDLING----------------------------
+    // useEffect( () => {
+    //     let errors = []
+    //     if (checkIn >= checkOut) errors.push("Check out date can not be the same as Check in date");
+        
+    //     setErrors(errors);
+    // }, [checkIn,checkOut]);
+    
+    //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
     let createdBooking;
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        
+        setHasSubmitted(true);
+        
+        // console.log("THIS IS CURRENT LISTING ID FOR BOOKIGN", currentListing.id)
         const payload = {
             userId:currentSessionUser,
             listingId:currentListing.id,
             checkIn,
             checkOut
         }
-        console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
-        createdBooking = dispatch(createOneBooking(payload))
-        history.push(`/users/${currentSessionUser}/bookings`);
+        // console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
+        if(checkOut > checkIn){
+            createdBooking = dispatch(createOneBooking(payload))
+        }else{
+            setHasSubmitted(true);
+            setErrors("Check out date can not be the same as Check in date");
+            return;
+        }
+        if(createdBooking){
+            setHasSubmitted(false);
+            history.push(`/users/${currentSessionUser}/bookings`);
+        }
 
     }
 
     return (
         <div>
             <h1>Reserve Your Booking</h1>
+            { hasSubmitted && errors &&
+                <div>
+                    {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
+                </div>
+            }
             <form className='Booking-form' onSubmit={handleSubmit}>
                 <h2>Tell Us About Your Booking</h2>
                 <label>

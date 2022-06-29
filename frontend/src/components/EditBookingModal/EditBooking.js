@@ -34,12 +34,12 @@ const EditBooking = ({booking, hideForm}) => {
             userId:booking.userId,
             listingId:booking.listingId,
             checkIn,
-            checkOut
+            checkOut,
+            Listing:booking.Listing
         }
         console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
         editedBooking = dispatch(editOneBooking(payload))
         hideForm();
-        history.push(`/users/${booking.userId}/bookings`);
 
     }
     const handleCancel = (e) => {
@@ -51,9 +51,9 @@ const EditBooking = ({booking, hideForm}) => {
 
     return (
         <div>
-            {
-            booking &&
+            { booking &&
             <>
+            
             <h2>Edit Your Booking</h2>
             <form className='Booking-form' onSubmit={handleSubmit}>
                 <label>

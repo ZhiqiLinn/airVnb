@@ -23,18 +23,23 @@ const CreateListingPage = ({sessionUser}) => {
     const currentSessionUser = sessionUser.id
 
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+    const integers = "1234567890"
+    const statesSelections = ['','AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+
+        //-----------------ERROR HANDLING----------------------------
     useEffect( () => {
         let errors = []
-        if (!name.length >3) errors.push("Name is required");
-        if (!about.length > 10) errors.push("Description is required");
+        if (name.length <= 3) errors.push("Name should have at least 3 characters");
+        if (about.length <= 10 || about.length >= 1000) errors.push("Description length should between 10 to 1000 characters");
         if (!city.length) errors.push("City is required");
-        if (!state.length === 2 ) errors.push("State is required");
-        if (!price.length) errors.push("Price is required");
-        if (!serviceFee.length) errors.push("Service Fee is required");
+        if (state.length !== 2 ) errors.push("State is required");
+        if (!/^\d+$/.test(price)) errors.push("Price is required and should be in number");
+        if (!/^\d+$/.test(serviceFee)) errors.push("Service Fee is required and should be in number");
         if (!img1) errors.push("Minimum of one image is required");
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
-
+    
+ //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
     let createdListing;
     const handleSubmit = e => {
         e.preventDefault();
@@ -55,10 +60,13 @@ const CreateListingPage = ({sessionUser}) => {
 
         };
         createdListing = dispatch(createOneListing(payload))
-        reset();
-        setHasSubmitted(false);
+  
         // window.open('/listings','_self')
-        history.push(`/listings`);
+        if(createdListing && !errors.length) {
+            reset();
+            setHasSubmitted(false);
+            history.push(`/listings`);
+        }
       }
     const reset = () => {
         setName('');
@@ -122,12 +130,11 @@ const CreateListingPage = ({sessionUser}) => {
                 <br></br>
                 <label>
                     State:
-                    <input
-                        type='text'
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                        required
-                    />
+                    <select onChange={(e) => setState(e.target.value)} value={state}>
+                        {statesSelections.map(type =>
+                            <option key={type}>{type}</option>
+                        )}
+                    </select>
                 </label>
                 <br></br>
                 <h3>Upload Images For Your Listing</h3>

@@ -7,9 +7,10 @@ import { getAllListings } from '../../store/listing';
 import HomePage from '../HomePage'
 import EditBookingModal from '../EditBookingModal';
 import DeleteBookingModal from '../DeleteBookingModal';
-const BookingsPage = ({allListings, allBookings}) => {
+const BookingsPage = ({allListings}) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const allBookings = useSelector(state => state.bookingState.bookingData)
 
     // console.log("---------THIS IS ALL BOOKINGS FROM BookingPage COMPONENT", allBookings)
     // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
@@ -20,6 +21,8 @@ const BookingsPage = ({allListings, allBookings}) => {
     const sessionUserId = useSelector(state => state.session.user.id);
 
     const bookingsArr = Object.values(allBookings)
+
+
 
     useEffect(()=>{
         dispatch(getAllListings())
@@ -33,12 +36,12 @@ const BookingsPage = ({allListings, allBookings}) => {
     if (sessionUser) {
       sessionLinks = (
         <div>
-        { bookingsArr.map(booking => (                     
+        { bookingsArr && bookingsArr.map(booking => (                     
             <div>
                 <hr></hr>
                 <div>
-                    <img src={booking.Listing.img1} height="100px" width="100px"></img>
-                    <p>{booking.Listing.name}</p>
+                    <img src={booking?.Listing?.img1} height="100px" width="100px"></img>
+                    <p>{booking?.Listing?.name}</p>
                 </div>
                 <div>
                     <p>Check In Date : {booking.checkIn}</p>

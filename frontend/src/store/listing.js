@@ -21,11 +21,6 @@ const add = (addedListing) => ({
   addedListing
 });
 
-//----------------------- ACTION CREATOR : EDIT A LISTING--------------------
-const edit = (editedListing) => ({
-  type: EDIT_Listing,
-  editedListing
-});
 
 //----------------------- ACTION CREATOR : DELETE A LISTING--------------------
 const remove = (deletedListing) => ({
@@ -44,6 +39,16 @@ export const getAllListings = () => async (dispatch) => {
       dispatch(load(allListings));
     }
   };
+
+  //----------------------- THUNK : GET ALL LISTINGS--------------------
+export const getAllListingsFromOneUser = (userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/users/${userId}/listings`);
+  if (response.ok) {
+      const allListings = await response.json();
+      // console.log("GET ALL LISTING THUNK WORKS")
+    dispatch(load(allListings));
+  }
+};
 
 
 //----------------------- THUNK : GET ONE LISTING--------------------
@@ -118,6 +123,7 @@ export const deleteOneListing = (data) => async (dispatch) => {
   
   if (response.ok) {
     const listing = await response.json();
+    console.log("!------THIS IS LISTING IN THUNK,", listing)
     dispatch(remove(listing));
   }
 }
@@ -161,6 +167,7 @@ const listingReducer = (state = initialState, action) => {
       case DELETE_Listing:
         const deletedState = {...state};
         delete deletedState[action.deletedListing.id];
+        console.log("!--------THIS IS DELETEDSTATE,", deletedState)
         return deletedState;
     default:
         return state;

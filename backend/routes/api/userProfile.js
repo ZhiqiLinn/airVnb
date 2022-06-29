@@ -18,6 +18,16 @@ router.get('/:id(\\d+)/bookings', asyncHandler(async (_req, res) => {
     return res.json(booking);
   }));
 
+//-----------------------------------------------GET TO LISTINGS PAGE---------------------------------------------
+router.get('/:id(\\d+)/listings', asyncHandler(async (_req, res) => {
+  const userId = parseInt(_req.params.id, 10);
+  const listing = await Listing.findAll({
+      where: {userId: userId},
+      order:[['createdAt', 'ASC']]
+  })
+  return res.json(listing);
+}));
+
 
 
 module.exports = router;

@@ -16,6 +16,10 @@ const validateBooking = [
       .exists({ checkFalsy: true })
       .notEmpty()
       .withMessage('Select your check out date.'),
+      // .custom((value, { req }) => {
+      //   if (value <= req.body.checkIn) {
+      //     throw new Error('Check out date cant be check in date.')
+      //   }}),
     handleValidationErrors
   ];
 
@@ -44,8 +48,9 @@ router.get('/', asyncHandler(async (_req, res) => {
 
 //-----------------------------------------------GET TO BOOKING DETAIL PAGE---------------------------------------------
       router.get('/:id(\\d+)', asyncHandler(async function(req, res) {
-        const booking = await Booking.findByPk(req.params.id, {
-          include:User
+        const bookingId = parseInt(req.params.id, 10);
+        const booking = await Booking.findByPk(bookingId, {
+          include:Listing
         });
         return res.json(booking);
       }));
@@ -97,7 +102,9 @@ router.post(
 //---------------------------------------------------EDIT A BOOKING---------------------------------------------------
 router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) {
     const bookingId = parseInt(req.params.id, 10);
-    let currBooking = await Booking.findByPk(bookingId);
+    let currBooking = await Booking.findByPk(bookingId, {
+      include:Listing
+    });
     const validationErrors = validationResult(req);
     const {
         userId,
@@ -114,7 +121,9 @@ router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) 
         checkIn,
         checkOut
     })
-      const newBooking = await Booking.findByPk(bookingId);
+      const newBooking = await Booking.findByPk(bookingId, {
+        include:Listing
+      });
     res.json(newBooking);
   } else {
     res.status(422).json({ errors: validationErrors.array() });
@@ -141,7 +150,9 @@ router.put('/:id(\\d+)', validateBooking, asyncHandler(async function(req, res) 
   
   //----------------------------------------------DELETE A BOOKING---------------------------------------------
   router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const booking = await Booking.findByPk(req.params.id)  
+    const booking = await Booking.findByPk(req.params.id, {
+      include:Listing
+    })  
     if (booking) {
         await booking.destroy()
         res.json({ message: 'Success' })

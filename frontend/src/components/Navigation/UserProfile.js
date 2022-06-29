@@ -1,9 +1,26 @@
+// import { NavLink } from "react-router-dom"
+// import { useState } from "react";
+// import BookingsPage from "../BookingsPage";
 
+// const UserProfile = () => {
+//     const [sideOpen, setSideOpen] = useState(false);
+//     const [selectedProduct, setSelectedProduct] = useState('')
 
-const UserProfile = () => {
-    return(
-        <h1>THIS IS YOUR USER PROFILE PAGE</h1>
-    )
-}
+//     return(
+//         <div>
+//             <div onClick={setSideOpen(true)}>
+//                 Booking
+//             </div>
+//             <BookingsPage visible={sideOpen}/>
 
-export default UserProfile
+//             {/* <div>
+//             <NavLink to="/users/bookings">View All Bookings</NavLink>
+//             </div>
+//             <div>
+//             <NavLink to="/users/listings">View All Listings</NavLink>
+//             </div> */}
+//         </div>
+//     )
+// }
+
+// export default UserProfile
