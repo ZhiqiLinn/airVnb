@@ -16,6 +16,10 @@ const validateBooking = [
       .exists({ checkFalsy: true })
       .notEmpty()
       .withMessage('Select your check out date.'),
+      // .custom((value, { req }) => {
+      //   if (value <= req.body.checkIn) {
+      //     throw new Error('Check out date cant be check in date.')
+      //   }}),
     handleValidationErrors
   ];
 
