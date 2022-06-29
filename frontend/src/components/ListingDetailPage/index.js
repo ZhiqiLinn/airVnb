@@ -9,12 +9,12 @@ import CreateBookingPage from '../CreateBookingSection';
 
 
 
-const ListingDetailPage = ({sessionUser, allListings}) => {
+const ListingDetailPage = ({sessionUser}) => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
-    const currentListing = allListings[id]
+    const currentListing = useSelector(state => state.listingState.listingData[id])  
     // console.log("THIS IS CURR LISTING", currentListing)
 
     useEffect(() => {

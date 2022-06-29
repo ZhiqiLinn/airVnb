@@ -11,12 +11,9 @@ const DeleteListing = ({currentListing, setShowModal}) => {
     const dispatch = useDispatch();
 
     const currentSessionUser = useSelector(state => state.session.user.id)
-    useEffect(() => {
-        dispatch(getAllListings())
-    }, [dispatch]);
 
-    const handleDelete = () => {
-        dispatch(deleteOneListing(currentListing))
+    const handleDelete = async () => {
+        await dispatch(deleteOneListing(currentListing))
         history.push('/listings')
     }
 
