@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { deleteOneListing } from "../../store/listing";
-
+import { deleteOneListing, getAllListings } from "../../store/listing";
+import { useEffect } from "react";
 
 const DeleteListing = ({currentListing, setShowModal}) => {
     // console.log("currentListing PROPS", currentListing)
@@ -11,10 +11,13 @@ const DeleteListing = ({currentListing, setShowModal}) => {
     const dispatch = useDispatch();
 
     const currentSessionUser = useSelector(state => state.session.user.id)
+    useEffect(() => {
+        dispatch(getAllListings())
+    }, [dispatch]);
 
     const handleDelete = () => {
         dispatch(deleteOneListing(currentListing))
-        history.push('/listings/delete')
+        history.push('/listings')
     }
 
     const handleCancel = (e) => {
