@@ -7,6 +7,7 @@ import { getAllListings } from '../../store/listing';
 import HomePage from '../HomePage'
 import EditBookingModal from '../EditBookingModal';
 import DeleteBookingModal from '../DeleteBookingModal';
+
 const BookingsPage = ({allListings}) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -38,6 +39,7 @@ const BookingsPage = ({allListings}) => {
         <div>
         { bookingsArr && bookingsArr.map(booking => (                     
             <div>
+<<<<<<< Updated upstream
                 <hr></hr>
                 <div>
                     <img src={booking?.Listing?.img1} height="100px" width="100px"></img>
@@ -67,6 +69,23 @@ const BookingsPage = ({allListings}) => {
     return(
         <>
            {sessionLinks}
+=======
+            {Object.values(allBookings).map(booking => (
+                <div>
+                    <div>
+                        <p>{allListings[booking.listingId]}</p>
+                    </div>
+                    <div>
+                        <p>Check In Date : {booking.checkIn}</p>
+                        <p>Check Out Date : {booking.checkOut}</p>
+                    </div>
+                </div>
+            )
+
+            )
+            }   
+            </div>   
+>>>>>>> Stashed changes
         </>
     )
 

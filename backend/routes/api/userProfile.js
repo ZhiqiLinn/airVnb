@@ -2,7 +2,11 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+<<<<<<< Updated upstream
 const { User,Booking, Listing } = require("../../db/models")
+=======
+const { User,Booking } = require("../../db/models")
+>>>>>>> Stashed changes
 
 const router = express.Router();
 
