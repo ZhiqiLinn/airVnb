@@ -1,15 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import DemoUserLogin from '../DemoUserBtn';
+import icon from "../../images/icon.PNG";
 
 function Navigation({ isLoaded }){
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
-
+  //------------LINK TO HOME PAGE-------------------------
+  const linkToHomePage = () => {
+    history.push('/')
+  }
+  //-----------------SESSION USERS------------------------
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
@@ -27,13 +33,15 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    <div>
+
+        <div onClick={linkToHomePage}>
+        <img src={icon}></img>
+        <span style={{color:"#FF5A5F", fontSize:"large"}}>  airvnb</span>
+        </div>
         <NavLink exact to="/listings">Check All Listings</NavLink>
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    </div>
   );
 }
 
