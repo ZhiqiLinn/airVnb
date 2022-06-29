@@ -8,12 +8,14 @@ import 'react-calendar/dist/Calendar.css';
 const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     //-----------------TOTAL PRICE CALCULATION-------------------
     let today = new Date();
-    let mm = today.getMonth() + 1;
-    let dd = today.getDate();
+    let mm = ("0" + (today.getMonth() + 1)).slice(-2)
+    let dd = ("0" + today.getDate()).slice(-2)
     let yyyy = today.getFullYear();
     let todayDate = yyyy + '-' + mm + '-' + dd;
     console.log('TODAY DATE ', todayDate)
     
+    //1000*3600*24 = seconds in a day
+
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
@@ -21,14 +23,12 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     const [checkOut, setCheckOut] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
     
-    //-----------------ERROR HANDLING----------------------------
-    // useEffect( () => {
-    //     let errors = []
-    //     if (checkIn >= checkOut) errors.push("Check out date can not be the same as Check in date");
-        
-    //     setErrors(errors);
-    // }, [checkIn,checkOut]);
-    
+    const checkInDate = new Date(checkIn)
+    const checkOutDate = new Date(checkOut)
+    console.log("THIS IS CHECKIN DATE", checkInDate)
+    console.log("THIS IS CHECKIN DATE", checkOutDate)
+    const night = (checkOutDate-checkInDate)/(1000*3600*24)
+
     //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
     let createdBooking;
     const handleSubmit = (e) => {
@@ -44,16 +44,20 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
             checkOut
         }
         // console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
+
         if(checkOut > checkIn){
+            console.log("checkOut > checkIn", checkOut > checkIn)
             createdBooking = dispatch(createOneBooking(payload))
         }else{
+            let errors = [];
             setHasSubmitted(true);
-            setErrors("Check out date can not be the same as Check in date");
+            errors.push("Check out date can not be the same as Check in date");
+            setErrors(errors)
             return;
         }
         if(createdBooking){
             setHasSubmitted(false);
-            history.push(`/users/${currentSessionUser}/bookings`);
+            history.push(`/users/bookings`);
         }
 
     }
@@ -67,7 +71,6 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                 </div>
             }
             <form className='Booking-form' onSubmit={handleSubmit}>
-                <h2>Tell Us About Your Booking</h2>
                 {/* <Calendar 
                     value={new Date()}
                     minDate={new Date()}
@@ -77,7 +80,8 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                     Check In
                     <input
                         type='date'
-                        value={todayDate}
+                        value={checkIn}
+                        min={`${yyyy}-${mm}-${dd}`}
                         onChange={(e) => setCheckIn(e.target.value)}
                         required
                     />
@@ -92,11 +96,17 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                         required
                     />
                 </label>
-                <p>{(checkOut-checkIn)*(currentListing.price + currentListing.serviceFee)}</p>
                 <div className='Booking-form-btns-div'>
                     <button className="btn" type='submit' >
                             Reserve
                     </button>
+                   <p>You won't be charged yet</p>
+                </div>
+                <div>
+                    <p>Night x {night}</p>
+                    <p>Price x ${currentListing.price}</p>
+                    <p>Service Fee x ${currentListing.serviceFee}</p>
+                    <p>Total Before Taxes: ${(night)*(currentListing.price + currentListing.serviceFee)}</p>
                 </div>
             </form>
         </div>
