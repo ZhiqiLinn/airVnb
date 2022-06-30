@@ -122,9 +122,11 @@ export const deleteOneListing = (data) => async (dispatch) => {
   });
   
   if (response.ok) {
-    const listing = await response.json();
-    console.log("!------THIS IS LISTING IN THUNK,", listing)
-    dispatch(remove(listing));
+    const msg = await response.json();
+    if(msg.message === "Success"){
+      dispatch(remove(data));
+    }
+
   }
 }
 //---------------------------REDUCER---------------------------------------------
@@ -165,10 +167,14 @@ const listingReducer = (state = initialState, action) => {
       //   }
       //   return editedState;
       case DELETE_Listing:
-        const deletedState = {...state};
-        delete deletedState[action.deletedListing.id];
-        console.log("!--------THIS IS DELETEDSTATE,", deletedState)
+        const deletedState = {
+          ...state,
+          listingData:{...state.listingData}};
+        // console.log("!-----DELETEDSATE BEFORE DELETE", action)
+        delete deletedState.listingData[action.deletedListing.id];
+        // console.log("!--------THIS IS DELETEDSTATE after dewlet,", deletedState)
         return deletedState;
+
     default:
         return state;
 

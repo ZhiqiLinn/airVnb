@@ -11,6 +11,7 @@ import DeleteMsgPage from "./components/DeleteListingModal/DeleteMsgPage";
 import BookingsPage from "./components/BookingsPage";
 import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
+import "./index.css"
 
 
 function App() {

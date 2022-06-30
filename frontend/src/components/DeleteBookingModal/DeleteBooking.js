@@ -16,7 +16,7 @@ const DeleteBooking = ({booking, hideForm}) => {
     const handleDelete = () => {
         dispatch(deleteOneBooking(booking))
         hideForm();
-        history.push(`/users/${booking.userId}/bookings`)
+        history.push(`/users/bookings`)
     }
 
     const handleCancel = (e) => {

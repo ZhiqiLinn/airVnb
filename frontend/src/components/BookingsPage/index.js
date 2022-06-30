@@ -7,6 +7,7 @@ import { getAllListings } from '../../store/listing';
 import HomePage from '../HomePage'
 import EditBookingModal from '../EditBookingModal';
 import DeleteBookingModal from '../DeleteBookingModal';
+
 const BookingsPage = ({allListings}) => {
     const dispatch = useDispatch();
     const history = useHistory();
