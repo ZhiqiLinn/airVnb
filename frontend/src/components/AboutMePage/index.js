@@ -20,20 +20,20 @@ const AboutMePage = () => {
                     Visit Me By:
                     <ul >
                         <li>
-                            <a href="https://www.linkedin.com/in/zhiqi-linn/">                     
-                                <i class="fa-brands fa-linkedin"></i>
+                            <a className="about-anchor" href="https://www.linkedin.com/in/zhiqi-linn/">                     
+                                <i className="fa-brands fa-linkedin"></i>
                                     {` LinkedIn`}
                             </a> 
                         </li>
                         <li>
-                            <a href="https://github.com/ZhiqiLinn"> 
-                                <i class="fa-brands fa-github"></i>
+                            <a className="about-anchor" href="https://github.com/ZhiqiLinn"> 
+                                <i className="fa-brands fa-github"></i>
                                 {` Github`}
                             </a>
                         </li>
                         <li>
-                            <a href="mailto:zhiqilinn@gmail.com"> 
-                                <i class="fa-solid fa-envelope"></i>
+                            <a className="about-anchor" href="mailto:zhiqilinn@gmail.com"> 
+                                <i className="fa-solid fa-envelope"></i>
                                 {` Email: ZhiqiLinn@gmail.com`} 
                             </a>
                         </li>

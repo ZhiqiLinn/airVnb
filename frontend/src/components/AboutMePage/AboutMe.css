@@ -22,18 +22,18 @@
     margin: 0% 10% ;
 }
 
-a{
+a.about-anchor{
     color: black;
     text-decoration: none;
 }
-a:hover{
+a.about-anchor:hover{
     border: 1px solid black;
     border-radius:7px;
     background-color: #f85e63;
     color: white;
 }
 
-a:active {
+a.about-anchor:active {
     color: black;
   }
 
