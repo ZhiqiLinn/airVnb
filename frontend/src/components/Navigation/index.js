@@ -24,7 +24,6 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <DemoUserLogin />
         <LoginFormModal />
         <SignupFormModal />
         

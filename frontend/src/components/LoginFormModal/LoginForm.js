@@ -38,7 +38,7 @@ function LoginForm() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <div className="login-username-password-div">
+        <div className="login-input-div">
           <label>
             <input
               className="login-input"
@@ -61,13 +61,13 @@ function LoginForm() {
             />
           </label>
         </div>
-          <span style={{fontSize:"small", marginLeft:"10%"}}><input type="checkbox"></input>Check box to agree hire Rena. </span>
+          
         <button className="login-modal-btn" type="submit">Continue</button>
       </form>
       <hr></hr>
       <div className="login-modal-demo-user">
         <div>
-          <span style={{fontSize:"small"}}>Don't have an account? Log in as Demo User!</span>
+          <span style={{fontSize:"small"}}>Don't have an account? Log in as a Demo User!</span>
         </div>
         <div>
           <DemoUserLogin />
