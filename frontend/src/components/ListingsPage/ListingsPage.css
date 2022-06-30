@@ -1,0 +1,21 @@
+.listings-container{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.listing-img{
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.listing-div{
+    margin: 5%;
+    /* text-decoration: 'none'; */
+}
+
+.listing-post-btn{
+    
+}

@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import CreateListingPage from '../CreateListingPage';
 import './Navigation.css';
 import DemoUserLogin from '../DemoUserBtn';
-import icon from "../../images/icon.PNG";
+import icon from "../../images/favicon16.png";
 
 function Navigation({ isLoaded }){
   const history = useHistory();
@@ -19,7 +20,11 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <>
+        <NavLink exact to="/listings/new">Become a Host</NavLink>
+        {/* <NavLink exact to="/about-me">About Rena</NavLink> */}
+        <ProfileButton user={sessionUser} />
+      </>
     );
   } else {
     sessionLinks = (

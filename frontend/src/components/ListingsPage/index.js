@@ -1,14 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllListings } from '../../store/listing';
+import './ListingsPage.css'
 
 const ListingsPage = ({sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    // console.log("---------THIS IS ALL LISTINGS FROM ListingPage COMPONENT", allListings)
-    // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
+    // console.log('---------THIS IS ALL LISTINGS FROM ListingPage COMPONENT', allListings)
+    // console.log('----THIS IS CURRENT SESSION USER ID ', currentSessionUser)
     const allListings = useSelector(state => state.listingState.listingData)  
 
     useEffect(()=>{
@@ -25,27 +26,31 @@ const ListingsPage = ({sessionUser}) => {
     let postButton;
     if (sessionUser){
         postButton =(
-            <div>
+            <div className='listing-post-btn'>
             <button onClick={linkToPosting}>
                 POST YOUR LISTING
             </button>
         </div>
         )
     }
-    //-------LINK TO DETAIL PAGE------------------------------------
-
-
     //--------------------------------------------------------------
     
     return(
         <>
-            {postButton}
-            <div>
-            {Object.values(allListings).map(({ id, name, img1 }) => (
-                <div>
-                    <img src={img1} alt={name}></img>
-                    <NavLink to={`/listings/${id}`}>{name}</NavLink>
-                </div>
+            <hr></hr>
+            <div className='listings-container'>
+            {Object.values(allListings).map(({ id, name, price, img1 }) => (
+                <Link style={{ textDecoration: 'none' }} to={`/listings/${id}`}>
+                    <div className='listing-div'>
+                        <img src={img1} alt={name} className='listing-img'></img>
+                        <div>
+                            {name}
+                        </div>
+                        <div>
+                            ${price}
+                        </div>
+                    </div>
+                </Link>
             ))}
             </div>
         </>
