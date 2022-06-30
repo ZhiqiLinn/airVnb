@@ -30,48 +30,70 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+    <div className="signup-modal-container">
+      <div className="signup-modal-title">
+        <p>Sign up</p>
+      </div>
+      <hr></hr>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <h3 style={{marginLeft:"10%"}}>Welcome to AirVnb</h3>
+        </div>
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <div className="signup-input-div">
+          <label>
+            <input
+              className="signup-input"
+              type="text"
+              value={email}
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <hr></hr>
+          <label>
+            <input
+              className="signup-input"
+              type="text"
+              value={username}
+              placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          <hr></hr>
+          <label>
+            <input
+              className="signup-input"
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <hr></hr>
+          <label>
+            <input
+              className="signup-input"
+              type="password"
+              value={confirmPassword}
+              placeholder="Confirm password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <span style={{fontSize:"small", marginLeft:"10%"}}>
+          <input type="checkbox"></input>
+            Check box to agree not using your real infomation here :)
+        </span>
+        <button className="signup-modal-btn" type="submit">Sign Up</button>
+      </form>
+    </div>
   );
 }
 
