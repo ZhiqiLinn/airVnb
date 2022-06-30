@@ -6,7 +6,7 @@ import { getAllListings, getOneListing } from '../../store/listing';
 import DeleteListingModal from '../DeleteListingModal';
 import EditListingModal from '../EditListingModal';
 import CreateBookingPage from '../CreateBookingSection';
-
+import "./ListingDetail.css"
 
 
 const ListingDetailPage = ({sessionUser}) => {
@@ -36,11 +36,12 @@ const ListingDetailPage = ({sessionUser}) => {
     }
 
     return(
-        <div>
+        <div className='listing-detail-page-container'>
 
             {currentListing && 
             <>  
                 <div>
+
                     <div className='detail-page-title-container'>
                         <h2>
                             {currentListing.name}
@@ -50,44 +51,57 @@ const ListingDetailPage = ({sessionUser}) => {
                         </p>
 
                     </div>
+
+
                     <div className='detail-page-imgs-container'>
                         <div>
-                            <img src={currentListing.img1} alt={currentListing.name}></img>
+                            <img className='detail-large-img' src={currentListing.img1} alt={currentListing.name}></img>
                         </div>
-                        <div>
-                            <img src={currentListing.img2} alt={currentListing.name}></img>
-                        </div>
-                        <div>
-                            <img src={currentListing.img3} alt={currentListing.name}></img>
+                        <div className='detail-small-img-div'>
+                            <img className='detail-small-img' src={currentListing.img2} alt={currentListing.name}></img>
+                            <img className='detail-small-img' src={currentListing.img3} alt={currentListing.name}></img>
                         </div>
                     </div>
-                    {ownerSection}
-                    <hr></hr>
-                    <div className='detail-page-listing-requirements'>
-                        <div>
-                            <h4>Self check-in</h4>
+
+
+                    <div className='detail-page-bottom-div'>
+                        <div className='detail-page-left-div'>   
+                            <div>
+                                {ownerSection}
+                            </div>
+                            <div>
+                                <hr></hr>
+                                <div className='detail-page-listing-requirements'>
+                                    <div>
+                                        <h4>Self check-in</h4>
+                                    </div>
+                                    <div>
+                                        <h4>Free cancellation for 48 hours.</h4>
+                                    </div>
+                                </div>
+                                    <hr></hr>
+                                <div className='detail-page-listing-about'>
+                                        <h4>About</h4>
+                                        <p>{currentListing.about}</p>
+                                </div>
+                                    <hr></hr>
+                                <div className='detail-page-listing-amenties'>
+                                        <h4>What this place offers</h4>
+                                            Bay view
+                                            <br></br>Canal view
+                                            <br></br>Beach access
+                                            <br></br>Kitchen
+                                            <br></br>Wifi
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h4>Free cancellation for 48 hours.</h4>
+
+                        <div className='detail-page-booking-container'>
+                            <CreateBookingPage currentSessionUser={currentSessionUser} currentListing={currentListing}/>
                         </div>
+                        
                     </div>
-                    <hr></hr>
-                    <div className='detail-page-listing-about'>
-                        <h4>About</h4>
-                        <p>{currentListing.about}</p>
-                    </div>
-                    <hr></hr>
-                    <div className='detail-page-listing-amenties'>
-                        <h4>What this place offers</h4>
-                            Bay view
-                            <br></br>Canal view
-                            <br></br>Beach access
-                            <br></br>Kitchen
-                            <br></br>Wifi
-                    </div>
-                </div>
-                <div className='detail-page-booking-container'>
-                    <CreateBookingPage currentSessionUser={currentSessionUser} currentListing={currentListing}/>
+
                 </div>
 
             </>

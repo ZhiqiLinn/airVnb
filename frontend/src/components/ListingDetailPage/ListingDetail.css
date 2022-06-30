@@ -1,0 +1,45 @@
+.detail-page-imgs-container{
+    display:flex;
+    gap: 65px;
+}
+
+
+img.detail-large-img{
+    height: 100%;
+    width: 110%;
+
+    
+}
+
+img.detail-small-img{
+    height: 100%;
+    width: 75%;
+
+    
+}
+
+.detail-small-img-div{
+    display: flex;
+    flex-direction: column;
+    gap:5px
+}
+
+.listing-detail-page-container{
+    margin: 0 10% 10% 10%;
+}
+
+.detail-page-bottom-div{
+    display: flex;
+    flex-direction: row;
+    margin: 5% 15% 0% 0%;
+    justify-content: space-around;
+    gap:5%
+}
+.detail-page-booking-container{
+    padding: 50px;
+    height: 500px;
+    width:500px;
+    border: 1px solid red;
+    border-radius: 5px;
+    text-align: center;
+}
