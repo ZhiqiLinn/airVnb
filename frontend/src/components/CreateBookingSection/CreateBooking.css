@@ -1,0 +1,61 @@
+.detail-page-booking-container{
+    height: 500px;
+    width: 300px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    position:sticky;
+    box-shadow: 1px 1px 10px 0 rgba(0,0,0,.1);
+    
+}
+
+.detail-page-booking-container:hover{
+    box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+}
+
+.booking-modal-title{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+
+.checkin-checkout-div{
+    margin: 15% 10% 5% 10%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+input.checkin-checkout-input{
+
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:93%;
+    height:15%;
+    border:none;
+
+}
+.wont-charged-text{
+    font-size: small;
+    text-align: center;
+}
+
+
+.booking-calculation-div{
+    font-size: small;
+    margin-top: 10%;
+    margin-left: 15%;
+
+}
+
+.booking-reserve-btn{
+    background-color: #FF5A5F;
+    color:white;
+    margin: 10% 10% 5% 10%;
+    font-size:15px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:80%;
+    height:15%;
+    border:none;
+    border-radius: 5px;
+}

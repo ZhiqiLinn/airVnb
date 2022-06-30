@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { createOneBooking } from "../../store/booking";
-import { Calendar } from "react-calendar"
-import 'react-calendar/dist/Calendar.css';
+import './CreateBooking.css'
 
 const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     //-----------------TOTAL PRICE CALCULATION-------------------
@@ -11,7 +10,6 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     let mm = ("0" + (today.getMonth() + 1)).slice(-2)
     let dd = ("0" + today.getDate()).slice(-2)
     let yyyy = today.getFullYear();
-    let todayDate = yyyy + '-' + mm + '-' + dd;
     // console.log('TODAY DATE ', todayDate)
     
     //1000*3600*24 = seconds in a day
@@ -21,8 +19,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     const [errors, setErrors] = useState([]);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    const [hasSubmitted, setHasSubmitted] = useState(false);
-    
+    const [hasSubmitted, setHasSubmitted] = useState(false);    
     const checkInDate = new Date(checkIn)
     const checkOutDate = new Date(checkOut)
     // console.log("THIS IS CHECKIN DATE", checkInDate)
@@ -51,7 +48,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
         }else{
             let errors = [];
             setHasSubmitted(true);
-            errors.push("Check out date can not be the same as Check in date");
+            errors.push("Check out date can not be ealier than check in date or same as check in date");
             setErrors(errors)
             return;
         }
@@ -61,10 +58,38 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
         }
 
     }
+    //-----------SHOW CALCULATION WHEN CHECKOUT & CHECKIN DATES ARE SELECTED------------
+    let calculationCard;
+
+        if(checkOutDate > checkInDate){
+            calculationCard=(
+                <div >
+                    <p className="wont-charged-text">You won't be charged.</p>
+                    <div className='booking-calculation-div'>
+                        <p>Night x {night}</p>
+                        <p>Price x ${currentListing.price}</p>
+                        <p>Service Fee x ${currentListing.serviceFee}</p>
+                        <p>Total Before Taxes: ${(night)*(currentListing.price + currentListing.serviceFee)}</p>
+                    </div>
+                </div>
+            )
+        }else{
+            calculationCard=(
+                <div >
+                    <p className="wont-charged-text">You won't be charged.</p>
+                    <div className='booking-calculation-div' >
+                        <p>Night x 0</p>
+                        <p>Price x ${currentListing.price}</p>
+                        <p>Service Fee x ${currentListing.serviceFee}</p>
+                        <p>Total Before Taxes: $0</p>
+                    </div>
+                </div>
+            )
+        }
 
     return (
-        <div>
-            <h1>Reserve Your Booking</h1>
+        <div className='detail-page-booking-container'>
+            <h1 className='booking-modal-title'>Reserve Your Booking</h1>
             { hasSubmitted && errors &&
                 <div>
                     {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
@@ -76,38 +101,38 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                     minDate={new Date()}
                     defaultActiveStartDate={new Date()}
                     onChange={(e) => setCheckIn(e.target.value)}/> */}
-                <label>
-                    Check In
-                    <input
-                        type='date'
-                        value={checkIn}
-                        min={`${yyyy}-${mm}-${dd}`}
-                        onChange={(e) => setCheckIn(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Check Out
-                    <input
-                        type='date'
-                        value={checkOut}
-                        onChange={(e) => setCheckOut(e.target.value)}
-                        required
-                    />
-                </label>
+                <div className="checkin-checkout-div">
+                    <label>
+                        <input
+                         className='checkin-checkout-input'
+                            type='date'
+                            placeholder='CHECK-IN'
+                            value={checkIn}
+                            min={`${yyyy}-${mm}-${dd}`}
+                            onChange={(e) => setCheckIn(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <hr></hr>
+                    <label>
+                        <input
+                            className='checkin-checkout-input'
+                            type='date'
+                            placeholder='CHECK-OUT'
+                            value={checkOut}
+                            onChange={(e) => setCheckOut(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                {calculationCard}
                 <div className='Booking-form-btns-div'>
-                    <button className="btn" type='submit' >
+                    <button className="booking-reserve-btn" type='submit' >
                             Reserve
                     </button>
-                   <p>You won't be charged yet</p>
+
                 </div>
-                <div>
-                    <p>Night x {night}</p>
-                    <p>Price x ${currentListing.price}</p>
-                    <p>Service Fee x ${currentListing.serviceFee}</p>
-                    <p>Total Before Taxes: ${(night)*(currentListing.price + currentListing.serviceFee)}</p>
-                </div>
+
             </form>
         </div>
     )

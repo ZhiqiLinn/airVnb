@@ -96,10 +96,10 @@ const ListingDetailPage = ({sessionUser}) => {
                             </div>
                         </div>
 
-                        <div className='detail-page-booking-container'>
+                        <div>
                             <CreateBookingPage currentSessionUser={currentSessionUser} currentListing={currentListing}/>
                         </div>
-                        
+
                     </div>
 
                 </div>
