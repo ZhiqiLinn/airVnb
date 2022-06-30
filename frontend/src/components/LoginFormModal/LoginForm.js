@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import DemoUserLogin from "../DemoUserBtn";
+import "./LoginForm.css";
+
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -19,33 +22,58 @@ function LoginForm() {
     );
   };
 
+  
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <div className="login-modal-container">
+      <div className="login-modal-title">
+        <p>Log in</p>
+      </div>
+      <hr></hr>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <h3 style={{marginLeft:"10%"}}>Welcome to AirVnb</h3>
+        </div>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <div className="login-username-password-div">
+          <label>
+            <input
+              className="login-input"
+              type="text"
+              value={credential}
+              placeholder="Username or Email"
+              onChange={(e) => setCredential(e.target.value)}
+              required
+            />
+          </label>
+          <hr></hr>
+          <label>
+            <input
+              className="login-input"
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+          <span style={{fontSize:"small", marginLeft:"10%"}}><input type="checkbox"></input>Check box to agree hire Rena. </span>
+        <button className="login-modal-btn" type="submit">Continue</button>
+      </form>
+      <hr></hr>
+      <div className="login-modal-demo-user">
+        <div>
+          <span style={{fontSize:"small"}}>Don't have an account? Log in as Demo User!</span>
+        </div>
+        <div>
+          <DemoUserLogin />
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -161,7 +161,7 @@ const bookingReducer = (state = initialState, action) => {
           bookingData:{...state.bookingData}};
         // console.log("!-----DELETEDSATE BEFORE DELETE", action)
         delete deletedState.bookingData[action.deletedBooking.id];
-        // console.log("!--------THIS IS DELETEDSTATE after dewlet,", deletedState)
+        // console.log("!--------THIS IS DELETEDSTATE AFTER DELETE,", deletedState)
         return deletedState;
     default:
         return state;
