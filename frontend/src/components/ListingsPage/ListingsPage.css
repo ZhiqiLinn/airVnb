@@ -1,8 +1,8 @@
 .listings-container{
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .listing-img{
@@ -16,6 +16,20 @@
     /* text-decoration: 'none'; */
 }
 
-.listing-post-btn{
+.listing-name{
+    font-size: small;
+    font-weight: bold;
+}
+
+.listing-price{
+    font-size: small;
+}
+
+a.listings-container{
+    color:black;
+
+}
+a.listings-container:active{
+    color:black;
     
 }

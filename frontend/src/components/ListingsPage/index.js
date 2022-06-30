@@ -38,15 +38,18 @@ const ListingsPage = ({sessionUser}) => {
     return(
         <>
             <div className='listings-container'>
-            {Object.values(allListings).map(({ id, name, price, img1 }) => (
-                <Link style={{ textDecoration: 'none' }} to={`/listings/${id}`}>
+            {Object.values(allListings).map(({ id, name, price, img1,city,state }) => (
+                <Link 
+                style={{ textDecoration: 'none', color: 'black' }} 
+                activeStyle={{ color: 'black' }}
+                to={`/listings/${id}`}>
                     <div className='listing-div'>
                         <img src={img1} alt={name} className='listing-img'></img>
-                        <div>
-                            {name}
+                        <div className='listing-name'>
+                            {`${city}, ${state}`}
                         </div>
-                        <div>
-                            ${price}
+                        <div className='listing-price'>
+                            ${price} night
                         </div>
                     </div>
                 </Link>
