@@ -35,3 +35,7 @@ img.detail-small-img{
     justify-content: space-around;
     gap:5%
 }
+
+.detail-page-own-section{
+    display: flex;
+}

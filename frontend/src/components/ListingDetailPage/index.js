@@ -27,10 +27,12 @@ const ListingDetailPage = ({sessionUser}) => {
     let ownerSection;
     if(currentListing?.userId === currentSessionUser){
         ownerSection=(
-            <div className='detail-page-own-section'>
+            <div>
                 <h4>Owner Actions:</h4>
-                <EditListingModal currentListing={currentListing}/>
-                <DeleteListingModal currentListing={currentListing}/>
+                <div className='detail-page-own-section'>
+                    <EditListingModal currentListing={currentListing}/>
+                    <DeleteListingModal currentListing={currentListing}/>
+                </div>
             </div>
         )
     }
@@ -46,7 +48,7 @@ const ListingDetailPage = ({sessionUser}) => {
                         <h2>
                             {currentListing.name}
                         </h2>
-                        <p>
+                        <p style={{fontSize:"small"}}>
                             {`${currentListing.city}, ${currentListing.state}, US`}
                         </p>
 
@@ -73,25 +75,28 @@ const ListingDetailPage = ({sessionUser}) => {
                                 <hr></hr>
                                 <div className='detail-page-listing-requirements'>
                                     <div>
-                                        <h4>Self check-in</h4>
+                                        <h4><i class="fa-solid fa-key"></i> Self check-in</h4>
                                     </div>
                                     <div>
-                                        <h4>Free cancellation for 48 hours.</h4>
+                                        <h4><i class="fa-solid fa-calendar-xmark"></i> Free cancellation for 48 hours.</h4>
                                     </div>
                                 </div>
                                     <hr></hr>
                                 <div className='detail-page-listing-about'>
-                                        <h4>About</h4>
+                                        <h4><i class="fa-solid fa-house"></i> About</h4>
                                         <p>{currentListing.about}</p>
                                 </div>
                                     <hr></hr>
                                 <div className='detail-page-listing-amenties'>
-                                        <h4>What this place offers</h4>
-                                            Bay view
-                                            <br></br>Canal view
-                                            <br></br>Beach access
-                                            <br></br>Kitchen
-                                            <br></br>Wifi
+                                        <h4><i class="fa-solid fa-bed"></i> What this place offers</h4>
+                                            Air conditioning
+                                            <br></br>
+                                            Security cameras on property
+                                            <br></br>
+                                            Bathroom Essential
+                                            <br></br>
+                                            Wifi
+                                            
                                 </div>
                             </div>
                         </div>

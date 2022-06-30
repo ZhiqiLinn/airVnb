@@ -7,7 +7,7 @@ function DeleteListingModal({currentListing}) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete Listing</button>
+      <button className="btn" onClick={() => setShowModal(true)}>Delete Listing</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteListing setShowModal={setShowModal} currentListing={currentListing}/>
