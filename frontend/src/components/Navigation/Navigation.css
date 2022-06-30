@@ -1,0 +1,26 @@
+.navigation-container{
+    display: flex;
+    justify-content: space-between;
+    width:95vw;
+    margin: 0 10% 5px 0%;
+}
+.navi-right{
+    width: 50vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+.navi-left{
+    margin-left: 10%;
+}
+
+.navbar-navlink{
+    color:black;
+    font-size: small;
+    text-decoration: none;
+}
+
+.navbar-navlink:hover{
+    padding: 2px 0 2px 0 ;
+    border-radius: 20px;
+    background-color: rgba(230, 230, 230, 0.527);
+}

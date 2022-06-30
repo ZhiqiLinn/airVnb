@@ -21,30 +21,43 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink exact to="/listings/new">Become a Host</NavLink>
-        <NavLink exact to="/about-me">About Rena</NavLink>
+      <div>
+        <NavLink exact className="navbar-navlink" to="/listings/new">Become a Host</NavLink>
+      </div>
+
+      <div>
         <ProfileButton user={sessionUser} />
+      </div>
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <LoginFormModal />
-        <SignupFormModal />
-        
+        <div> 
+          <LoginFormModal />
+        </div>
+        <div>
+          <SignupFormModal />
+        </div>
       </>
     );
   }
 
   return (
-    <div>
-        <div onClick={linkToHomePage}>
-        <img src={icon}></img>
-        <span style={{color:"#FF5A5F", fontSize:"large"}}>  airvnb</span>
+    <div className='navigation-container'>
+        <div className='navi-left' onClick={linkToHomePage}>
+          <img src={icon}></img>
+          <span style={{color:"#FF5A5F", fontSize:"large"}}>  airvnb</span>
         </div>
-        <NavLink exact to="/listings">Check All Listings</NavLink>
-        {isLoaded && sessionLinks}
-        <hr></hr>
+        <div className='navi-right'>
+          <div>
+            <NavLink className="navbar-navlink" exact to="/listings">Check All Listings</NavLink>
+          </div>
+          <div>
+            <NavLink className="navbar-navlink" exact to="/about-me">About Rena</NavLink>
+          </div>
+          {isLoaded && sessionLinks}
+        </div>
     </div>
   );
 }
