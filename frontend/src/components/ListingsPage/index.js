@@ -37,7 +37,6 @@ const ListingsPage = ({sessionUser}) => {
     
     return(
         <>
-            <hr></hr>
             <div className='listings-container'>
             {Object.values(allListings).map(({ id, name, price, img1 }) => (
                 <Link style={{ textDecoration: 'none' }} to={`/listings/${id}`}>

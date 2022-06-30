@@ -1,0 +1,54 @@
+.rena-img{
+    margin: 10%;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+    display: block;
+    transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    margin-top: -10px;
+}
+
+.rena-img:hover{
+    box-shadow: 1px 1px 10px 0 rgba(0,0,0,.1);
+}
+.introduce-me-container{
+    margin: 10% 10% 5% 10%;
+    display: flex;
+}
+
+.introduce-me{
+    margin: 0% 10% ;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    border: 1px solid black;
+    border-radius:7px;
+    background-color: #f85e63;
+    color: white;
+}
+
+a:active {
+    color: black;
+  }
+
+ul{
+    list-style-type: none;
+}
+
+.introduce-airvnb{
+    margin: 5% 20% 5% 20%;
+    display: flex;
+    text-align: center;
+}
+
+.introduce-footer{
+    margin: 5%;
+    text-align: center;
+}
+

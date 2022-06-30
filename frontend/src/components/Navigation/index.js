@@ -22,7 +22,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <NavLink exact to="/listings/new">Become a Host</NavLink>
-        {/* <NavLink exact to="/about-me">About Rena</NavLink> */}
+        <NavLink exact to="/about-me">About Rena</NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );
@@ -38,13 +38,13 @@ function Navigation({ isLoaded }){
 
   return (
     <div>
-
         <div onClick={linkToHomePage}>
         <img src={icon}></img>
         <span style={{color:"#FF5A5F", fontSize:"large"}}>  airvnb</span>
         </div>
         <NavLink exact to="/listings">Check All Listings</NavLink>
         {isLoaded && sessionLinks}
+        <hr></hr>
     </div>
   );
 }

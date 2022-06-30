@@ -12,6 +12,7 @@ import BookingsPage from "./components/BookingsPage";
 import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
 import "./index.css"
+import AboutMePage from "./components/AboutMePage";
 
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/users/bookings" exact>
             <BookingsPage allListings={allListings} />
+          </Route>
+          <Route path="/about-me" exact>
+            <AboutMePage />
           </Route>
         </Switch>
       )}
