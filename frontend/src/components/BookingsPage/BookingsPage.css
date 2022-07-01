@@ -1,0 +1,16 @@
+.booking-div{
+    border-bottom: 1px solid black;
+    margin: 2% 25% 2% 25%;
+    padding: 50px 30px 20px 75px;
+    display: flex;
+    gap: 25px;
+}
+
+.booking-detail-div{
+    margin-top: 5%;
+}
+
+.booking-btns-div{
+    margin-top: 5%;
+}
+

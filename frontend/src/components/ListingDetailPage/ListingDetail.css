@@ -1,19 +1,19 @@
 .detail-page-imgs-container{
     display:flex;
-    gap: 65px;
+    gap: 20px;
 }
 
 
 img.detail-large-img{
     height: 100%;
-    width: 110%;
+    width: 100%;
 
     
 }
 
 img.detail-small-img{
-    height: 100%;
-    width: 75%;
+    height: 400px;
+    width: 400px;
 
     
 }

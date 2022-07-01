@@ -7,6 +7,7 @@ import { getAllListings } from '../../store/listing';
 import HomePage from '../HomePage'
 import EditBookingModal from '../EditBookingModal';
 import DeleteBookingModal from '../DeleteBookingModal';
+import './BookingsPage.css';
 
 const BookingsPage = ({allListings}) => {
     const dispatch = useDispatch();
@@ -33,20 +34,23 @@ const BookingsPage = ({allListings}) => {
       sessionLinks = (
         <div>
         { bookingsArr && bookingsArr.map(booking => (                     
-            <div>
-                <hr></hr>
+            <div className='booking-div'>
                 <div>
-                    <img src={booking?.Listing?.img1} height="100px" width="100px"></img>
-                    <p>{booking?.Listing?.name}</p>
+                    <img src={booking?.Listing?.img1} style={{borderRadius:"10px"}} height="200px" width="200px"></img>
                 </div>
-                <div>
-                    <p>Check In Date : {booking.checkIn}</p>
-                    <p>Check Out Date : {booking.checkOut}</p>
+                <div className='booking-detail-div'>
+                    <p style={{fontWeight:"bold"}}>{booking?.Listing?.name}</p>
+                    Check In Date : {booking.checkIn}
+                    <br></br>
+                    Check Out Date : {booking.checkOut}
                 </div>
-                <div>
-                    <button>VIEW DETAILS</button>
-                    <EditBookingModal booking={booking}/>
-                    <DeleteBookingModal booking={booking}/>
+                <div className='booking-btns-div'>
+                    <div>
+                      <EditBookingModal booking={booking}/>
+                    </div>
+                    <div>
+                      <DeleteBookingModal booking={booking}/>
+                    </div>
                 </div>
             </div>
         ))}   
