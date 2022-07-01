@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { createOneListing } from "../../store/listing";
-// import { getOneListing } from "../store/listing";
-// import ErrorMessage from "./ErrorMessage";
+import CreateListingImg from "./CreateListingImg";
 
+import "./CreateListing.css"
 const CreateListingPage = ({sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -86,118 +86,153 @@ const CreateListingPage = ({sessionUser}) => {
 
 
     return(
-        <div className='listing-form-container'>
-            <h1>Welcome!</h1>
-            { hasSubmitted && errors &&
+        <div>
+            <div className='listing-form-container'>
                 <div>
-                    {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
+                    <CreateListingImg />
                 </div>
-            }
-            <form className='listing-form' onSubmit={handleSubmit}>
-                
-                <h2>Tell Us About Your Listing</h2>
-                <label>
-                    Title:
-                    <input
-                        type='text'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Description:
-                    <input
-                        type='text'
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <h3>Confirm Your Listing Location:</h3>
-                <label>
-                    City:
-                    <input
-                        type='text'
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    State:
-                    <select onChange={(e) => setState(e.target.value)} value={state}>
-                        {statesSelections.map(type =>
-                            <option key={type}>{type}</option>
-                        )}
-                    </select>
-                </label>
-                <br></br>
-                <h3>Upload Images For Your Listing</h3>
-                <label>
-                    Price
-                    <input
-                        type='text'
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />
-                    $/day
-                </label>
-                <br></br>
-                <label>
-                    Service Fee:
-                    <input
-                        type='text'
-                        value={serviceFee}
-                        onChange={(e) => setServiceFee(e.target.value)}
-                        required
-                    />
-                    $/day
-                </label>
-                <br></br>
-                <h3>Upload images for your listing:</h3>
-                <label>
-                    Image 1 (Required):
-                    <input
-                        type='text'
-                        value={img1}
-                        onChange={(e) => setImg1(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Image 2 (Optional):
-                    <input
-                        type='text'
-                        value={img2}
-                        onChange={(e) => setImg2(e.target.value)}
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Image 3 (Optional):
-                    <input
-                        type='text'
-                        value={img3}
-                        onChange={(e) => setImg3(e.target.value)}
-                    />
-                     
-                </label>
-                <br></br>
-                <div className='listing-form-btns-div'>
-                    <button className="btn"type='submit' >
-                            Submit Listing
-                    </button>
-                    <button className="btn"type='button' onClick={handleCancelClick}>
-                        Cancel Listing
-                    </button>
+                <div className="listing-form-img">
                 </div>
-            </form>
+            </div>
+            <div style={{textAlign:"center"}}>
+                <h1>Welcome!</h1>
+                { hasSubmitted && errors &&
+                    <div>
+                        {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
+                    </div>
+                }
+                <form onSubmit={handleSubmit}>
+                    
+                    <h2>Tell Us About Your Listing</h2>
+                    <label>
+                                Title:
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="TITLE"
+                                    type='text'
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <label>
+                                Description:
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="DESCRIPTION"
+                                    type='text'
+                                    value={about}
+                                    onChange={(e) => setAbout(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <h3>Confirm Your Listing Location:</h3>
+                            <label>
+                                City:
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="CITY"
+                                    type='text'
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <label>
+                                State:
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="STATE"
+                                    type='text'
+                                    value={state}
+                                    onChange={(e) => setState(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <h3>Upload Images For Your Listing</h3>
+                            <label>
+                                Price ($/day):
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="PRICE"
+                                    type='text'
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <label>
+                                Service Fee ($/day):
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="SERVICE FEE"
+                                    type='text'
+                                    value={serviceFee}
+                                    onChange={(e) => setServiceFee(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <h3>Upload images for your listing:</h3>
+                            <label>
+                                Image 1 (Required):
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="IMAGE 1 (REQUIRED)"
+                                    type='text'
+                                    value={img1}
+                                    onChange={(e) => setImg1(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <br></br>
+                            <label>
+                                Image 2 (Optional):
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="IMAGE 2 (OPTIONAL)"
+                                    type='text'
+                                    value={img2}
+                                    onChange={(e) => setImg2(e.target.value)}
+                                />
+                            </label>
+                            <br></br>
+                            <label>
+                                Image 3 (Optional):
+                                <br></br>
+                                <input
+                                    className="create-listing-input"
+                                    placeholder="IMAGE 3 (OPTIONAL)"
+                                    type='text'
+                                    value={img3}
+                                    onChange={(e) => setImg3(e.target.value)}
+                                />
+                                
+                            </label>
+                    <br></br>
+                    <div className='listing-form-btns-div'>
+                        <button className="btn"type='submit' >
+                                Submit Listing
+                        </button>
+                        <button className="btn"type='button' onClick={handleCancelClick}>
+                            Cancel Listing
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
