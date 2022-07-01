@@ -60,7 +60,7 @@ const EditBooking = ({booking, hideForm}) => {
                         <label>
                             Check In:
                             <input
-                            className='.edit-booking-input'
+                            className='edit-booking-input'
                             placeholder='CHECK-IN'
                                 type='date'
                                 value={checkIn}
@@ -72,7 +72,7 @@ const EditBooking = ({booking, hideForm}) => {
                         <label>
                             Check Out:
                             <input
-                                className='.edit-booking-input'
+                                className='edit-booking-input'
                                 placeholder='CHECK-OUT'
                                 type='date'
                                 value={checkOut}

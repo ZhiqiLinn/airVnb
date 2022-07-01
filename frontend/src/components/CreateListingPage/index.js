@@ -92,6 +92,12 @@ const CreateListingPage = ({sessionUser}) => {
                     <CreateListingImg />
                 </div>
                 <div className="listing-form-img">
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <h1>Open your door</h1>
+                    <h1>to hosting!</h1>
+                    <h1>↓</h1>
                 </div>
             </div>
             <div style={{textAlign:"center"}}>

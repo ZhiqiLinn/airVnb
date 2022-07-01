@@ -38,7 +38,7 @@ const CreateListingImg = () => {
                     backgroundSize:'cover',
                     transitionDuration:'1s',
                     height:"1000px",
-                    width:"800px",
+                    width:"900px",
                     zIndex:"-999",
                 }}>
                 </div>

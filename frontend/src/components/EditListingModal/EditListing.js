@@ -93,7 +93,7 @@ const EditListingPage = ({currentListing, hideForm}) => {
 
 
     return(
-        <div className='listing-form-container'>
+        <div className='edit-listing-form-container'>
             <h2 className="edit-listing-title">Edit Your Listing</h2>
             <hr></hr>
             { hasSubmitted && errors &&
@@ -225,7 +225,7 @@ const EditListingPage = ({currentListing, hideForm}) => {
                         <br></br>
                     </div>
                         <hr></hr>
-                    <div className='listing-form-btns-div'>
+                    <div className='edit-listing-form-btns-div'>
                         <button className="edit-listing-btn btn-hov" type='submit'>
                             Submit Listing
                         </button>

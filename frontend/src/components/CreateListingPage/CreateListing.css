@@ -1,7 +1,11 @@
 .listing-form-img{
-    width: 800px;
+    width: 900px;
     height: 1000px;
     background-color: black;
+    font-size: xx-large;
+    color:white;
+    text-align: center;
+    justify-content: center;
 }
 
 
@@ -18,4 +22,6 @@
 .listing-form-btns-div{
     display: flex;
     justify-content: center;
+    margin-top: 3%;
 }
+
