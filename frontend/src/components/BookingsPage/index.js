@@ -26,11 +26,18 @@ const BookingsPage = ({allListings}) => {
         dispatch(getAllListings())
         dispatch(getAllBookingsFromOneUser(sessionUser.id))
     },[dispatch])
-    //--------------CHECK IF A SESSION USER EXISTS-------------------------
-    
-
+    //--------------WHEN SESSION USER IS NOT EXISTS-------------------------
     let sessionLinks;
-    if (sessionUser) {
+    if (!sessionUser) {
+      sessionLinks = (
+        <>
+          <HomePage />
+          
+        </>
+      );
+    }
+    //--------------WHEN SESSION USER EXISTS BUT DOESNT HAVE ANY BOOKING------------
+    if (bookingsArr.length) {
       sessionLinks = (
         <div>
         { bookingsArr && bookingsArr.map(booking => (                     
@@ -56,13 +63,14 @@ const BookingsPage = ({allListings}) => {
         ))}   
         </div>   
       );
-    } else {
+    }else{
+
       sessionLinks = (
-        <>
-          <HomePage />
-        </>
-      );
-    }
+      <>
+        <h1>You have no booking reserved.</h1>
+      </>
+    )}
+
     return(
         <>
            {sessionLinks}
