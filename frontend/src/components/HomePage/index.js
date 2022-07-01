@@ -28,19 +28,21 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="home-page-demo-user">
-                <DemoUserLogin />
-            </div>
-            <div className="home-page-img-container" style={{
-                backgroundImage:`url(${images[currentImg]})`,
-                backgroundSize:'cover',
-                transitionDuration:'1s',
-                height:"800px",
-                width:"1200px",
-                zIndex:"-999",
-                margin:"5% 10% 5% 10%",
-                borderRadius:"20px"
-            }}>
+            <div className="home-page-img-container">
+                <div  style={{
+                    backgroundImage:`url(${images[currentImg]})`,
+                    backgroundSize:'cover',
+                    transitionDuration:'1s',
+                    height:"800px",
+                    width:"1200px",
+                    zIndex:"-999",
+                    margin:"5% 10% 5% 10%",
+                    borderRadius:"20px"
+                }}>
+                    <div className="home-page-demo-user">
+                        <DemoUserLogin />
+                    </div>
+                </div>
             </div>
         </>
     )

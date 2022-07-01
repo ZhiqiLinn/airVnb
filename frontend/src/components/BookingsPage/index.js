@@ -21,8 +21,6 @@ const BookingsPage = ({allListings}) => {
     const bookingsArr = Object.values(allBookings)
 
 
-
-
     useEffect(()=>{
         dispatch(getAllListings())
         dispatch(getAllBookingsFromOneUser(sessionUser.id))

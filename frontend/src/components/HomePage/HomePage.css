@@ -1,5 +1,10 @@
 .home-page-demo-user{
-    position: absolute;
-    top:50%;
+    position: relative;
     left:45%;
+    top: 25%;
+}
+
+.home-page-img-container{
+    height:"800px";
+    width:"1200px";
 }

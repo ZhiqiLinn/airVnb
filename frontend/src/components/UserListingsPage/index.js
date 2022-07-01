@@ -19,9 +19,7 @@ const UserListingsPage = () => {
     
     //--------LINK TO POST LISTING WHEN SESSION USER EXISTS---------
 
-    const linkToPosting = () => {
-        history.push('/listings/new')
-    }
+
 
 
      //-------------------CHECK IF AS SESSION USER EXISTS--------------------------
@@ -29,12 +27,6 @@ const UserListingsPage = () => {
      if (sessionUser) {
        sessionLinks = (
          <>
-             <h1>THIS IS USER LISTING PAGE</h1>
-             <div>
-             <button onClick={linkToPosting}>
-                 POST YOUR LISTING
-             </button>
-         </div>
              <div className='listings-container'>
              {Object.values(allListings).map(({ id, name, price, img1,city,state }) => (
                 <NavLink 
