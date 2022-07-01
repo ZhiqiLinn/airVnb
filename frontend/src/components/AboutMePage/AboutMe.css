@@ -27,7 +27,8 @@ a.about-anchor{
     text-decoration: none;
 }
 a.about-anchor:hover{
-    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
     border-radius:7px;
     background-color: #f85e63;
     color: white;

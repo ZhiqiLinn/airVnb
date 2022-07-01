@@ -31,7 +31,7 @@ img.detail-small-img{
 .detail-page-bottom-div{
     display: flex;
     flex-direction: row;
-    margin: 5% 12% 0% 0%;
+    margin: 5% 0% 0% 0%;
     justify-content: space-around;
     gap:5%
 }
