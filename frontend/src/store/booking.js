@@ -6,7 +6,7 @@ import { ValidationError } from "../utils/validationError";
 const LOAD_Booking = 'booking/LOAD_A_BOOKING';
 const ADD_Booking = 'booking/ADD_A_BOOKING';
 const LOAD_USER_Bookings = 'booking/LOAD_USER_Bookings';
-
+const EDIT_Booking = 'booking/EDIT_USER_Bookings'
 const DELETE_Booking = 'booking/DELETE_A_BOOKING';
 
 //----------------------- ACTION CREATOR : LOAD ALL BOOKINGS--------------------
@@ -26,6 +26,11 @@ const addBooking = (addedBooking) => ({
   addedBooking
 });
 
+//----------------------- ACTION CREATOR : ADD/UPDATE A BOOKING--------------------
+const editBooking = (editedBooking) => ({
+  type: EDIT_Booking,
+  editedBooking
+});
 
 //----------------------- ACTION CREATOR : DELETE A BOOKING--------------------
 const removeBooking = (deletedBooking) => ({
@@ -79,7 +84,7 @@ export const editOneBooking = (data) => async (dispatch) => {
     if (response.ok) {
       const booking = await response.json();
       console.log("EDIT ONE BOOKING THUNK BOOKING", booking)
-      dispatch(addBooking(booking));
+      dispatch(editBooking(booking));
     }
 }
 
@@ -158,7 +163,7 @@ const bookingReducer = (state = initialState, action) => {
         );
         return userBookingState;
 
-      //--------------------CASE FOR LOAD ONE BOOKING-------------------------------
+      //--------------------CASE FOR LOAD/ADD/UPDATE ONE BOOKING-------------------------------
       case ADD_Booking:
         const addedState = {
           ...state, 
@@ -171,6 +176,19 @@ const bookingReducer = (state = initialState, action) => {
         addedState.bookingData[action.addedBooking.id]=action.addedBooking
         console.log("AFTER ADDEDSTATE", addedState)
         return addedState;
+    //--------------------CASE FOR EDIT ONE BOOKING-------------------------------
+         case EDIT_Booking:
+        const editedState = {
+          ...state, 
+          userBookings: { 
+            ...state.userBookings,
+            
+          } 
+        }
+        console.log("BEFORE EDITEDSTATE", editedState)
+        editedState.userBookings[action.editedBooking.id]=action.editedBooking
+        console.log("AFTER EDITEDSTATE", editedState)
+        return editedState;
       case DELETE_Booking:
         const deletedState = {
           ...state,

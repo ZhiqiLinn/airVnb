@@ -40,7 +40,7 @@ const BookingsPage = ({allListings}) => {
     if (bookingsArr.length) {
       sessionLinks = (
         <div>
-        { bookingsArr.map(booking => (                     
+        { bookingsArr && bookingsArr.map(booking => (                     
             <div className='booking-div'>
                 <div>
                     <img src={booking?.Listing?.img1} style={{borderRadius:"10px"}} height="200px" width="200px"></img>
