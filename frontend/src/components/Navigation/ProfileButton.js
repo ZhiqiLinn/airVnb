@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import "./Navigation.css"
 
 
 function ProfileButton({ user }) {
+  console.log("THIS IS USEEEEERRRRRR", user)
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
@@ -33,14 +35,19 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <div onClick={openMenu}>
+        <img src={user.profileUrl}></img>
+        <i class="fa-solid fa-bars"></i>
+      </div>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li><Link to={`/users`}>User Profile</Link></li>
-          <li>
-            <button onClick={logout}>Log Out</button>
+          <li><NavLink className="dropdown-menu-navlink" to={`/users`}>Profile</NavLink></li>
+          <hr></hr>
+          <li><NavLink className="dropdown-menu-navlink" to={`/users/listings`}>Your Listings</NavLink></li>
+          <hr></hr>
+          <li><NavLink className="dropdown-menu-navlink" to={`/users/bookings`}>Your Bookings</NavLink></li>
+          <hr></hr>
+          <li onClick={logout}><NavLink className="dropdown-menu-navlink" to={`/`}>Log out</NavLink>
           </li>
         </ul>
       )}

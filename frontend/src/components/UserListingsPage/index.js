@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllListingsFromOneUser } from '../../store/listing';
-
+import "../ListingsPage/ListingsPage.css"
 const UserListingsPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -32,7 +32,7 @@ const UserListingsPage = () => {
                 POST YOUR LISTING
             </button>
         </div>
-            <div>
+            <div className='listings-container'>
             {Object.values(allListings).map(({ id, name, img1 }) => (
                 <div>
                     <img src={img1} alt={name}></img>

@@ -39,7 +39,7 @@ const ListingsPage = ({sessionUser}) => {
         <>
             <div className='listings-container'>
             {Object.values(allListings).map(({ id, name, price, img1,city,state }) => (
-                <Link 
+                <NavLink 
                 style={{ textDecoration: 'none', color: 'black' }} 
                 activeStyle={{ color: 'black' }}
                 to={`/listings/${id}`}>
@@ -52,7 +52,7 @@ const ListingsPage = ({sessionUser}) => {
                             ${price} night
                         </div>
                     </div>
-                </Link>
+                </NavLink>
             ))}
             </div>
         </>

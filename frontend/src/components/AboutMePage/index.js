@@ -51,7 +51,7 @@ const AboutMePage = () => {
                     <p>AarVnb is a clone web application inspired by Airbnb, that provides an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities.
                     </p>
                     <div>
-                        Built With:
+                        <span style={{fontWeight:"bold"}}>Built With:</span>
                         <br></br>
                             JavaScript
                         <br></br>
