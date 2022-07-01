@@ -47,3 +47,13 @@ input.login-input{
     margin-top: 5%;
 
 }
+
+.login-btn{
+    background-color: #FF5A5F;
+    color:white;
+    height: 25px;
+    width: 60px;
+    border:none;
+    border-radius: 5px;
+}
+

@@ -47,7 +47,7 @@ function Navigation({ isLoaded }){
     <div className='navigation-container'>
         <div className='navi-left' onClick={linkToHomePage}>
           <img src={icon}></img>
-          <span style={{color:"#FF5A5F", fontSize:"large"}}>  airvnb</span>
+          <span style={{color:"#FF5A5F", fontSize:"x-large"}}>  airvnb</span>
         </div>
         <div className='navi-right'>
           <div>
