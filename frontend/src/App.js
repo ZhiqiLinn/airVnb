@@ -10,6 +10,7 @@ import ListingDetailPage from "./components/ListingDetailPage";
 import BookingsPage from "./components/BookingsPage";
 import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
+import PageNotFound from "./components/PageNotFound"
 import "./index.css"
 import AboutMePage from "./components/AboutMePage";
 
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/about-me" exact>
             <AboutMePage />
+          </Route>
+          <Route>
+              <PageNotFound />
           </Route>
         </Switch>
       )}
