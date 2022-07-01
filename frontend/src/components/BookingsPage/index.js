@@ -12,7 +12,7 @@ import './BookingsPage.css';
 const BookingsPage = ({allListings}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const allBookings = useSelector(state => state.bookingState.bookingData)
+    const allBookings = useSelector(state => state.bookingState.userBookings)
 
     // console.log("---------THIS IS ALL BOOKINGS FROM BookingPage COMPONENT", allBookings)
     // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
@@ -40,7 +40,7 @@ const BookingsPage = ({allListings}) => {
     if (bookingsArr.length) {
       sessionLinks = (
         <div>
-        { bookingsArr && bookingsArr.map(booking => (                     
+        { bookingsArr.map(booking => (                     
             <div className='booking-div'>
                 <div>
                     <img src={booking?.Listing?.img1} style={{borderRadius:"10px"}} height="200px" width="200px"></img>

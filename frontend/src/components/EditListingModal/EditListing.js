@@ -21,7 +21,8 @@ const EditListingPage = ({currentListing, hideForm}) => {
 
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const currentSessionUser = useSelector(state => state.session.user.id)
-    
+    const statesSelections = ['','AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
 
     // useEffect(() => {
@@ -144,18 +145,19 @@ const EditListingPage = ({currentListing, hideForm}) => {
                             />
                         </label>
                         <br></br>
-                        <label>
-                            State:
-                            <br></br>
-                            <input
-                                className="edit-input"
-                                placeholder="STATE"
-                                type='text'
-                                value={state}
-                                onChange={(e) => setState(e.target.value)}
-                                required
-                            />
-                        </label>
+                            <label>
+                                State:
+                                <br></br>
+                                <select 
+                                    onChange={(e) => setState(e.target.value)} 
+                                    value={state}
+                                    className="create-listing-input"
+                                    >
+                                    {statesSelections.map(type =>
+                                        <option key={type}>{type}</option>
+                                    )}
+                                </select>
+                            </label>
                         <br></br>
                         <h3>Upload Images For Your Listing</h3>
                         <label>

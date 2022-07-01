@@ -13,8 +13,8 @@ const CreateListingPage = ({sessionUser}) => {
     const [about, setAbout] = useState('');
     const [city, setCity] = useState('');
     const [state, setState ] = useState('');
-    const [price, setPrice] = useState('0');
-    const [serviceFee, setServiceFee] = useState('0');
+    const [price, setPrice] = useState('');
+    const [serviceFee, setServiceFee] = useState('');
     const [img1, setImg1] = useState('');
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
@@ -153,14 +153,15 @@ const CreateListingPage = ({sessionUser}) => {
                             <label>
                                 State:
                                 <br></br>
-                                <input
-                                    className="create-listing-input"
-                                    placeholder="STATE"
-                                    type='text'
+                                <select 
+                                    onChange={(e) => setState(e.target.value)} 
                                     value={state}
-                                    onChange={(e) => setState(e.target.value)}
-                                    required
-                                />
+                                    className="create-listing-input"
+                                    >
+                                    {statesSelections.map(type =>
+                                        <option key={type}>{type}</option>
+                                    )}
+                                </select>
                             </label>
                             <br></br>
                             <h3>Upload Images For Your Listing</h3>

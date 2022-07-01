@@ -5,7 +5,8 @@ import { ValidationError } from "../utils/validationError";
 //---------------------------LOAD TYPE-------------------------------------------
 const LOAD_Booking = 'booking/LOAD_A_BOOKING';
 const ADD_Booking = 'booking/ADD_A_BOOKING';
-const EDIT_Booking = 'booking/EDIT_A_BOOKING';
+const LOAD_USER_Bookings = 'booking/LOAD_USER_Bookings';
+
 const DELETE_Booking = 'booking/DELETE_A_BOOKING';
 
 //----------------------- ACTION CREATOR : LOAD ALL BOOKINGS--------------------
@@ -14,7 +15,11 @@ const loadBooking = (allBookings) => ({
     allBookings,
   });
   
-
+//----------------------- ACTION CREATOR : LOAD ALL LISTINGS--------------------
+const loadUserBooking = (allBookingsFromOneUser) => ({
+  type: LOAD_USER_Bookings,
+  allBookingsFromOneUser
+});
 //----------------------- ACTION CREATOR : ADD/UPDATE A BOOKING--------------------
 const addBooking = (addedBooking) => ({
   type: ADD_Booking,
@@ -45,7 +50,7 @@ export const getAllBookingsFromOneUser = (userId) => async (dispatch) => {
     if (response.ok) {
         const allBookings = await response.json();
         // console.log("GET ALL BOOKING THUNK WORKS")
-      dispatch(loadBooking(allBookings));
+      dispatch(loadUserBooking(allBookings));
     }
   };
 
@@ -127,7 +132,7 @@ export const deleteOneBooking = (data) => async (dispatch) => {
   }
 }
 //---------------------------REDUCER---------------------------------------------
-const initialState = { bookingData: {}};
+const initialState = { bookingData: {}, userBookings:{}};
 
 const bookingReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -141,6 +146,17 @@ const bookingReducer = (state = initialState, action) => {
           (booking) => (newState.bookingData[booking.id] = booking)
         );
         return newState;
+
+      //--------------------CASE FOR LOAD ONE USER'S LISTINGS----------------------
+      case LOAD_USER_Bookings:
+        const userBookingState = {
+          ...state, 
+          userBookings:{}
+        };
+        action.allBookingsFromOneUser.forEach(
+          (booking) => (userBookingState.userBookings[booking.id] = booking)
+        );
+        return userBookingState;
 
       //--------------------CASE FOR LOAD ONE BOOKING-------------------------------
       case ADD_Booking:
@@ -163,6 +179,7 @@ const bookingReducer = (state = initialState, action) => {
         delete deletedState.bookingData[action.deletedBooking.id];
         // console.log("!--------THIS IS DELETEDSTATE AFTER DELETE,", deletedState)
         return deletedState;
+
     default:
         return state;
 
