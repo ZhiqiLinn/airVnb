@@ -13,6 +13,10 @@ const EditBooking = ({booking, hideForm}) => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
+    const checkInDate = new Date(checkIn)
+    const checkOutDate = new Date(checkOut)
+    // console.log("THIS IS CHECKIN DATE", checkInDate)
+    // console.log("THIS IS CHECKIN DATE", checkOutDate)
 
     useEffect(() => {
         dispatch(getAllBookings());
@@ -28,7 +32,7 @@ const EditBooking = ({booking, hideForm}) => {
     let editedBooking;
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setHasSubmitted(true);
         const payload = {
             id:booking.id,
             userId:booking.userId,
@@ -37,9 +41,23 @@ const EditBooking = ({booking, hideForm}) => {
             checkOut,
             Listing:booking.Listing
         }
-        console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
-        editedBooking = dispatch(editOneBooking(payload))
-        hideForm();
+
+        if(checkOut > checkIn){
+            console.log("checkOut > checkIn", checkOut > checkIn)
+            editedBooking = dispatch(editOneBooking(payload))
+            hideForm();
+        }else{
+            console.log("reaches here")
+            let errors = [];
+            setHasSubmitted(true);
+            errors.push("Check out date can not be ealier than check in date or same as check in date");
+            setErrors(errors)
+            return;
+        }
+        if(editedBooking){
+            setHasSubmitted(false);
+            history.push(`/users/bookings`);
+        }
 
     }
     const handleCancel = (e) => {
@@ -55,6 +73,11 @@ const EditBooking = ({booking, hideForm}) => {
             <div className="edit-booking-container">
             
                 <h2>Edit Your Booking</h2>
+                { hasSubmitted && errors &&
+                <div>
+                    {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
+                </div>
+                }   
                 <form  onSubmit={handleSubmit}>
                     <div className="edit-date-div">
                         <label>

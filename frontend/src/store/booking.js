@@ -167,13 +167,13 @@ const bookingReducer = (state = initialState, action) => {
       case ADD_Booking:
         const addedState = {
           ...state, 
-          bookingData: { 
-            ...state.bookingData,
+          userBookings: { 
+            ...state.userBookings,
             
           } 
         }
         console.log("BEFORE ADDEDSTATE", addedState)
-        addedState.bookingData[action.addedBooking.id]=action.addedBooking
+        addedState.userBookings[action.addedBooking.id]=action.addedBooking
         console.log("AFTER ADDEDSTATE", addedState)
         return addedState;
     //--------------------CASE FOR EDIT ONE BOOKING-------------------------------
@@ -192,9 +192,9 @@ const bookingReducer = (state = initialState, action) => {
       case DELETE_Booking:
         const deletedState = {
           ...state,
-          bookingData:{...state.bookingData}};
+          userBookings:{...state.userBookings}};
         // console.log("!-----DELETEDSATE BEFORE DELETE", action)
-        delete deletedState.bookingData[action.deletedBooking.id];
+        delete deletedState.userBookings[action.deletedBooking.id];
         // console.log("!--------THIS IS DELETEDSTATE AFTER DELETE,", deletedState)
         return deletedState;
 
