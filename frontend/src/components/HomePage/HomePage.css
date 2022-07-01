@@ -8,3 +8,21 @@
     height:"800px";
     width:"1200px";
 }
+
+
+.home-page-listings-div{
+    position: relative;
+    left:45%;
+    top: 25%;
+    margin-bottom: 2%;
+}
+
+.home-page-listings-text{
+    position: relative;
+    left:35%;
+    top: -10%;
+    font-size: xxx-large;
+    font-weight: bolder;
+    color:#FF5A5F;
+    
+}

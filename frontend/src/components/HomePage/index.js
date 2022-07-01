@@ -6,11 +6,12 @@ import splash4 from "../../images/splash4.jpg";
 import splash5 from "../../images/splash5.jpg";
 import { useState, useEffect } from "react";
 import "./HomePage.css"
+import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
 
     const images = [splash1,splash2,splash3,splash4,splash5];
-
+    const history = useHistory();
     const [currentImg, setCurrentImg] = useState(0);
 
     useEffect(() => {
@@ -25,6 +26,10 @@ const HomePage = () => {
         
         return () => clearInterval(interval);
     }, [])
+    //------------LINK TO ALL LISTINGS------------------
+    const linkToAllListings = () => {
+        history.push('/listings')
+    }
 
     return (
         <>
@@ -39,6 +44,11 @@ const HomePage = () => {
                     margin:"5% 10% 5% 10%",
                     borderRadius:"20px"
                 }}>
+                    <div className="home-page-listings-div">
+                            <button onClick={linkToAllListings} className="demo-user-btn btn-hov">
+                                Explore
+                            </button>
+                    </div>
                     <div className="home-page-demo-user">
                         <DemoUserLogin />
                     </div>

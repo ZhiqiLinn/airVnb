@@ -1,11 +1,12 @@
 .demo-user-btn{
+    
     background-color: #FF5A5F;
     color:white;
     font-size:15px;
     display:block;
     width:125px;
     height:40px;
-    border:none;
+    border: 1px solid white;
     border-radius: 5px;
 
 }
