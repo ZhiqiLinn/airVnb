@@ -5,6 +5,7 @@ import splash3 from "../../images/splash3.jpg";
 import splash4 from "../../images/splash4.jpg";
 import splash5 from "../../images/splash5.jpg";
 import { useState, useEffect } from "react";
+import "./HomePage.css"
 
 const HomePage = () => {
 
@@ -27,16 +28,18 @@ const HomePage = () => {
 
     return (
         <>
-            <div style={{zIndex:"1"}}>
+            <div className="home-page-demo-user">
                 <DemoUserLogin />
             </div>
             <div className="home-page-img-container" style={{
                 backgroundImage:`url(${images[currentImg]})`,
                 backgroundSize:'cover',
                 transitionDuration:'1s',
-                height:"1200px",
-                width:"2400px",
-                zIndex:"-999"
+                height:"800px",
+                width:"1200px",
+                zIndex:"-999",
+                margin:"5% 10% 5% 10%",
+                borderRadius:"20px"
             }}>
             </div>
         </>

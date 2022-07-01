@@ -16,22 +16,19 @@ const BookingsPage = ({allListings}) => {
     // console.log("---------THIS IS ALL BOOKINGS FROM BookingPage COMPONENT", allBookings)
     // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
     // console.log("----THIS CURRENT USER ", sessionUser.id)
-    if (!useSelector(state => state.session.user.id)){
-        history.push('/')
-    }    
-    const sessionUserId = useSelector(state => state.session.user.id);
-
+    const sessionUser = useSelector(state => state?.session?.user);
+    
     const bookingsArr = Object.values(allBookings)
+
 
 
 
     useEffect(()=>{
         dispatch(getAllListings())
-        dispatch(getAllBookingsFromOneUser(sessionUserId))
+        dispatch(getAllBookingsFromOneUser(sessionUser.id))
     },[dispatch])
     //--------------CHECK IF A SESSION USER EXISTS-------------------------
     
-    const sessionUser = useSelector(state => state.session.user);
 
     let sessionLinks;
     if (sessionUser) {
@@ -61,7 +58,6 @@ const BookingsPage = ({allListings}) => {
       sessionLinks = (
         <>
           <HomePage />
-          
         </>
       );
     }
