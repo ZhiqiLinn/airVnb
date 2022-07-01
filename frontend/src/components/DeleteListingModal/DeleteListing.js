@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { deleteOneListing, getAllListings } from "../../store/listing";
 import { useEffect } from "react";
+import "./DeleteListing.css";
 
 const DeleteListing = ({currentListing, setShowModal}) => {
     // console.log("currentListing PROPS", currentListing)
@@ -24,21 +25,19 @@ const DeleteListing = ({currentListing, setShowModal}) => {
     };
 
     return(
-        <div>
-            <div>
+        <>
+            <div className="delete-listing-container">
                 <h2>Do you really want to delete your listing? This process cannot be undone.</h2>
-                <div>
-                    <button className="btn" type="button" onClick={handleDelete}>
+                <div className='delete-listing-btns-div'>
+                    <button className="delete-listing-btn" type="button" onClick={handleDelete}>
                         Delete
                     </button>
-                </div>
-                <div>
-                <button className="btn" type='button' onClick={handleCancel}>
+                    <button className="delete-listing-btn" type='button' onClick={handleCancel}>
                         Cancel
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

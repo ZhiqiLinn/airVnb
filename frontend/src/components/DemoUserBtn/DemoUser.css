@@ -9,3 +9,13 @@
     border-radius: 5px;
 
 }
+
+.demo-user-btn:hover{
+    background-color: #f62773;
+    box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+}
+
+.copy-right{
+    text-align: center;
+    position: fixed;
+}

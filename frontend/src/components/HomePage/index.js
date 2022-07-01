@@ -43,6 +43,7 @@ const HomePage = () => {
                         <DemoUserLogin />
                     </div>
                 </div>
+            <p className="copy-right">© Copyright 2022 Zhiqi Lin @appAcademy</p>
             </div>
         </>
     )

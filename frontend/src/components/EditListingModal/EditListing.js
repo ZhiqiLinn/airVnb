@@ -32,25 +32,24 @@ const EditListingPage = ({currentListing, hideForm}) => {
         dispatch(getAllListings());
       }, [dispatch]);
 
-    useEffect( () => {
+      useEffect( () => {
         let errors = []
-        if (!name.length) errors.push("Name is required");
-        if (!about.length) errors.push("Description is required");
+        if (name.length <= 3) errors.push("Name should have at least 3 characters");
+        if (about.length <= 10 || about.length >= 1000) errors.push("Description length should between 10 to 1000 characters");
         if (!city.length) errors.push("City is required");
-        if (!state.length) errors.push("State is required");
-        if (!price.length) errors.push("Price is required");
-        if (!serviceFee.length) errors.push("Service Fee is required");
+        if (state.length !== 2 ) errors.push("State is required");
+        if (!/^\d+$/.test(price)) errors.push("Price is required and should be in number");
+        if (!/^\d+$/.test(serviceFee)) errors.push("Service Fee is required and should be in number");
         if (!img1) errors.push("Minimum of one image is required");
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 
-
-    async function handleSubmit(e) {
+    //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
+    let editedListing;
+    function handleSubmit(e) {
         e.preventDefault();
-        console.log("---------HANDLE SUBMI TOP")
         // setHasSubmitted(true);
-        if (errors.length) return alert(`Cannot Submit`);
-    
+        setHasSubmitted(true);
         const payload = {
             id:currentListing.id,
             userId:currentSessionUser,
@@ -65,14 +64,15 @@ const EditListingPage = ({currentListing, hideForm}) => {
             img3
 
         };
-        console.log("---------HANDLE SUBMIT", payload)
-        await dispatch(editOneListing(payload))
-        
-        reset();
-        // setHasSubmitted(false);
-        hideForm();
-        history.push(`/listings/${currentListing.id}`);
+        editedListing =  dispatch(editOneListing(payload))
+
+        if(editedListing && !errors.length) {
+            reset();
+            setHasSubmitted(false);
+            hideForm();
+            history.push(`/listings/${currentListing.id}`);
       }
+    }
     const reset = () => {
         setName('');
         setAbout('');
@@ -94,118 +94,146 @@ const EditListingPage = ({currentListing, hideForm}) => {
 
     return(
         <div className='listing-form-container'>
-            <h1>Welcome!</h1>
+            <h2 className="edit-listing-title">Edit Your Listing</h2>
+            <hr></hr>
             { hasSubmitted && errors &&
                 <div>
                     {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
                 </div>
             }
-            <form className='listing-form' onSubmit={handleSubmit}>
-                
-                <h2>Tell Us About Your Listing</h2>
-                <label>
-                    Title:
-                    <input
-                        type='text'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Description:
-                    <input
-                        type='text'
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <h3>Confirm Your Listing Location:</h3>
-                <label>
-                    City:
-                    <input
-                        type='text'
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    State:
-                    <input
-                        type='text'
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <h3>Upload Images For Your Listing</h3>
-                <label>
-                    Price
-                    <input
-                        type='text'
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />
-                    $/day
-                </label>
-                <br></br>
-                <label>
-                    Service Fee:
-                    <input
-                        type='text'
-                        value={serviceFee}
-                        onChange={(e) => setServiceFee(e.target.value)}
-                        required
-                    />
-                    $/day
-                </label>
-                <br></br>
-                <h3>Upload images for your listing:</h3>
-                <label>
-                    Image 1 (Required):
-                    <input
-                        type='text'
-                        value={img1}
-                        onChange={(e) => setImg1(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Image 2 (Optional):
-                    <input
-                        type='text'
-                        value={img2}
-                        onChange={(e) => setImg2(e.target.value)}
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Image 3 (Optional):
-                    <input
-                        type='text'
-                        value={img3}
-                        onChange={(e) => setImg3(e.target.value)}
-                    />
-                     
-                </label>
-                <br></br>
-                <div className='listing-form-btns-div'>
-                    <button className="btn"type='submit'>
-                        Submit Listing
-                    </button>
-                    <button className="btn"type='button' onClick={handleCancelClick}>
-                        Cancel Listing
-                    </button>
-                </div>
-            </form>
+
+                <form className='listing-form' onSubmit={handleSubmit}>
+                    <div className="edit-form-div">
+                        <label>
+                            Title:
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="TITLE"
+                                type='text'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <label>
+                            Description:
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="DESCRIPTION"
+                                type='text'
+                                value={about}
+                                onChange={(e) => setAbout(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <h3>Confirm Your Listing Location:</h3>
+                        <label>
+                            City:
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="CITY"
+                                type='text'
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <label>
+                            State:
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="STATE"
+                                type='text'
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <h3>Upload Images For Your Listing</h3>
+                        <label>
+                            Price ($/day):
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="PRICE"
+                                type='text'
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <label>
+                            Service Fee ($/day):
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="SERVICE FEE"
+                                type='text'
+                                value={serviceFee}
+                                onChange={(e) => setServiceFee(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <h3>Upload images for your listing:</h3>
+                        <label>
+                            Image 1 (Required):
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="IMAGE 1 (REQUIRED)"
+                                type='text'
+                                value={img1}
+                                onChange={(e) => setImg1(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <br></br>
+                        <label>
+                            Image 2 (Optional):
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="IMAGE 2 (OPTIONAL)"
+                                type='text'
+                                value={img2}
+                                onChange={(e) => setImg2(e.target.value)}
+                            />
+                        </label>
+                        <br></br>
+                        <label>
+                            Image 3 (Optional):
+                            <br></br>
+                            <input
+                                className="edit-input"
+                                placeholder="IMAGE 3 (OPTIONAL)"
+                                type='text'
+                                value={img3}
+                                onChange={(e) => setImg3(e.target.value)}
+                            />
+                            
+                        </label>
+                        <br></br>
+                    </div>
+                        <hr></hr>
+                    <div className='listing-form-btns-div'>
+                        <button className="edit-listing-btn btn-hov" type='submit'>
+                            Submit Listing
+                        </button>
+                        <button className="edit-listing-btn btn-hov" type='button' onClick={handleCancelClick}>
+                            Cancel Listing
+                        </button>
+                    </div>
+                </form>
         </div>
     )
 }

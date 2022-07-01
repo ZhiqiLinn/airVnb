@@ -1,0 +1,28 @@
+.edit-listing-title{
+    text-align: center;
+}
+
+.edit-form-div{
+    margin: 5% 15% 5% ;
+}
+
+.listing-form-btns-div{
+    margin: 5% 15% 5% ;
+    
+}
+.edit-input{
+    height: 25px;
+    width: 350px;
+}
+.edit-listing-btn{
+    background-color: #FF5A5F;
+    color:white;
+    margin: 5% 10% 5% 10%;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:80%;
+    height:15%;
+    border:none;
+    border-radius: 5px;
+
+}

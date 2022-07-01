@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import "./DemoUser.css"
-const DemoUserLogin = () => {
+const  DemoUserLogin = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const credential = "Demo"

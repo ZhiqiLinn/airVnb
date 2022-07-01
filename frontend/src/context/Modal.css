@@ -23,3 +23,13 @@
     background-color:white;
     border-radius: 10px;
   }
+
+
+
+  #listing-modal-content{
+    position: absolute;
+    background-color:white;
+    border-radius: 10px;
+    height: 1000px;
+    width:500px;
+  }

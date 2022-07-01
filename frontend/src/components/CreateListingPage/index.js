@@ -23,7 +23,6 @@ const CreateListingPage = ({sessionUser}) => {
     const currentSessionUser = sessionUser.id
 
     // console.log("----THIS IS CURRENT SESSION USER ID ", currentSessionUser)
-    const integers = "1234567890"
     const statesSelections = ['','AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 
         //-----------------ERROR HANDLING----------------------------
@@ -39,7 +38,7 @@ const CreateListingPage = ({sessionUser}) => {
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
     
- //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
+    //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
     let createdListing;
     const handleSubmit = e => {
         e.preventDefault();

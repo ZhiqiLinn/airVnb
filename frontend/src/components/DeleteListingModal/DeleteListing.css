@@ -1,0 +1,20 @@
+.delete-listing-container{
+    text-align: center;
+    margin: 25% 5% 15% 5%;
+}
+.delete-listing-btns-div{
+    margin: 15% 25% 5% 
+}
+
+.delete-listing-btn{
+    background-color: #FF5A5F;
+    color:white;
+    margin: 5% 10% 5% 10%;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:80%;
+    height:15%;
+    border:none;
+    border-radius: 5px;
+
+}

@@ -7,7 +7,6 @@ import ListingsPage from "./components/ListingsPage";
 import CreateListingPage from "./components/CreateListingPage";
 import HomePage from "./components/HomePage"
 import ListingDetailPage from "./components/ListingDetailPage";
-import DeleteMsgPage from "./components/DeleteListingModal/DeleteMsgPage";
 import BookingsPage from "./components/BookingsPage";
 import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
@@ -40,9 +39,6 @@ function App() {
           </Route>
           <Route path="/listings/new" exact>
             <CreateListingPage sessionUser={sessionUser}/>
-          </Route>
-          <Route path="/listings/delete" exact>
-            <DeleteMsgPage />
           </Route>
           <Route path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>

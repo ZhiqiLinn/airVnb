@@ -127,7 +127,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                 </div>
                 {calculationCard}
                 <div className='Booking-form-btns-div'>
-                    <button className="booking-reserve-btn" type='submit' >
+                    <button className="booking-reserve-btn btn-hov" type='submit' >
                             Reserve
                     </button>
 

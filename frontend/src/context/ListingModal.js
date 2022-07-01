@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './Modal.css';
 
 
-const ModalContext = React.createContext();
-export const ModalProvider = ({children}) => {
+const ListingModalContext = React.createContext();
+export const ListingModalProvider = ({children}) => {
     const modalRef = useRef();
     const [value, setValue] = useState()
 
@@ -14,23 +14,23 @@ export const ModalProvider = ({children}) => {
 
     return(
     <>
-        <ModalContext.Provider value={value}>
+        <ListingModalContext.Provider value={value}>
             {children}
-        </ModalContext.Provider>
+        </ListingModalContext.Provider>
         <div ref={modalRef} />
 
     </>
     )
 }
 
-export function Modal({ onClose, children }) {
-    const modalNode = useContext(ModalContext);
+export function ListingModal({ onClose, children }) {
+    const modalNode = useContext(ListingModalContext);
     if (!modalNode) return null;
   
     return ReactDOM.createPortal(
       <div id="modal">
         <div id="modal-background"  onClick={onClose} />
-        <div id="modal-content">
+        <div id="listing-modal-content">
           {children}
         </div>
       </div>,
