@@ -13,7 +13,7 @@ import "./CreateListing.css"
 
 const CreateListingImg = () => {
 
-    const images = [createListingImg1,createListingImg2,createListingImg3,createListingImg4,createListingImg5];
+    const images = [createListingImg1,createListingImg2,createListingImg3,createListingImg4,createListingImg5,createListingImg6,createListingImg7];
 
     const [currentImg, setCurrentImg] = useState(0);
 
@@ -25,7 +25,7 @@ const CreateListingImg = () => {
             else {
                  setCurrentImg(currentImg + 1);
             }
-        }, 5000)
+        }, 1000)
         
         return () => clearInterval(interval);
     }, [])
