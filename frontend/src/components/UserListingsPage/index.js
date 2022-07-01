@@ -8,7 +8,7 @@ const UserListingsPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUserId = useSelector(state => state?.session?.user?.id);    
-    const allListings = useSelector(state => state.listingState.listingData)  
+    const allListings = useSelector(state => state.listingState.userListings)  
 
     useEffect(()=>{
         dispatch(getAllListingsFromOneUser(sessionUserId))

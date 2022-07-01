@@ -4,16 +4,22 @@ import { ValidationError } from "../utils/validationError";
 
 //---------------------------LOAD TYPE-------------------------------------------
 const LOAD_Listing = 'listing/LOAD_A_LISTING';
+const LOAD_USER_Listings = 'listing/LOAD_USER_Listings';
 const ADD_Listing = 'listing/ADD_A_LISTING';
-const EDIT_Listing = 'listing/EDIT_A_LISTING';
 const DELETE_Listing = 'listing/DELETE_A_LISTING';
+
 
 //----------------------- ACTION CREATOR : LOAD ALL LISTINGS--------------------
 const load = (allListings) => ({
     type: LOAD_Listing,
     allListings,
   });
-  
+
+//----------------------- ACTION CREATOR : LOAD ALL LISTINGS--------------------
+const loadUserListing = (allListingsFromOneUser) => ({
+  type: LOAD_USER_Listings,
+  allListingsFromOneUser
+});
 
 //----------------------- ACTION CREATOR : ADD A LISTING--------------------
 const add = (addedListing) => ({
@@ -46,7 +52,7 @@ export const getAllListingsFromOneUser = (userId) => async (dispatch) => {
   if (response.ok) {
       const allListings = await response.json();
       // console.log("GET ALL LISTING THUNK WORKS")
-    dispatch(load(allListings));
+    dispatch(loadUserListing(allListings));
   }
 };
 
@@ -130,7 +136,7 @@ export const deleteOneListing = (data) => async (dispatch) => {
   }
 }
 //---------------------------REDUCER---------------------------------------------
-const initialState = { listingData: {}};
+const initialState = { listingData: {}, userListings:{}};
 
 const listingReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -144,7 +150,16 @@ const listingReducer = (state = initialState, action) => {
           (listing) => (newState.listingData[listing.id] = listing)
         );
         return newState;
-
+      //--------------------CASE FOR LOAD ONE USER'S LISTINGS----------------------
+      case LOAD_USER_Listings:
+        const userListingState = {
+          ...state, 
+          userListings:{}
+        };
+        action.allListingsFromOneUser.forEach(
+          (listing) => (userListingState.userListings[listing.id] = listing)
+        );
+        return userListingState;
       //--------------------CASE FOR LOAD ONE LISTING-------------------------------
       case ADD_Listing:
         const addedState = {
@@ -156,16 +171,6 @@ const listingReducer = (state = initialState, action) => {
         addedState.listingData[action.addedListing.id]=action.addedListing
         return addedState;
         
-      // case EDIT_Listing:
-      //   console.log(action.editedListing)
-      //   const editedState = { 
-      //     ...state, 
-      //     listingData: { 
-      //       ...state.listingData,
-      //       [action.addedListing.id]:action.addedListing
-      //     } 
-      //   }
-      //   return editedState;
       case DELETE_Listing:
         const deletedState = {
           ...state,

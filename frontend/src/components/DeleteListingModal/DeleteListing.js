@@ -14,7 +14,7 @@ const DeleteListing = ({currentListing, setShowModal}) => {
 
     const handleDelete = async () => {
         await dispatch(deleteOneListing(currentListing))
-        history.push('/listings')
+        history.push('/users/listings')
     }
 
     const handleCancel = (e) => {

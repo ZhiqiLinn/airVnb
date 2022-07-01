@@ -65,7 +65,7 @@ const CreateListingPage = ({sessionUser}) => {
         if(createdListing && !errors.length) {
             reset();
             setHasSubmitted(false);
-            history.push(`/listings`);
+            history.push(`/users/listings`);
         }
       }
     const reset = () => {
