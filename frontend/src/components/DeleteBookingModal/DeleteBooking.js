@@ -26,15 +26,13 @@ const DeleteBooking = ({booking, hideForm}) => {
 
     return(
         <div>
-            <div>
+            <div className="delete-listing-container">
                 <h2>Do you really want to delete your booking? This process cannot be undone.</h2>
-                <div>
-                    <button className="btn" type="button" onClick={handleDelete}>
+                <div className='delete-listing-btns-div'>
+                    <button className="btn-hov btn" type="button" onClick={handleDelete}>
                         Delete
                     </button>
-                </div>
-                <div>
-                <button className="btn" type='button' onClick={handleCancel}>
+                    <button className="btn-hov btn" type='button' onClick={handleCancel}>
                         Cancel
                     </button>
                 </div>

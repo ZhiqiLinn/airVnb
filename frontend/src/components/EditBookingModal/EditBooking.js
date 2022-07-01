@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { editOneBooking, getAllBookings } from "../../store/booking";
-
+import "./EditBooking.css"
 
 const EditBooking = ({booking, hideForm}) => {
     // console.log("THIS IS BOOKIGN:", booking)
@@ -52,39 +52,45 @@ const EditBooking = ({booking, hideForm}) => {
     return (
         <div>
             { booking &&
-            <>
+            <div className="edit-booking-container">
             
-            <h2>Edit Your Booking</h2>
-            <form className='Booking-form' onSubmit={handleSubmit}>
-                <label>
-                    Check In
-                    <input
-                        type='date'
-                        value={checkIn}
-                        onChange={(e) => setCheckIn(e.target.value)}
-                        required
-                    />
-                </label>
-                <br></br>
-                <label>
-                    Check Out
-                    <input
-                        type='date'
-                        value={checkOut}
-                        onChange={(e) => setCheckOut(e.target.value)}
-                        required
-                    />
-                </label>
-                <div className='Booking-form-btns-div'>
-                    <button className="btn" type='submit' >
-                            Reserve
-                    </button>
-                    <button className="btn" type='button' onClick={handleCancel}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
-            </>
+                <h2>Edit Your Booking</h2>
+                <form  onSubmit={handleSubmit}>
+                    <div className="edit-date-div">
+                        <label>
+                            Check In:
+                            <input
+                            className='edit-input'
+                            placeholder='CHECK-IN'
+                                type='date'
+                                value={checkIn}
+                                onChange={(e) => setCheckIn(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <hr></hr>
+                        <label>
+                            Check Out:
+                            <input
+                                className='edit-input'
+                                placeholder='CHECK-OUT'
+                                type='date'
+                                value={checkOut}
+                                onChange={(e) => setCheckOut(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+                    <div className='edit-form-btns-div'>
+                        <button className="btn-hov btn" type='submit' >
+                                Reserve
+                        </button>
+                        <button className="btn-hov btn" type='button' onClick={handleCancel}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
             }
         </div>
     )

@@ -1,0 +1,18 @@
+.edit-booking-container{
+    margin: 15%
+}
+
+.edit-date-div{
+    border: 1px black solid;
+    border-radius: 5px;;
+}
+
+.edit-input{
+    width: 99%;
+    border: none;
+}
+
+.edit-form-btns-div{
+    margin: 10% 20%;
+    
+}

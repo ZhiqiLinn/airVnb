@@ -96,17 +96,13 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                 </div>
             }
             <form className='Booking-form' onSubmit={handleSubmit}>
-                {/* <Calendar 
-                    value={new Date()}
-                    minDate={new Date()}
-                    defaultActiveStartDate={new Date()}
-                    onChange={(e) => setCheckIn(e.target.value)}/> */}
                 <div className="checkin-checkout-div">
                     <label>
+                        Check In:
                         <input
-                         className='checkin-checkout-input'
-                            type='date'
+                            className='checkin-checkout-input'
                             placeholder='CHECK-IN'
+                            type='date'
                             value={checkIn}
                             min={`${yyyy}-${mm}-${dd}`}
                             onChange={(e) => setCheckIn(e.target.value)}
@@ -115,6 +111,7 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
                     </label>
                     <hr></hr>
                     <label>
+                        Check Out:
                         <input
                             className='checkin-checkout-input'
                             type='date'
