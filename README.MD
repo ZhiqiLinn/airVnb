@@ -17,7 +17,6 @@ Express\
 React\
 Redux
 
-# Technical Details: #
 
 
 # Features Directions: #
@@ -63,4 +62,14 @@ You will be able to reserve a booking inside the listing detail page.
 You will be able to edit and delete your bookings in your bookings page.
 
 ![editDeleteBooking](https://user-images.githubusercontent.com/90532956/176980927-64fe519b-34dc-49f6-816b-73d4ad76f66b.gif)
+
+
+
+# Challenges : #
+
+
+**Planning Process:**
+
+When I first started designing my  API routes and Frontend Routes, only some basic routes for each feature were created. After went through AirBnB a couple more times, I realized one of the most important aspects on developing a web application was missing: **THE USER'S DEMANDS!!!**. I first designed it based on a student aspect, who is trying to complete a nice perfect web development project. However, after I started to re-evaluate this website from a user aspect, I listed down everything that a user wanted to see on the navigation bar,  feature pages, and user profile menu, as well as considered the connections between each route, such as where should I place this button to make it clear and easy to navigate for a user? Where can a user see their own bookings?  An example change I made to the route is that I changed the bookings detail route from "/users/:userId/bookings/:bookingId" to "/users/bookings". I eliminated the user id because there is no need to define a user's id in the frontend route, the only user profile that a user wants to see at any time will be the session user's profile who is currently logged in. I also eliminated the booking's id because I want a user to be able to view, edit and delete everything on the same page without redirecting to another page since the site doesn't have too much information about booking, an extra route will be unnecessary. This planning process allowed me to be able to comprehensively think about an idea from multiple aspects (both user's aspect and the designer's aspect). It also allowed me to concentrate on coding step by step without making huge changes that might possibly affect my other codes or routes. I would say this is a very important fundamental part to succeed in any project.
+	
 
