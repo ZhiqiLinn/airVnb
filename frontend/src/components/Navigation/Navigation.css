@@ -13,6 +13,7 @@
 }
 .navi-left{
     margin-left: 10%;
+    cursor: pointer;
 }
 
 .navbar-navlink{
