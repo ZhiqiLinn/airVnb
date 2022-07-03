@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import CreateListingPage from '../CreateListingPage';
 import './Navigation.css';
-import DemoUserLogin from '../DemoUserBtn';
 import icon from "../../images/favicon16.png";
+import SearchBarPage from '../SearchBarPage';
 
 function Navigation({ isLoaded }){
   const history = useHistory();
@@ -54,10 +53,7 @@ function Navigation({ isLoaded }){
           <span style={{color:"#FF5A5F", fontSize:"x-large"}}>  airvnb</span>
         </div>
         <div>
-          <button className='btn-hov search-btn' onClick={linkToSearchPage}>
-            <i className="fa-solid fa-magnifying-glass" ></i>  
-            {` Search a Listing`}
-          </button>
+          <SearchBarPage />
         </div>
         <div className='navi-right'>
           <div>

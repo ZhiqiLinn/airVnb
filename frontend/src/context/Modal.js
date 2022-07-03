@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import './Modal.css';
 
 
-const ModalContext = React.createContext();
+export const ModalContext = React.createContext();
 export const ModalProvider = ({children}) => {
     const modalRef = useRef();
     const [value, setValue] = useState()
-
+    const [filteredData, setFilteredData] = useState();
     useEffect(() => {
         setValue(modalRef.current);
       }, [])
 
     return(
     <>
-        <ModalContext.Provider value={value}>
+        <ModalContext.Provider value={{value, filteredData, setFilteredData}}>
             {children}
         </ModalContext.Provider>
         <div ref={modalRef} />
