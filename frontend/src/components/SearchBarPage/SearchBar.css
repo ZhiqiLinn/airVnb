@@ -5,9 +5,12 @@
     width: 90vw;
     text-align: center;
     gap:10px;
-    background-color: #FF5A5F;
+    background-color: black;
     height: 500px;
+    color: white;
     margin: 0 25% 0 5%;
+    background-image: url("../../images/searchPage.PNG");
+    background-size: 90vw 500px;
 }
 .search-input{
     height: 50px;
@@ -18,4 +21,9 @@
 
 .glass{
     padding-top: 120px;
+}
+
+.searchbar-icon{
+    background-color: white;
+    border-radius: 5px;
 }

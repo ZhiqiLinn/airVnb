@@ -10,13 +10,13 @@ const SearchBarPage = ({allListings}) => {
     const dispatch = useDispatch();
     const allListingsArr = Object.values(allListings)
 
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredData, setFilteredData] = useState(allListingsArr);
     
     //------------FILTER KEYWORDS FROM ALL LISTING------------
     let newFilter;
     const handleFilter = (e) => {
         const searchWord = e.target.value
-        if(searchWord.length === 0) newFilter=[];
+        console.log(searchWord.length)
         newFilter = allListingsArr.filter(listing => {
             return listing.name.toLowerCase().includes(searchWord.toLowerCase())
         })
@@ -37,7 +37,7 @@ const SearchBarPage = ({allListings}) => {
         <div className="search">
             <div className="search-bar-div">
                 <label>
-                    <h1>Search Your Listing Today!</h1>
+                    <p style={{fontSize:"xxx-large"}}>Search Your Listing Today!</p>
                     <br></br>
                 <input 
                     className="search-input"
@@ -51,11 +51,11 @@ const SearchBarPage = ({allListings}) => {
                     
                     {filteredData.length === 0 ? 
                         <div>
-                            <img height="30px" width="30px" src={searchIcon} alt='search' ></img>   
+                            <img className="searchbar-icon" height="30px" width="30px" src={searchIcon} alt='search' ></img>   
                         </div>
                         :
                         <div>
-                            <img height="30px" width="30px" src={closeIcon} alt='search' onClick={handleClear} ></img>   
+                            <img className="searchbar-icon" height="30px" width="30px" src={closeIcon} alt='search' onClick={handleClear} ></img>   
                         </div>
                      }
                 </div>

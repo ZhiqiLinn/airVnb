@@ -39,7 +39,7 @@ const HomePage = () => {
                     backgroundSize:'cover',
                     transitionDuration:'1s',
                     height:"800px",
-                    width:"1200px",
+                    width:"80vw",
                     zIndex:"-999",
                     margin:"5% 10% 5% 10%",
                     borderRadius:"20px"
