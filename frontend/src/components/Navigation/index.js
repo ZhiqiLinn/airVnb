@@ -16,6 +16,10 @@ function Navigation({ isLoaded }){
   const linkToHomePage = () => {
     history.push('/')
   }
+   //------------LINK TO HOME PAGE-------------------------
+   const linkToSearchPage = () => {
+    history.push('/search')
+  }
   //-----------------SESSION USERS------------------------
   let sessionLinks;
   if (sessionUser) {
@@ -48,6 +52,12 @@ function Navigation({ isLoaded }){
         <div className='navi-left' onClick={linkToHomePage}>
           <img src={icon}></img>
           <span style={{color:"#FF5A5F", fontSize:"x-large"}}>  airvnb</span>
+        </div>
+        <div>
+          <button className='btn-hov search-btn' onClick={linkToSearchPage}>
+            <i className="fa-solid fa-magnifying-glass" ></i>  
+            {` Search a Listing`}
+          </button>
         </div>
         <div className='navi-right'>
           <div>

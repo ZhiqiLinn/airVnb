@@ -43,11 +43,9 @@ const EditBooking = ({booking, hideForm}) => {
         }
 
         if(checkOut > checkIn){
-            console.log("checkOut > checkIn", checkOut > checkIn)
             editedBooking = dispatch(editOneBooking(payload))
             hideForm();
         }else{
-            console.log("reaches here")
             let errors = [];
             setHasSubmitted(true);
             errors.push("Check out date can not be ealier than check in date or same as check in date");

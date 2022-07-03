@@ -72,7 +72,6 @@ export const getOneBooking = (bookingId) => async (dispatch) => {
 
 //----------------------- THUNK : EDIT ONE BOOKING--------------------
 export const editOneBooking = (data) => async (dispatch) => {
-    console.log("DATA", data)
     const response = await csrfFetch(`/api/bookings/${data.id}`, {
       method: "put",
       headers: {
@@ -80,10 +79,8 @@ export const editOneBooking = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     });
-    console.log("EDIT ONE BOOKING THUNK RESPONSE", response)
     if (response.ok) {
       const booking = await response.json();
-      console.log("EDIT ONE BOOKING THUNK BOOKING", booking)
       dispatch(editBooking(booking));
     }
 }
@@ -172,9 +169,7 @@ const bookingReducer = (state = initialState, action) => {
             
           } 
         }
-        console.log("BEFORE ADDEDSTATE", addedState)
         addedState.userBookings[action.addedBooking.id]=action.addedBooking
-        console.log("AFTER ADDEDSTATE", addedState)
         return addedState;
     //--------------------CASE FOR EDIT ONE BOOKING-------------------------------
          case EDIT_Booking:
@@ -185,9 +180,7 @@ const bookingReducer = (state = initialState, action) => {
             
           } 
         }
-        console.log("BEFORE EDITEDSTATE", editedState)
         editedState.userBookings[action.editedBooking.id]=action.editedBooking
-        console.log("AFTER EDITEDSTATE", editedState)
         return editedState;
       case DELETE_Booking:
         const deletedState = {

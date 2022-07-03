@@ -29,7 +29,6 @@ const UserListingsPage = () => {
     }
     //--------------WHEN SESSION USER EXISTS BUT DOESNT HAVE ANY LISTINGS----------
       if(ListingsArr.length){
-          console.log("ALL LISTINGS EXISTIS",!!ListingsArr)
           sessionLinks = (
             <>
                 <div className='listings-container'>

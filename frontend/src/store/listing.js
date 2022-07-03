@@ -76,10 +76,8 @@ export const editOneListing = (data) => async (dispatch) => {
       },
       body: JSON.stringify(data),
     });
-    console.log("~~~RESPONSE", response)
     if (response.ok) {
       const listing = await response.json();
-      console.log("~~~LISTING", listing)
       await dispatch(add(listing));
       return listing
     }

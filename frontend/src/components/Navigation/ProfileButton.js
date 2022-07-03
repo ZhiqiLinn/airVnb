@@ -6,7 +6,6 @@ import "./Navigation.css"
 
 
 function ProfileButton({ user }) {
-  console.log("THIS IS USEEEEERRRRRR", user)
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
@@ -37,7 +36,7 @@ function ProfileButton({ user }) {
     <>
       <div onClick={openMenu}>
         <img src={user.profileUrl}></img>
-        <i class="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-bars"></i>
       </div>
       {showMenu && (
         <ul className="profile-dropdown">
