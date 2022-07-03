@@ -9,7 +9,7 @@ function EditBookingModal({booking}) {
     <>
       <button className="btn-hov btn" onClick={() => setShowModal(true)}>Edit Booking</button>
       {showModal && (
-        <Modal class="edit-booking-modal" onClose={() => setShowModal(false)}>
+        <Modal className="edit-booking-modal" onClose={() => setShowModal(false)}>
           <EditBooking booking={booking} hideForm={() => setShowModal(false)}/>
         </Modal>
       )}

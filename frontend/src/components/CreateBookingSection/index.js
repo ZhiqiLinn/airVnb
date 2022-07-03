@@ -43,7 +43,6 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
         // console.log("THIS IS PAYLOAD FOR BOOKING", [payload])
 
         if(checkOut > checkIn){
-            console.log("checkOut > checkIn", checkOut > checkIn)
             createdBooking = dispatch(createOneBooking(payload))
         }else{
             let errors = [];

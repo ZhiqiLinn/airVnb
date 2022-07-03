@@ -75,20 +75,20 @@ const ListingDetailPage = ({sessionUser}) => {
                                 <hr></hr>
                                 <div className='detail-page-listing-requirements'>
                                     <div>
-                                        <h4><i class="fa-solid fa-key"></i> Self check-in</h4>
+                                        <h4><i className="fa-solid fa-key"></i> Self check-in</h4>
                                     </div>
                                     <div>
-                                        <h4><i class="fa-solid fa-calendar-xmark"></i> Free cancellation for 48 hours.</h4>
+                                        <h4><i className="fa-solid fa-calendar-xmark"></i> Free cancellation for 48 hours.</h4>
                                     </div>
                                 </div>
                                     <hr></hr>
                                 <div className='detail-page-listing-about'>
-                                        <h4><i class="fa-solid fa-house"></i> About</h4>
+                                        <h4><i className="fa-solid fa-house"></i> About</h4>
                                         <p>{currentListing.about}</p>
                                 </div>
                                     <hr></hr>
                                 <div className='detail-page-listing-amenties'>
-                                        <h4><i class="fa-solid fa-bed"></i> What this place offers</h4>
+                                        <h4><i className="fa-solid fa-bed"></i> What this place offers</h4>
                                             Air conditioning
                                             <br></br>
                                             Security cameras on property

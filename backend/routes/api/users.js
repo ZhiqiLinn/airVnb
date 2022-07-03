@@ -60,7 +60,6 @@ router.post(
 //-----------------------------------------------GET TO USER'S BOOKINGS PAGE---------------------------------------------
 router.get('//:id(\\d+)/bookings', asyncHandler(async (_req, res) => {
   const userId = parseInt(_req.params.id, 10);
-  console.log("!!!!!!!!!THIS IS USER ID", userId)
   const booking = await Booking.findAll({
       // where: {userId:},
       order:[['createdAt', 'ASC']]

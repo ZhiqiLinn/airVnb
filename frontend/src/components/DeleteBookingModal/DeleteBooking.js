@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 
 const DeleteBooking = ({booking, hideForm}) => {
-    console.log("currentBooking PROPS", booking)
     // console.log("showModal PROPS", setShowModal)
 
     const history = useHistory();
