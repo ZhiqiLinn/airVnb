@@ -1,10 +1,8 @@
 import React, { useState,useEffect  } from 'react'
 import { useDispatch } from 'react-redux';
 import { getAllListings } from '../../store/listing';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "./SearchBar.css"
-import searchIcon from '../../images/search.png';
-import closeIcon from '../../images/close.png';
 
 const SearchBarPage = ({allListings}) => {
     const dispatch = useDispatch();
@@ -21,11 +19,6 @@ const SearchBarPage = ({allListings}) => {
             return listing.name.toLowerCase().includes(searchWord.toLowerCase())
         })
         setFilteredData(newFilter)
-    }
-
-    //------------CLEAR INPUT -------------------------------
-    const handleClear = (e) => {
-        setFilteredData([])
     }
 
     //-----------FILL THE LISITNGSDATA STATE-------------------
@@ -47,22 +40,10 @@ const SearchBarPage = ({allListings}) => {
                  />
 
                 </label>
-                <div className='glass'>
-                    
-                    {filteredData.length === 0 ? 
-                        <div>
-                            <img className="searchbar-icon" height="30px" width="30px" src={searchIcon} alt='search' ></img>   
-                        </div>
-                        :
-                        <div>
-                            <img className="searchbar-icon" height="30px" width="30px" src={closeIcon} alt='search' onClick={handleClear} ></img>   
-                        </div>
-                     }
-                </div>
                     
 
             </div>
-            { filteredData != 0 &&
+            { filteredData !== 0 &&
             <div className='listings-container'>
                 {filteredData.map(listing => {
                     return (
@@ -74,6 +55,9 @@ const SearchBarPage = ({allListings}) => {
                                 <img src={listing.img1} alt={listing.name} className='listing-img'></img>
                                 <div className='listing-name'>
                                     {`${listing.city}, ${listing.state}`}
+                                </div>
+                                <div style={{fontSize:"small", color:"grey"}}>
+                                    {listing.name}
                                 </div>
                                 <div className='listing-price'>
                                     ${listing.price} night

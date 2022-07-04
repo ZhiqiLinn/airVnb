@@ -15,13 +15,11 @@
 .search-input{
     height: 50px;
     width: 480px;
-    border: #FF5A5F 2px solid;
+    border: black 2px solid;
     border-radius: 5px;
 }
 
-.glass{
-    padding-top: 120px;
-}
+
 
 .searchbar-icon{
     background-color: white;
