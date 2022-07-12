@@ -1,0 +1,27 @@
+.search-bar-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    text-align: center;
+    gap:10px;
+    background-color: black;
+    height: 500px;
+    color: white;
+    margin: 0 25% 0 5%;
+    background-image: url("../../images/searchPage.PNG");
+    background-size: 90vw 500px;
+}
+.search-input{
+    height: 50px;
+    width: 480px;
+    border: black 2px solid;
+    border-radius: 5px;
+}
+
+
+
+.searchbar-icon{
+    background-color: white;
+    border-radius: 5px;
+}

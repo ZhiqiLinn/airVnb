@@ -12,6 +12,7 @@
     justify-content: space-evenly;
 }
 .navi-left{
+    margin-top: -.5%;
     margin-left: 10%;
     cursor: pointer;
 }
@@ -45,3 +46,15 @@
     text-decoration: none;
 }
 
+
+.search-btn{
+    background-color: #FF5A5F;
+    color:white;
+    display:block;
+    width:150px;
+    height:30px;
+    border:white 1px solid;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: -3%;
+}

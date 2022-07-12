@@ -13,6 +13,7 @@ import UserListingsPage from "./components/UserListingsPage";
 import PageNotFound from "./components/PageNotFound"
 import "./index.css"
 import AboutMePage from "./components/AboutMePage";
+import SearchBarPage from "./components/SearchBarPage";
 
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route path="/about-me" exact>
             <AboutMePage />
+          </Route>
+          <Route path="/search" exact>
+              <SearchBarPage allListings={allListings} />
           </Route>
           <Route>
               <PageNotFound />

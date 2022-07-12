@@ -30,11 +30,12 @@ hr{
     background-color: #f62773;
 }
 
-
 button{
     cursor: pointer;
 }
-
 a{
+    cursor: pointer;
+}
+Link{
     cursor: pointer;
 }
