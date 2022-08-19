@@ -1,6 +1,6 @@
 # About AirVnb:
-AarVnb is a web application inspired by Airbnb, that provides an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities. 
-[Click here to view AirVnb Live SIte](http://airvnb-project.herokuapp.com)
+AirVnb is a web application inspired by Airbnb, that provides an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities. 
+[Click here to view AirVnb Live Site](http://airvnb-project.herokuapp.com)
 
 **Please see below links to project Wiki:**\
 [Feature List](https://github.com/ZhiqiLinn/airVnb/wiki/Feature-List)\
