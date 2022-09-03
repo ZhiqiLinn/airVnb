@@ -14,7 +14,7 @@ import PageNotFound from "./components/PageNotFound"
 import "./index.css"
 import AboutMePage from "./components/AboutMePage";
 import SearchBarPage from "./components/SearchBarPage";
-
+import SearchResult from "./components/SearchBarPage/SearchResult"
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +56,9 @@ function App() {
           </Route>
           <Route path="/about-me" exact>
             <AboutMePage />
+          </Route>
+          <Route path='/search/:searchterms'>
+            <SearchResult allListings={allListings}/>
           </Route>
           <Route path="/search" exact>
               <SearchBarPage allListings={allListings} />

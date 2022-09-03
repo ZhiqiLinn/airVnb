@@ -18,14 +18,28 @@ const BookingsPage = ({allListings}) => {
     // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
     // console.log("----THIS CURRENT USER ", sessionUser.id)
     const sessionUser = useSelector(state => state?.session?.user);
+    const bookingsArr = Object.values(allBookings).reverse()
     
-    const bookingsArr = Object.values(allBookings)
+        useEffect(()=>{
+            dispatch(getAllListings())
+            dispatch(getAllBookingsFromOneUser(sessionUser.id))
+        },[dispatch])
 
+    //-------------TODAY'S DATE---------------------------------------------
+    // let today = new Date();
+    // let mm = ("0" + (today.getMonth() + 1)).slice(-2)
+    // let dd = ("0" + today.getDate()).slice(-2)
+    // let yyyy = today.getFullYear();
+    const expiredBooking = (checkOut) => {
+      let checkOutDate = new Date(checkOut)
+      let today = new Date()
+      let isExpired = (checkOutDate-today)/(1000*3600*24)
+      console.log(isExpired)
+      if(isExpired < 0) return false
+      return true
+    }
 
-    useEffect(()=>{
-        dispatch(getAllListings())
-        dispatch(getAllBookingsFromOneUser(sessionUser.id))
-    },[dispatch])
+    console.log(expiredBooking('2022-8-20'))
     //--------------WHEN SESSION USER IS NOT EXISTS-------------------------
     let sessionLinks;
     if (!sessionUser) {
@@ -40,28 +54,34 @@ const BookingsPage = ({allListings}) => {
     if (bookingsArr.length) {
       sessionLinks = (
         <div>
-        { bookingsArr && bookingsArr.map(booking => (                     
-            <div className='booking-div'>
-                <div>
-                    <img src={booking?.Listing?.img1} style={{borderRadius:"10px"}} height="200px" width="200px"></img>
+          { bookingsArr && bookingsArr.map(booking => 
+              (               
+                <div className='booking-div'>
+                { expiredBooking(booking.checkOut) &&
+                    <>
+                      <div>
+                          <img src={booking?.Listing?.img1} style={{borderRadius:"10px"}} height="200px" width="200px"></img>
+                      </div>
+                      <div className='booking-detail-div'>
+                          <p style={{fontWeight:"bold"}}>{booking?.Listing?.name}</p>
+                          Check In Date : {booking.checkIn}
+                          <br></br>
+                          Check Out Date : {booking.checkOut}
+                      </div>
+                      <div className='booking-btns-div'>
+                          <div>
+                            <EditBookingModal booking={booking}/>
+                          </div>
+                          <div>
+                            <DeleteBookingModal booking={booking}/>
+                          </div>
+                      </div>
+                  </>
+                }
                 </div>
-                <div className='booking-detail-div'>
-                    <p style={{fontWeight:"bold"}}>{booking?.Listing?.name}</p>
-                    Check In Date : {booking.checkIn}
-                    <br></br>
-                    Check Out Date : {booking.checkOut}
-                </div>
-                <div className='booking-btns-div'>
-                    <div>
-                      <EditBookingModal booking={booking}/>
-                    </div>
-                    <div>
-                      <DeleteBookingModal booking={booking}/>
-                    </div>
-                </div>
-            </div>
-        ))}   
-        </div>   
+            )
+          )}   
+        </div>    
       );
     }else{
 
@@ -72,10 +92,10 @@ const BookingsPage = ({allListings}) => {
     )}
 
     return(
-        <>
-           {sessionLinks}
-        </>
-    )
+      <>
+      {sessionLinks}
+      </>
+    );
 
 }
 export default BookingsPage;

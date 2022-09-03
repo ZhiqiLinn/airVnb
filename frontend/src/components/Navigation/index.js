@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -7,19 +7,20 @@ import SignupFormModal from '../SignupFormModal';
 import CreateListingPage from '../CreateListingPage';
 import './Navigation.css';
 import DemoUserLogin from '../DemoUserBtn';
-import icon from "../../images/favicon16.png";
+import icon from "../../images/logo2.png";
+import SearchBarPage from '../SearchBarPage';
 
 function Navigation({ isLoaded }){
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+
+  
   //------------LINK TO HOME PAGE-------------------------
   const linkToHomePage = () => {
     history.push('/')
   }
    //------------LINK TO HOME PAGE-------------------------
-   const linkToSearchPage = () => {
-    history.push('/search')
-  }
+
   //-----------------SESSION USERS------------------------
   let sessionLinks;
   if (sessionUser) {
@@ -50,15 +51,12 @@ function Navigation({ isLoaded }){
   return (
     <div className='navigation-container'>
         <div className='navi-left' onClick={linkToHomePage}>
-          <img src={icon}></img>
-          <span style={{color:"#FF5A5F", fontSize:"x-large"}}>  airvnb</span>
+          {/* <img src={icon} height="70px" width="140px"></img> */}
+          <span style={{color:"#FF5A5F", fontSize:"45px", marginLeft:'45%'}}>  airvnb</span>
         </div>
-        <div>
-          <button className='btn-hov search-btn' onClick={linkToSearchPage}>
-            <i className="fa-solid fa-magnifying-glass" ></i>  
-            {` Search a Listing`}
-          </button>
-        </div>
+          <div>
+            <SearchBarPage />
+          </div>
         <div className='navi-right'>
           <div>
             <NavLink className="navbar-navlink" exact to="/listings">Check All Listings</NavLink>

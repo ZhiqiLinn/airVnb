@@ -35,13 +35,13 @@ const EditListingPage = ({currentListing, hideForm}) => {
 
       useEffect( () => {
         let errors = []
-        if (name.length <= 3) errors.push("Name should have at least 3 characters");
+        if (!name.length) errors.push("Please enter your name");
         if (about.length <= 10 || about.length >= 1000) errors.push("Description length should between 10 to 1000 characters");
         if (!city.length) errors.push("City is required");
         if (state.length !== 2 ) errors.push("State is required");
         if (!/^\d+$/.test(price)) errors.push("Price is required and should be in number");
         if (!/^\d+$/.test(serviceFee)) errors.push("Service Fee is required and should be in number");
-        if (!img1) errors.push("Minimum of one image is required");
+
         setErrors(errors);
     }, [name, about, city, state, price, serviceFee, img1]);
 

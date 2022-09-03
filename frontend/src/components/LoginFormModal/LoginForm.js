@@ -69,6 +69,7 @@ function LoginForm() {
         <div>
           <span style={{fontSize:"small"}}>Don't have an account? Log in as a Demo User!</span>
         </div>
+        <br></br>
         <div>
           <DemoUserLogin />
         </div>
