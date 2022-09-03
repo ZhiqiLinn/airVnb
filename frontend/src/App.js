@@ -15,7 +15,7 @@ import "./index.css"
 import AboutMePage from "./components/AboutMePage";
 import SearchBarPage from "./components/SearchBarPage";
 import SearchResult from "./components/SearchBarPage/SearchResult"
-
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,21 +39,21 @@ function App() {
           <Route path="/listings" exact >
             <ListingsPage allListings={allListings} sessionUser={sessionUser}/>
           </Route>
-          <Route path="/listings/new" exact>
+          <ProtectedRoute path="/listings/new" exact>
             <CreateListingPage sessionUser={sessionUser}/>
-          </Route>
+          </ProtectedRoute>
           <Route path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
           </Route>
-          <Route path="/users" allListings={allListings} exact>
+          <ProtectedRoute path="/users" allListings={allListings} exact>
             <UserProfile/>
-          </Route>
-          <Route path="/users/listings" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/listings" exact>
             <UserListingsPage/>
-          </Route>
-          <Route path="/users/bookings" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/bookings" exact>
             <BookingsPage allListings={allListings} />
-          </Route>
+          </ProtectedRoute>
           <Route path="/about-me" exact>
             <AboutMePage />
           </Route>
