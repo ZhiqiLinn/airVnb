@@ -7,19 +7,19 @@
     border-bottom: 1px grey solid;
 }
 .navi-right{
-    width: 50vw;
+    width: 40vw;
     display: flex;
     justify-content: space-evenly;
+    margin-top: .5%;
 }
 .navi-left{
     margin-top: -.5%;
-    margin-left: 10%;
     cursor: pointer;
 }
 
 .navbar-navlink{
     color:black;
-    font-size: small;
+    font-size: medium;
     text-decoration: none;
 }
 
