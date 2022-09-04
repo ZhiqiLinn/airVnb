@@ -12,7 +12,27 @@ module.exports = {
         allowNull: false,        
         type: Sequelize.STRING(500)
       },
-      rating: {
+      cleanliness: {
+        allowNull: false,        
+        type: Sequelize.INTEGER
+      },
+      communication: {
+        allowNull: false,        
+        type: Sequelize.INTEGER
+      },
+      checkIn: {
+        allowNull: false,        
+        type: Sequelize.INTEGER
+      },
+      Accuracy: {
+        allowNull: false,        
+        type: Sequelize.INTEGER
+      },
+      Location: {
+        allowNull: false,        
+        type: Sequelize.INTEGER
+      },
+      Value: {
         allowNull: false,        
         type: Sequelize.INTEGER
       },
