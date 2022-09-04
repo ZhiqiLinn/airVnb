@@ -47,25 +47,31 @@ const ReviewsSection = ({currentListing, users}) => {
     const cleanlinessAvg = findAvg('cleanliness')
     const communicationAvg = findAvg('communication')
     const checkInAvg = findAvg('checkIn')
-    const AccuracyAvg = findAvg('Accuracy')
-    const LocationAvg = findAvg('Location')
-    const ValueAvg = findAvg('Value')
+    const accuracyAvg = findAvg('accuracy')
+    const locationAvg = findAvg('location')
+    const valueAvg = findAvg('value')
 
     const avgForAllRating = ((
         Number(cleanlinessAvg)
         + Number(communicationAvg) 
         + Number(checkInAvg) 
-        + Number(AccuracyAvg) 
-        + Number(LocationAvg) 
-        + Number(ValueAvg) )/6).toFixed(1)
+        + Number(accuracyAvg) 
+        + Number(locationAvg) 
+        + Number(valueAvg) )/6).toFixed(1)
     
-    
+      console.log(cleanlinessAvg)
+  console.log(communicationAvg)
+  console.log(checkInAvg)
+  console.log(accuracyAvg)
+  console.log(locationAvg)
+  console.log(valueAvg)
+
     const ratings = [{'name':"Cleanliness",'avg': cleanlinessAvg}, 
         {'name':'Communication', 'avg': communicationAvg}, 
         {'name':'Check In', 'avg': checkInAvg}, 
-        {'name':'Accuracy', 'avg': AccuracyAvg}, 
-        {'name':'Location', 'avg': LocationAvg}, 
-        {'name':'Value', 'avg': ValueAvg}]
+        {'name':'accuracy', 'avg': accuracyAvg}, 
+        {'name':'location', 'avg': locationAvg}, 
+        {'name':'value', 'avg': valueAvg}]
 
         console.log(ratings)
     //-------------------------GET USER'S INFO
