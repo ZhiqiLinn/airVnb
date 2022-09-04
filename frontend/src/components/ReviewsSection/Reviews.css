@@ -1,8 +1,7 @@
 .reviews-layout{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin:5%;
-    gap:14%;
+    margin:3%;
 }
 
 .review-img{
@@ -21,4 +20,20 @@
 
 .review-user-details{
     display: flex;
+}
+
+.rating-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin:2% 3% 3% 3%;
+}
+
+.single-rating{
+    display: flex;
+    gap:5%;
+}
+
+.progress-bar{
+    display: flex;
+    align-items: center;
 }
