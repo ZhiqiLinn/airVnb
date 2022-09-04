@@ -108,60 +108,66 @@ const handleSubmit = async (e) => {
                             <label>Cleanliness</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={cleanliness}
                             onChange={cleanlinessRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div className='rating-container'>
                             <label>Communication</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={communication}
                             onChange={communicationRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div className='rating-container'>
                             <label>Checkin</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={checkIn}
                             onChange={checkInRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div className='rating-container'>
                             <label>Accuracy</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={accuracy}
                             onChange={accuracyRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div className='rating-container'>
                             <label>Location</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={location}
                             onChange={locationRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div className='rating-container'>
                             <label>Value</label>
                             <ReactStars
                             count={5}
+                            half={false}
                             size={30}
                             value={value}
                             onChange={valueRating}
-                            activeColor="purple"
+                            color2={'#FF5A5F'}
                             />
                         </div>
                         <div>
