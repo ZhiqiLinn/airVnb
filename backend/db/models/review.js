@@ -5,9 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     cleanliness:DataTypes.INTEGER,
     communication:DataTypes.INTEGER,
     checkIn:DataTypes.INTEGER,
-    Accuracy:DataTypes.INTEGER,
-    Location:DataTypes.INTEGER,
-    Value:DataTypes.INTEGER,
+    accuracy:DataTypes.INTEGER,
+    location:DataTypes.INTEGER,
+    value:DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     listingId: DataTypes.INTEGER
   }, {});

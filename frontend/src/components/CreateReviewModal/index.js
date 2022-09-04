@@ -11,7 +11,7 @@ const CreateReviewModal = ({ currentListing, owner}) => {
   const [showModal, setShowModal] = useState(false);
   const [cleanliness, setCleanliness] = useState(0);
   const [communication, setCommunication] = useState(0);
-  const [checkin, setCheckin] = useState(0);
+  const [checkIn, setCheckin] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
   const [location, setLocation] = useState(0);
   const [value, setValue] = useState(0);
@@ -25,14 +25,14 @@ const CreateReviewModal = ({ currentListing, owner}) => {
     let errors = [];
     if(cleanliness <= 0) errors.push("please rate")
     if(communication <= 0) errors.push("please rate")
-    if(checkin <= 0) errors.push("please rate")
+    if(checkIn <= 0) errors.push("please rate")
     if(accuracy <= 0) errors.push("please rate")
     if(location <= 0) errors.push("please rate")
     if(value <= 0) errors.push("please rate")
     if(!content.length) errors.push("please fill your content")
     setErrors(errors);
 
-  },[cleanliness, communication, checkin, accuracy, location, value, content])
+  },[cleanliness, communication, checkIn, accuracy, location, value, content])
 
   const reset = () => {
     setCleanliness(0);
@@ -46,7 +46,7 @@ const CreateReviewModal = ({ currentListing, owner}) => {
 
 //   console.log(cleanliness)
 //   console.log(communication)
-//   console.log(checkin)
+//   console.log(checkIn)
 //   console.log(accuracy)
 //   console.log(location)
 //   console.log(value)
@@ -59,21 +59,20 @@ const handleSubmit = async (e) => {
       listingId: currentListing.id,
       cleanliness,
       communication,
-      checkin,
+      checkIn,
       accuracy,
       location,
       value,
       content,
       userId:sessionUser.id
     }
-    // console.log(payload)
+    console.log(payload)
     // console.log(errors)
-    let createdReview;
     if(!errors.length) {
-        createdReview = dispatch(createOneReview(payload))
+        await dispatch(createOneReview(payload))
         reset();
+        setShowModal(false)
         setHasSubmitted(false);
-        history.push(`/listings/${currentListing.id}`);
     }
 
   }
@@ -130,7 +129,7 @@ const handleSubmit = async (e) => {
                             <ReactStars
                             count={5}
                             size={30}
-                            value={checkin}
+                            value={checkIn}
                             onChange={checkInRating}
                             activeColor="purple"
                             />

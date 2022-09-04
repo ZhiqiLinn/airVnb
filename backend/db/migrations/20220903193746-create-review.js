@@ -24,15 +24,15 @@ module.exports = {
         allowNull: false,        
         type: Sequelize.INTEGER
       },
-      Accuracy: {
+      accuracy: {
         allowNull: false,        
         type: Sequelize.INTEGER
       },
-      Location: {
+      location: {
         allowNull: false,        
         type: Sequelize.INTEGER
       },
-      Value: {
+      value: {
         allowNull: false,        
         type: Sequelize.INTEGER
       },

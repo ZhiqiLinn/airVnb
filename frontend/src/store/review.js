@@ -84,21 +84,18 @@ export const editOneReview = (data) => async (dispatch) => {
 }
 
 //----------------------- THUNK : CREATE ONE REVIEW--------------------
-export const createOneReview = (data) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+export const createOneReview = (payload) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload)
+  });
+  const review = await response.json();
+  dispatch(add(review));
+  return review;
 
-    if (!response.ok) {
-    const review = await response.json();
-    dispatch(add(review));
-    return review;
-
-};
 }
 
 //----------------------- THUNK : DELETE ONE REVIEW--------------------

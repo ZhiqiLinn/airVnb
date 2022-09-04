@@ -8,18 +8,10 @@ const router = express.Router();
 
 //--------------------------------------VALIDATION FOR POSTING A LISTING---------------------------------------
 const validateListing = [
-    check('title')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Title cannot be empty.'),
     check('content')
       .exists({ checkFalsy: true })
       .notEmpty()
       .withMessage('Please provide a content.'),
-    check('rating')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a rating.'),
     handleValidationErrors
   ];
 
@@ -72,15 +64,25 @@ router.post(
       const validationErrors = validationResult(req);
       const {
         title,
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
         content,
-        rating,
         userId,
         listingId
       } = req.body;
       const NewReview = await Review.create({
         title,
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
         content,
-        rating,
         userId,
         listingId
       });
@@ -125,19 +127,29 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
   const validationErrors = validationResult(req);
   const {
     title,
-    content,
-    rating,
-    userId,
-    listingId} = req.body;
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
+        content,
+        userId,
+        listingId} = req.body;
     
 
   if (validationErrors.isEmpty()) {
     await currReview.update({
-        title,
-        content,
-        rating,
-        userId,
-        listingId})
+      title,
+      cleanliness,
+      communication,
+      checkIn,
+      accuracy,
+      location,
+      value,
+      content,
+      userId,
+      listingId})
     const NewReview = await Review.findByPk(reviewId);
     // console.log("!!!!!THIS IS NEW LISTING", NewReview)
   res.json(NewReview);

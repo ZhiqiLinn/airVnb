@@ -4,10 +4,15 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 import './Reviews.css'
 import CreateReviewModal from '../CreateReviewModal';
+import { getAllReviews } from '../../store/review';
 
-const ReviewsSection = ({allReviews, users}) => {
+const ReviewsSection = ({currentListing, users}) => {
     const dispatch = useDispatch();
+    const allReviews = Object.values(useSelector(state => state.reviewState.reviewData))
 
+    useEffect(() => {
+        dispatch(getAllReviews())
+    },[dispatch])
     //-------------------------GET DATE IN CORRECT FORMAT
     const months = {
         0: 'January',
@@ -108,7 +113,12 @@ const ReviewsSection = ({allReviews, users}) => {
                 }
             </div>
             <div className='reviews-layout'>
-                { allReviews.map( review =>(
+                { allReviews.map( review =>
+                
+                <>
+                {
+                    review.listingId === currentListing.id && 
+                    (
 
                     <div key={review.id} className="single-review">
                         <div className='review-user-details'>
@@ -120,7 +130,9 @@ const ReviewsSection = ({allReviews, users}) => {
                         </div>
                             <div>{review.content}</div>
                     </div>
-                ))
+                )}
+                </>
+                )
                 }
             </div>
                 <hr></hr>

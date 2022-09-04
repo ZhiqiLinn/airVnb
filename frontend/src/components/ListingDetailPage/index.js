@@ -21,7 +21,6 @@ const ListingDetailPage = () => {
     // console.log("-----THIS IS LISTING ID", id) 
     const currentListing = useSelector(state => state.listingState.listingData[id]) 
     // console.log("THIS IS CURR LISTING", currentListing)
-    const allReviews = currentListing.Reviews
     
     //-------------FIND OWNER INFO -------------------
     const users = Object.values(useSelector(state => state.session)); 
@@ -127,7 +126,7 @@ const ListingDetailPage = () => {
                     </div>
                     <hr></hr>
                     <div>
-                        <ReviewsSection allReviews={allReviews} users={users} sessionUser={sessionUser}/>
+                        <ReviewsSection currentListing={currentListing} users={users} sessionUser={sessionUser}/>
                     </div>
                     <div>
                         <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
