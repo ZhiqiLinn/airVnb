@@ -26,6 +26,12 @@ const validateSignup = [
       .withMessage('Password must be 6 characters or more.'),
     handleValidationErrors
   ];
+//-----------------------getInfo------------------------
+router.get('/', asyncHandler(async (_req, res) => {
+  const users = await User.findAll();
+  return res.json(users)
+}))
+
 
 //-----------------------SIGN UP---------------------------
 router.post(
@@ -57,13 +63,7 @@ router.post(
 //     })
 //   }).then(res => res.json()).then(data => console.log(data));
 
-//-----------------------------------------------GET TO USER'S BOOKINGS PAGE---------------------------------------------
-router.get('//:id(\\d+)/bookings', asyncHandler(async (_req, res) => {
-  const userId = parseInt(_req.params.id, 10);
-  const booking = await Booking.findAll({
-      // where: {userId:},
-      order:[['createdAt', 'ASC']]
-  })
-  return res.json(booking);
-}));
+
+
+
 module.exports = router;

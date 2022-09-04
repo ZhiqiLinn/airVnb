@@ -9,7 +9,7 @@ import EditBookingModal from '../EditBookingModal';
 import DeleteBookingModal from '../DeleteBookingModal';
 import './BookingsPage.css';
 
-const BookingsPage = ({allListings}) => {
+const BookingsPage = () => {
     //--------------WHEN SESSION USER IS NOT EXISTS-------------------------
     const dispatch = useDispatch();
     const history = useHistory();
@@ -20,7 +20,7 @@ const BookingsPage = ({allListings}) => {
     // console.log("---------THIS IS ALL BOOKINGS FROM BookingPage COMPONENT", allBookings)
     // console.log("---------THIS IS ALL LISTINGS FROM BookingPage COMPONENT", allListings)
     // console.log("----THIS CURRENT USER ", sessionUser.id)
-    const bookingsArr = Object.values(allBookings).reverse()
+    const bookingsArr = Object.values(allBookings)
     
     useEffect(()=>{
       dispatch(getAllListings())

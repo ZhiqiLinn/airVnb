@@ -1,11 +1,14 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAllListings, getOneListing } from '../../store/listing';
 import DeleteListingModal from '../DeleteListingModal';
 import EditListingModal from '../EditListingModal';
 import CreateBookingPage from '../CreateBookingSection';
+import ReviewsSection from '../ReviewsSection';
+import { getAllUsers } from '../../store/session';
+
 import "./ListingDetail.css"
 
 
@@ -14,13 +17,21 @@ const ListingDetailPage = ({sessionUser}) => {
     const {id} = useParams();
     const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
-    const currentListing = useSelector(state => state.listingState.listingData[id])  
+    const currentListing = useSelector(state => state.listingState.listingData[id]) 
+    const users = Object.values(useSelector(state => state.session)); 
     // console.log("THIS IS CURR LISTING", currentListing)
+    const allReviews = currentListing.Reviews
+
+    // console.log("!!ALL REVIEWS", allReviews)
 
     useEffect(() => {
         dispatch(getAllListings())
         dispatch(getOneListing(id))
+        dispatch(getAllUsers())
+
     },[dispatch])
+
+    
 
     //-------------EDIT AND DELETE SECTION FOR OWNER--------------
 
@@ -105,6 +116,10 @@ const ListingDetailPage = ({sessionUser}) => {
                             <CreateBookingPage currentSessionUser={currentSessionUser} currentListing={currentListing}/>
                         </div>
 
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <ReviewsSection allReviews={allReviews} users={users}/>
                     </div>
 
                 </div>

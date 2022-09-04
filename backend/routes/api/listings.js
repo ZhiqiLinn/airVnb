@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Listing, Booking} = require("../../db/models")
+const { Listing, Booking, Review} = require("../../db/models")
 
 const router = express.Router();
 
@@ -46,6 +46,7 @@ const validateListing = [
 //-----------------------------------------------GET TO LISTINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
     const listing = await Listing.findAll({
+      include:[Booking, Review],
         order:[['createdAt', 'ASC']]
     })
     return res.json(listing);
@@ -67,7 +68,7 @@ router.get('/', asyncHandler(async (_req, res) => {
 //------------------------------------------------GET A LISTING----------------------------------------------
 router.get('/:id(\\d+)', asyncHandler(async function(req, res) {
   const listing = await Listing.findByPk(req.params.id, {
-    include:Booking
+    include:[Booking, Review]
   });
   return res.json(listing);
 }));
