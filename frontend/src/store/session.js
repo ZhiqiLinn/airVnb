@@ -85,7 +85,7 @@ const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ALL_USERS:
-      newState = {};
+      newState = {...state};
       action.users.forEach(user => {
         newState[user.id] = user
       })

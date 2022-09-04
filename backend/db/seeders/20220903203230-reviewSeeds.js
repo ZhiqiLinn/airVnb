@@ -17,11 +17,11 @@ module.exports = {
     },
     {
       content: '2THIS IS A GREAT PLACE!!!!',
-      cleanliness:5,
-      communication:5,
-      checkIn:5,
-      Accuracy:5,
-      Location:5,
+      cleanliness:3,
+      communication:3,
+      checkIn:3,
+      Accuracy:3,
+      Location:3,
       Value:5,
       userId: 2,
       listingId: 1,
@@ -37,7 +37,7 @@ module.exports = {
       Location:5,
       Value:5,
       userId: 3,
-      listingId: 1,
+      listingId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

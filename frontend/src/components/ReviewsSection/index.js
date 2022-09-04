@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ProgressBar from "@ramonak/react-progress-bar";
 
 import './Reviews.css'
+import CreateReviewModal from '../CreateReviewModal';
 
 const ReviewsSection = ({allReviews, users}) => {
     const dispatch = useDispatch();

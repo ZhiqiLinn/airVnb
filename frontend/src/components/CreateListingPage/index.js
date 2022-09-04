@@ -58,10 +58,10 @@ const CreateListingPage = ({sessionUser}) => {
             img3
 
         };
-        createdListing = dispatch(createOneListing(payload))
-  
+        
         // window.open('/listings','_self')
-        if(createdListing && !errors.length) {
+        if(!errors.length) {
+            createdListing = dispatch(createOneListing(payload))
             reset();
             setHasSubmitted(false);
             history.push(`/users/listings`);

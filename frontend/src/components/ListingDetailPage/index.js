@@ -8,25 +8,33 @@ import EditListingModal from '../EditListingModal';
 import CreateBookingPage from '../CreateBookingSection';
 import ReviewsSection from '../ReviewsSection';
 import { getAllUsers } from '../../store/session';
-
+import CreateReviewModal from '../CreateReviewModal'
 import "./ListingDetail.css"
 
 
-const ListingDetailPage = ({sessionUser}) => {
+const ListingDetailPage = () => {
+    const sessionUser = useSelector(state => state.session.user);    
+
     const dispatch = useDispatch();
     const {id} = useParams();
     const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
     const currentListing = useSelector(state => state.listingState.listingData[id]) 
-    const users = Object.values(useSelector(state => state.session)); 
     // console.log("THIS IS CURR LISTING", currentListing)
     const allReviews = currentListing.Reviews
+    
+    //-------------FIND OWNER INFO -------------------
+    const users = Object.values(useSelector(state => state.session)); 
+    const findUser = (userId) => {
+        let result = users.filter(user => user.id === userId);
+        console.log(result)
+        return result[0]
+    }
 
-    // console.log("!!ALL REVIEWS", allReviews)
+    const owner = findUser(currentListing.userId)
 
     useEffect(() => {
         dispatch(getAllListings())
-        dispatch(getOneListing(id))
         dispatch(getAllUsers())
 
     },[dispatch])
@@ -119,7 +127,10 @@ const ListingDetailPage = ({sessionUser}) => {
                     </div>
                     <hr></hr>
                     <div>
-                        <ReviewsSection allReviews={allReviews} users={users}/>
+                        <ReviewsSection allReviews={allReviews} users={users} sessionUser={sessionUser}/>
+                    </div>
+                    <div>
+                        <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
                     </div>
 
                 </div>
