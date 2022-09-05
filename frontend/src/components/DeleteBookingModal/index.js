@@ -7,7 +7,7 @@ function DeleteBookingModal({booking}) {
   
   return (
     <>
-      <button className="btn-hov btn" onClick={() => setShowModal(true)}>Delete Booking</button>
+      <button className="login-btn btn-hov" onClick={() => setShowModal(true)}>Delete </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteBooking booking={booking} hideForm={() => setShowModal(false)}/>

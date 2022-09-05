@@ -19,7 +19,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const users = Object.values(useSelector(state => state.session)); 
   const sessionUser = useSelector(state => state?.session?.user);    
   const allBookings = useSelector(state => state.bookingState.bookingData)
   const allListings = useSelector(state => state.listingState.listingData)  
@@ -52,7 +52,7 @@ function App() {
             <UserListingsPage/>
           </ProtectedRoute>
           <ProtectedRoute path="/users/bookings" exact>
-            <BookingsPage allListings={allListings} />
+            <BookingsPage allListings={allListings} users={users}/>
           </ProtectedRoute>
           <Route path="/about-me" exact>
             <AboutMePage />

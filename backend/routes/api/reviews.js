@@ -2,40 +2,16 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Listing, Booking, Review} = require("../../db/models")
+const { Review, Booking} = require("../../db/models")
 
 const router = express.Router();
 
 //--------------------------------------VALIDATION FOR POSTING A LISTING---------------------------------------
 const validateListing = [
-    check('name')
+    check('content')
       .exists({ checkFalsy: true })
       .notEmpty()
-      .withMessage('Name cannot be empty.'),
-    check('about')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a description.'),
-    check('city')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a city.'),
-    check('state')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a state.'),
-    check('price')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a price.'), 
-    check('serviceFee')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please include your serviceFee.'),
-      check('img1')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide minimum of one image.'),
+      .withMessage('Please provide a content.'),
     handleValidationErrors
   ];
 
@@ -45,11 +21,10 @@ const validateListing = [
 
 //-----------------------------------------------GET TO LISTINGS PAGE---------------------------------------------
 router.get('/', asyncHandler(async (_req, res) => {
-    const listing = await Listing.findAll({
-      include:[Booking, Review],
-        order:[['createdAt', 'ASC']]
+    const review = await Review.findAll({
+        order:[['createdAt', 'DESC']]
     })
-    return res.json(listing);
+    return res.json(review);
   }));
 
     // --FETCH TEST:
@@ -67,10 +42,8 @@ router.get('/', asyncHandler(async (_req, res) => {
 
 //------------------------------------------------GET A LISTING----------------------------------------------
 router.get('/:id(\\d+)', asyncHandler(async function(req, res) {
-  const listing = await Listing.findByPk(req.params.id, {
-    include:[Booking, Review]
-  });
-  return res.json(listing);
+  const review = await Review.findByPk(req.params.id);
+  return res.json(review);
 }));
 
 //FETCH TEST
@@ -90,35 +63,35 @@ router.post(
     asyncHandler(async (req, res) => {
       const validationErrors = validationResult(req);
       const {
+        title,
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
+        content,
         userId,
-        name,
-        about,
-        city,
-        state,
-        price,
-        serviceFee,
-        img1,
-        img2,
-        img3
+        listingId
       } = req.body;
-      const newListing = await Listing.create({
+      const NewReview = await Review.create({
+        title,
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
+        content,
         userId,
-        name,
-        about,
-        city,
-        state,
-        price,
-        serviceFee,
-        img1,
-        img2,
-        img3
+        listingId
       });
 
       if (!validationErrors.isEmpty()) {
           return res.status(422).json({ errors: validationErrors.array() });
       } else {
-          await newListing.save();
-          res.json(newListing);
+          await NewReview.save();
+          res.json(NewReview);
       }
 }));
 
@@ -132,9 +105,9 @@ router.post(
       //     body: JSON.stringify({
       //         userId:"2",
       //         name:"EditnewListing",
-      //         about:"newListing",
-      //         city:"newListing",
-      //         state:"newListing",
+      //         about:"NewReview",
+      //         city:"NewReview",
+      //         state:"NewReview",
       //         price:"100",
       //         serviceFee:"25",
       //         img1:"https://a0.muscache.com/im/pictures/prohost-api/Hosting-50634369/original/ddbbcb9a-0b44-4677-a194-f032d7bbb0d6.jpeg?im_w=1200",
@@ -149,37 +122,37 @@ router.post(
 
 //---------------------------------------------------EDIT A LISTING---------------------------------------------------
 router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) {
-  const listingId = parseInt(req.params.id, 10);
-  let currListing = await Listing.findByPk(listingId);
+  const reviewId = parseInt(req.params.id, 10);
+  let currReview = await Review.findByPk(reviewId);
   const validationErrors = validationResult(req);
   const {
-    userId,
-    name,
-    about,
-    city,
-    state,
-    price,
-    serviceFee,
-    img1,
-    img2,
-    img3} = req.body;
+    title,
+        cleanliness,
+        communication,
+        checkIn,
+        accuracy,
+        location,
+        value,
+        content,
+        userId,
+        listingId} = req.body;
     
 
   if (validationErrors.isEmpty()) {
-    await currListing.update({
+    await currReview.update({
+      title,
+      cleanliness,
+      communication,
+      checkIn,
+      accuracy,
+      location,
+      value,
+      content,
       userId,
-      name,
-      about,
-      city,
-      state,
-      price,
-      serviceFee,
-      img1,
-      img2,
-      img3})
-    const newListing = await Listing.findByPk(listingId);
-    // console.log("!!!!!THIS IS NEW LISTING", newListing)
-  res.json(newListing);
+      listingId})
+    const NewReview = await Review.findByPk(reviewId);
+    // console.log("!!!!!THIS IS NEW LISTING", NewReview)
+  res.json(NewReview);
 } else {
   res.status(422).json({ errors: validationErrors.array() });
 }
@@ -194,10 +167,10 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
       //     },
       //     body: JSON.stringify({
       //         userId:"2",
-      //         name:"newListing",
-      //         about:"newListing",
-      //         city:"newListing",
-      //         state:"newListing",
+      //         name:"NewReview",
+      //         about:"NewReview",
+      //         city:"NewReview",
+      //         state:"NewReview",
       //         price:"100",
       //         serviceFee:"25",
       //         img1:"https://a0.muscache.com/im/pictures/prohost-api/Hosting-50634369/original/ddbbcb9a-0b44-4677-a194-f032d7bbb0d6.jpeg?im_w=1200",
@@ -211,9 +184,9 @@ router.put('/:id(\\d+)', validateListing, asyncHandler(async function(req, res) 
 
 //----------------------------------------------DELETE A LISTING---------------------------------------------
 router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-  const listing = await Listing.findByPk(req.params.id)
-  if (listing) {
-      await listing.destroy()
+  const review = await Review.findByPk(req.params.id)
+  if (review) {
+      await review.destroy()
       res.json({ message: 'Success' })
   } else {
       res.json({ message: 'Fail' })

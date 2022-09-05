@@ -62,7 +62,7 @@ function Navigation({ isLoaded }){
             <NavLink className="navbar-navlink" exact to="/listings">Check All Listings</NavLink>
           </div>
           <div>
-            <NavLink className="navbar-navlink" exact to="/about-me">About Rena</NavLink>
+            <NavLink className="navbar-navlink" exact to="/about-me">About</NavLink>
           </div>
           {isLoaded && sessionLinks}
         </div>

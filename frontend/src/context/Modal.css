@@ -33,3 +33,12 @@
     height: 1000px;
     width:500px;
   }
+
+
+  .card{
+    border-radius: 0.5em;
+    box-shadow: 0 3px 7px rgba(33, 33, 33, 0.2);
+    position: relative;
+    background-color: white;
+    padding: 0.5em;
+  }

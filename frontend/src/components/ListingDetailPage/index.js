@@ -1,26 +1,44 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAllListings, getOneListing } from '../../store/listing';
 import DeleteListingModal from '../DeleteListingModal';
 import EditListingModal from '../EditListingModal';
 import CreateBookingPage from '../CreateBookingSection';
+import ReviewsSection from '../ReviewsSection';
+import { getAllUsers } from '../../store/session';
+import CreateReviewModal from '../CreateReviewModal'
 import "./ListingDetail.css"
 
 
-const ListingDetailPage = ({sessionUser}) => {
+const ListingDetailPage = () => {
+    const sessionUser = useSelector(state => state.session.user);    
+
     const dispatch = useDispatch();
     const {id} = useParams();
     const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
-    const currentListing = useSelector(state => state.listingState.listingData[id])  
+    const currentListing = useSelector(state => state.listingState.listingData[id]) 
     // console.log("THIS IS CURR LISTING", currentListing)
+    
+    //-------------FIND OWNER INFO -------------------
+    const users = Object.values(useSelector(state => state.session)); 
+    const findUser = (userId) => {
+        let result = users.filter(user => user.id === userId);
+        console.log(result)
+        return result[0]
+    }
+
+    const owner = findUser(currentListing.userId)
 
     useEffect(() => {
         dispatch(getAllListings())
-        dispatch(getOneListing(id))
+        dispatch(getAllUsers())
+
     },[dispatch])
+
+    
 
     //-------------EDIT AND DELETE SECTION FOR OWNER--------------
 
@@ -105,6 +123,16 @@ const ListingDetailPage = ({sessionUser}) => {
                             <CreateBookingPage currentSessionUser={currentSessionUser} currentListing={currentListing}/>
                         </div>
 
+                    </div>
+                    <hr></hr>
+                    <div>
+                        <ReviewsSection currentListing={currentListing} users={users} sessionUser={sessionUser}/>
+                    </div>
+                    {/* <div>
+                        <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
+                    </div> */}
+                    <div>
+                        
                     </div>
 
                 </div>

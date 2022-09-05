@@ -51,6 +51,7 @@ export const getAllListingsFromOneUser = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/users/${userId}/listings`);
   if (response.ok) {
       const allListings = await response.json();
+      console.log("one listing", allListings)
       // console.log("GET ALL LISTING THUNK WORKS")
     dispatch(loadUserListing(allListings));
   }

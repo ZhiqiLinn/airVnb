@@ -1,0 +1,42 @@
+.reviews-layout{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:3%
+}
+
+.review-img{
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    font-size: 1.75em;
+    height:40px;
+    width: 40px;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.single-review{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+}
+
+.review-user-details{
+    display: flex;
+}
+
+.rating-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin:2% 3% 3% 3%;
+}
+
+.single-rating{
+    display: flex;
+    gap:5%;
+}
+
+.progress-bar{
+    display: flex;
+    align-items: center;
+}

@@ -7,7 +7,7 @@ function EditBookingModal({booking}) {
   
   return (
     <>
-      <button className="btn-hov btn" onClick={() => setShowModal(true)}>Edit Booking</button>
+      <button className="login-btn btn-hov" onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal className="edit-booking-modal" onClose={() => setShowModal(false)}>
           <EditBooking booking={booking} hideForm={() => setShowModal(false)}/>

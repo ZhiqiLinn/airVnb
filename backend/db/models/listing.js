@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
     Listing.hasMany(models.Booking, {
       foreignKey: 'listingId',
       onDelete: 'CASCADE', 
+      hooks: true  });
+    Listing.hasMany(models.Review, {
+      foreignKey: 'listingId',
+      onDelete: 'CASCADE', 
       hooks: true  })
   };
   return Listing;
