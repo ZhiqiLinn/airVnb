@@ -43,7 +43,7 @@ function App() {
             <CreateListingPage sessionUser={sessionUser}/>
           </ProtectedRoute>
           <Route path="/listings/:id" exact>
-            <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
+            <ListingDetailPage allListings={allListings} sessionUser={sessionUser} users={users}/>
           </Route>
           <ProtectedRoute path="/users" allListings={allListings} exact>
             <UserProfile/>

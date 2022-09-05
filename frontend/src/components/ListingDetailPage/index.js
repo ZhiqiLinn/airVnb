@@ -24,6 +24,7 @@ const ListingDetailPage = () => {
     
     //-------------FIND OWNER INFO -------------------
     const users = Object.values(useSelector(state => state.session)); 
+    console.log(users)
     const findUser = (userId) => {
         let result = users.filter(user => user.id === userId);
         console.log(result)
@@ -132,7 +133,7 @@ const ListingDetailPage = () => {
                         <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
                     </div> */}
                     <div>
-                        
+
                     </div>
 
                 </div>
