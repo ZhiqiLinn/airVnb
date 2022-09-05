@@ -1,7 +1,7 @@
 .reviews-layout{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin:3%;
+    gap:3%
 }
 
 .review-img{
@@ -10,12 +10,15 @@
     border-radius: 50%;
     font-size: 1.75em;
     height:40px;
-    width: 40px;;
+    width: 40px;
+    margin-right: 2%;
+    margin-bottom: 2%;
 }
 
 .single-review{
     display: flex;
     flex-direction: column;
+    margin-bottom: 5%;
 }
 
 .review-user-details{

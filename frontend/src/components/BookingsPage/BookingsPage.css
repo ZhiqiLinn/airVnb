@@ -1,7 +1,10 @@
 
-
 .single-booking-div{
     display: flex;
+    /* border: 1px solid grey;
+    padding: 2%;
+    border-radius: 5px; */
+
 }
 .booking-detail-div{
     margin-left: 10px;
@@ -9,31 +12,79 @@
 
 .notrip-card{
     display: flex;
-    margin: 2em 7em;
-    border-radius: .75em;
+    margin: 3% 0 5% 0;
+    border-radius: 10px;
     border: #E2E2E2 1px solid;
+    justify-content: space-between;
+    width: 90%;
+
 }
+
 .notrip-left{
-    margin: 5%;
+    margin: 5% 0 5% 5%;
 }
+
 .notrip-card-img{
-    width: 600px;
-    height: 328px;
-    border-top-right-radius: .75em;
-    border-bottom-right-radius: .75em;
+    width: 650px;
+    height: 340px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 
 
-.booking-sidebar{
-    display: flex;
-    flex-direction: column;
-}
 .booking-layout{
     display: flex;
+    justify-content: center;
 }
 
 .expired-booking-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin:3%;
+    margin: 3% 5% 5% 0;
+    gap:2%
+
 }
+
+.ongoing-booking-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 3% 5% 5% 0;
+    gap:2%
+}
+.booking-btns-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+.trip-all-expired-booking-container{
+    height:350px;
+    padding: 0 5px 5px;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: relative;
+    margin: 5%;
+}
+
+
+.trip-all-expired-booking-container::-webkit-scrollbar {
+    background-color: transparent;
+    border: 1em solid transparent;
+    width:10px;
+
+  }
+  
+  .trip-all-expired-booking-container::-webkit-scrollbar-track {
+    background-color: rgba(179, 179, 179, 0.4);
+    width:10px;
+    border-radius: 10px;
+  }
+  
+  .trip-all-expired-booking-container::-webkit-scrollbar-thumb {
+    background-color: rgba(146, 146, 146, 0.4);
+    border-radius: 10px;
+    width:10px;
+
+    background-clip: content-box;
+  }

@@ -2,9 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-import "./Reviews.css";
-import CreateReviewModal from "../CreateReviewModal";
 import { getAllReviews } from "../../store/review";
+import "./Reviews.css";
 
 const ReviewsSection = ({ currentListing, users }) => {
   const dispatch = useDispatch();
@@ -101,8 +100,10 @@ const ReviewsSection = ({ currentListing, users }) => {
         <>
           <div>
             <br></br>
-            <i className="fa-solid fa-star fa-sm"></i>
-            {avgForAllRating} · {allReviews.length} reviews
+            <h3>
+              <i className="fa-solid fa-star fa-sm"></i>
+                {` ${avgForAllRating} · ${allReviews.length} reviews`}
+            </h3>
           </div>
           <div className="rating-container">
             {ratings.map((rating) => (
@@ -123,18 +124,16 @@ const ReviewsSection = ({ currentListing, users }) => {
             ))}
           </div>
           <div className="reviews-layout">
-            {allReviews.map((review) => (
+            {!!allReviews.length && allReviews.map((review) => (
               <>
                 {review.listingId === currentListing.id && (
                   <div key={review.id} className="single-review">
                     <div className="review-user-details">
-                      <div>
                         <img
                           className="review-img"
                           src={findUserPic(review.userId)}
                           alt={review.id}
                         ></img>
-                      </div>
                       <div>
                         <div>{findUserName(review.userId)}</div>
                         <div>{correctDateFormat(review.updatedAt)}</div>
@@ -145,6 +144,16 @@ const ReviewsSection = ({ currentListing, users }) => {
                 )}
               </>
             ))}
+            {!allReviews.length && 
+            (
+              <>
+                <h1>No reviews (yet)</h1>
+                <p>Book today and let us know your exprience with the stay.</p>
+              </>
+            )
+            
+            
+            }
           </div>
           <hr></hr>
         </>

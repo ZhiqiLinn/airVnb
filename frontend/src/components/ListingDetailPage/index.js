@@ -128,8 +128,11 @@ const ListingDetailPage = () => {
                     <div>
                         <ReviewsSection currentListing={currentListing} users={users} sessionUser={sessionUser}/>
                     </div>
-                    <div>
+                    {/* <div>
                         <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
+                    </div> */}
+                    <div>
+                        
                     </div>
 
                 </div>
