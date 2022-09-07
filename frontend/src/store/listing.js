@@ -173,9 +173,11 @@ const listingReducer = (state = initialState, action) => {
       case DELETE_Listing:
         const deletedState = {
           ...state,
-          listingData:{...state.listingData}};
+          listingData:{...state.listingData},userListings:{...state.userListings}};
         // console.log("!-----DELETEDSATE BEFORE DELETE", action)
         delete deletedState.listingData[action.deletedListing.id];
+        delete deletedState.userListings[action.deletedListing.id];
+
         // console.log("!--------THIS IS DELETEDSTATE after dewlet,", deletedState)
         return deletedState;
 
