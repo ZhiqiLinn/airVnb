@@ -7,6 +7,7 @@ import splash5 from "../../images/splash5.jpg";
 import { useState, useEffect } from "react";
 import "./HomePage.css"
 import { useHistory } from "react-router-dom";
+import Footer from "../Footer";
 
 const HomePage = () => {
 
@@ -53,7 +54,7 @@ const HomePage = () => {
                         <DemoUserLogin />
                     </div>
                 </div>
-            <p className="copy-right">© Copyright 2022 Zhiqi Lin @appAcademy</p>
+                <Footer />
             </div>
         </>
     )

@@ -4,12 +4,16 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 import { getAllReviews } from "../../store/review";
 import "./Reviews.css";
+import EditReviewModal from "../EditReviewModal.js";
+import Footer from "../Footer";
+import DeleteReviewModal from "../DeleteReviewModal";
 
 const ReviewsSection = ({ currentListing, users }) => {
   const dispatch = useDispatch();
-  const allReviews = Object.values(
+  const Reviews = Object.values(
     useSelector((state) => state.reviewState.reviewData)
   );
+  const allReviews = Reviews.filter(rev => rev.listingId === +currentListing.id)
 
   useEffect(() => {
     dispatch(getAllReviews());
@@ -96,7 +100,38 @@ const ReviewsSection = ({ currentListing, users }) => {
 
   return (
     <>
-      {allReviews && (
+      {allReviews.length === 0 && (
+        <>
+        <div>
+          <br></br>
+          <h3>
+            <i className="fa-solid fa-star fa-sm"></i>
+              {` 0.0 · 0 reviews`}
+          </h3>
+        </div>
+        <div className="rating-container">
+          {ratings.map((rating) => (
+            <div key={rating.name}>
+              <div className="single-rating">
+                <p style={{ width: "100px" }}>{rating.name}</p>
+                <ProgressBar
+                  completed={0}
+                  bgColor="black"
+                  isLabelVisible={false}
+                  height="5px"
+                  width="250px"
+                  className="progress-bar"
+                />
+                <p>0.0</p>
+              </div>
+            </div>
+          ))}
+          </div>
+          <h3> No reviews (yet)... <br></br>Book this listing today and let us know your experience! </h3>
+          </>
+        )}
+  
+      {!!allReviews.length && (
         <>
           <div>
             <br></br>
@@ -138,8 +173,13 @@ const ReviewsSection = ({ currentListing, users }) => {
                         <div>{findUserName(review.userId)}</div>
                         <div>{correctDateFormat(review.updatedAt)}</div>
                       </div>
+                      <div style={{marginTop:"3%", marginLeft:"3%"}}>
+                        <EditReviewModal currentReview={review} currentListing={currentListing} />
+                        <DeleteReviewModal currentReview={review} currentListing={currentListing} />
+                        </div>
                     </div>
-                    <div>{review.content}</div>
+                      <div className="review-content-outer"><p className="review-content">{review.content}</p></div>
+                      
                   </div>
                 )}
               </>
@@ -155,6 +195,7 @@ const ReviewsSection = ({ currentListing, users }) => {
             
             }
           </div>
+          <Footer />
           <hr></hr>
         </>
       )}

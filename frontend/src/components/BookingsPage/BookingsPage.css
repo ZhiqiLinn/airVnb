@@ -1,6 +1,8 @@
 
 .single-booking-div{
     display: flex;
+    text-decoration: none;
+    color:black
     /* border: 1px solid grey;
     padding: 2%;
     border-radius: 5px; */
@@ -21,7 +23,7 @@
 }
 
 .notrip-left{
-    margin: 5% 0 5% 5%;
+    margin: 5%
 }
 
 .notrip-card-img{

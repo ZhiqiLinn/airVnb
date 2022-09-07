@@ -40,8 +40,6 @@ function ProfileButton({ user }) {
       </div>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li><NavLink className="dropdown-menu-navlink" to={`/users`}>Profile</NavLink></li>
-          <hr></hr>
           <li><NavLink className="dropdown-menu-navlink" to={`/users/listings`}>Your Listings</NavLink></li>
           <hr></hr>
           <li><NavLink className="dropdown-menu-navlink" to={`/users/bookings`}>Your Trips</NavLink></li>

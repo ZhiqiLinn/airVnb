@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
+import { ReviewModal } from '../../context/ReviewModal';
 import { createOneReview } from '../../store/review';
 import { useHistory } from "react-router-dom";
 import ReactStars from 'react-stars'
+import './CreateReview.css'
 
 const CreateReviewModal = ({ currentListing, owner}) => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const CreateReviewModal = ({ currentListing, owner}) => {
     if(accuracy <= 0) errors.push("please rate")
     if(location <= 0) errors.push("please rate")
     if(value <= 0) errors.push("please rate")
-    if(!content.length) errors.push("please fill your content")
+    if(!content.length || content.length > 500) errors.push("Content should be between 0 - 500 characters")
     setErrors(errors);
 
   },[cleanliness, communication, checkIn, accuracy, location, value, content])
@@ -100,9 +101,14 @@ const handleSubmit = async (e) => {
                 Review
             </button>
                 {showModal  && (
-                    <Modal onClose={handleClose}>
-                    <h3>{currentListing.name}</h3>
+                    <ReviewModal onClose={handleClose}>
                     <form className='review-form'>
+                        
+                        <br></br>
+                        <h3>{currentListing.name}</h3>
+                        <hr></hr>
+                
+                        <br></br>
                         Please rate your exprience in these areas
                         <div className='rating-container'>
                             <label>Cleanliness</label>
@@ -173,13 +179,14 @@ const handleSubmit = async (e) => {
                         <div>
                             <p>{`Please write a public review for ${owner.username}`}</p>
                                 <textarea
-                                    className="create-listing-input"
+                                    className="create-review-textarea"
                                     placeholder="Share your thoughts"
                                     type='text'
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
                                     required
                                 />
+                            <div style={{fontSize:"small", textAlign:"end"}}>{`${content.length}/500 characters`}</div>
                         </div>
                         <button
                             className='rating-button rating-button-cancel'
@@ -193,7 +200,7 @@ const handleSubmit = async (e) => {
                             disabled={errors.length !== 0}
                         >Submit</button>
                     </form>
-                    </Modal>
+                    </ReviewModal>
                 )}
         </>
     }
