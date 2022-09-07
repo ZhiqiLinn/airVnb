@@ -145,28 +145,28 @@ const BookingsPage = ({ users }) => {
                       )}
                     </p>
                     <p>{`Hosted by ${
-                      findHostName(onGoingBookings[0].Listing.userId)?.username
+                      findHostName(onGoingBookings[0].Listing?.userId)?.username
                     }`}</p>
                   </div>
                   <img
                     className="notrip-card-img"
-                    src={onGoingBookings[0].Listing.img1}
+                    src={onGoingBookings[0].Listing?.img1}
                   ></img>
                 </div>
               </div>
             }
             <h1> Where you're going</h1>
             <div className="ongoing-booking-container">
-              {onGoingBookings.map((booking) => (
+              {onGoingBookings && onGoingBookings.slice(0, 9).map((booking) => (
                 <div className="single-booking-div">
-                  <div>
+                    <NavLink to={`/listings/${booking.listingId}`}>
                     <img
                       src={booking.Listing?.img1}
                       style={{ borderRadius: "10px" }}
                       height="95px"
                       width="95px"
                     ></img>
-                  </div>
+                  </NavLink>
                   <div className="booking-detail-div">
                     <div style={{ fontWeight: "bold" }}>
                       {booking.Listing?.name}
@@ -183,11 +183,11 @@ const BookingsPage = ({ users }) => {
                 </div>
               ))}
             </div>
+            <button className="btn" onClick={() => setShowAllOnGoingBooking(true)}>
+              View All {onGoingBookings.length} Trips
+            </button>
           </>
         )}
-        <button className="btn" onClick={() => setShowAllOnGoingBooking(true)}>
-          View All {onGoingBookings.length} Trips
-        </button>
         {showAllOnGoingBooking && (
           <Modal onClose={() => setShowAllOnGoingBooking(false)}>
             <div>
@@ -196,7 +196,7 @@ const BookingsPage = ({ users }) => {
                 {onGoingBookings &&
                   onGoingBookings.map((booking) => (
                     <div className="single-booking-div">
-                      <div>
+                        <NavLink to={`/listings/${booking.listingId}`}>
                         <img
                           src={booking.Listing?.img1}
                           style={{
@@ -204,8 +204,8 @@ const BookingsPage = ({ users }) => {
                           }}
                           height="120px"
                           width="120px"
-                        ></img>
-                      </div>
+                          ></img>
+                          </NavLink>
                       <div className="booking-detail-div">
                         <div
                           style={{
@@ -217,13 +217,15 @@ const BookingsPage = ({ users }) => {
                         </div>
                         <div>{`Hosted by ${
                           findHostName(booking.Listing?.userId)?.username
-                        }`}</div>
+                        }`}
+                        </div>
                         {DateFormat(booking.checkIn, booking.checkOut)}
                         <div className="booking-btns-div">
                           <EditBookingModal booking={booking} />
                           <DeleteBookingModal booking={booking} />
                         </div>
                       </div>
+                      
                     </div>
                   ))}
               </div>
@@ -235,14 +237,14 @@ const BookingsPage = ({ users }) => {
           {expiredBookings &&
             expiredBookings.slice(0, 9).map((booking) => (
               <div className="single-booking-div">
-                <div>
+                <NavLink to={`/listings/${booking.listingId}`}>
                   <img
                     src={booking.Listing?.img1}
                     style={{ borderRadius: "10px" }}
                     height="95px"
                     width="95px"
                   ></img>
-                </div>
+                </NavLink>
                 <div className="booking-detail-div">
                   <div
                     style={{
@@ -280,7 +282,7 @@ const BookingsPage = ({ users }) => {
                   {expiredBookings &&
                     expiredBookings.map((booking) => (
                       <div className="single-booking-div">
-                        <div>
+                        <NavLink to={`/listings/${booking.listingId}`}>
                           <img
                             src={booking.Listing?.img1}
                             style={{
@@ -289,7 +291,7 @@ const BookingsPage = ({ users }) => {
                             height="95px"
                             width="95px"
                           ></img>
-                        </div>
+                        </NavLink>
                         <div className="booking-detail-div">
                           <div
                             style={{

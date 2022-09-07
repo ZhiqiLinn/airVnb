@@ -42,3 +42,14 @@
     background-color: white;
     padding: 0.5em;
   }
+
+
+  #review-modal-content{
+    position: absolute;
+    background-color:white;
+    border-radius: 10px;
+    height: 700px;
+    width:500px;
+    display: flex;
+    justify-content: center;
+  }

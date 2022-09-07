@@ -12,6 +12,7 @@ import * as sessionActions from "./store/session";
 import * as listingActions from "./store/listing";
 import * as bookingActions from "./store/booking"
 import * as reviewActions from './store/review'
+import { ReviewModalProvider } from "./context/ReviewModal";
 const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
   return (
     <Provider store={store}>
+      <ReviewModalProvider>
       <ListingModalProvider>
         <ModalProvider>
           <BrowserRouter>
@@ -35,6 +37,7 @@ function Root() {
           </BrowserRouter>
         </ModalProvider>
       </ListingModalProvider>
+      </ReviewModalProvider>
     </Provider>
   );
 }

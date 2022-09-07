@@ -8,7 +8,6 @@ import CreateListingPage from "./components/CreateListingPage";
 import HomePage from "./components/HomePage"
 import ListingDetailPage from "./components/ListingDetailPage";
 import BookingsPage from "./components/BookingsPage";
-import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
 import PageNotFound from "./components/PageNotFound"
 import "./index.css"
@@ -45,9 +44,9 @@ function App() {
           <Route path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
           </Route>
-          <ProtectedRoute path="/users" allListings={allListings} exact>
+          {/* <ProtectedRoute path="/users" allListings={allListings} exact>
             <UserProfile/>
-          </ProtectedRoute>
+          </ProtectedRoute> */}
           <ProtectedRoute path="/users/listings" exact>
             <UserListingsPage/>
           </ProtectedRoute>

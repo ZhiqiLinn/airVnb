@@ -30,7 +30,6 @@ const ListingDetailPage = () => {
         return result[0]
     }
 
-    const owner = findUser(currentListing.userId)
 
     useEffect(() => {
         dispatch(getAllListings())
@@ -127,19 +126,18 @@ const ListingDetailPage = () => {
                     <hr></hr>
                     <div>
                         <ReviewsSection currentListing={currentListing} users={users} sessionUser={sessionUser}/>
+
                     </div>
-                    {/* <div>
-                        <CreateReviewModal owner={owner} sessionUser={sessionUser} currentListing={currentListing}/>
-                    </div> */}
+              
                     <div>
                         
                     </div>
 
                 </div>
-
+                
             </>
             
-            }
+        }
         </div>
     )
 
