@@ -8,7 +8,6 @@ import CreateListingPage from "./components/CreateListingPage";
 import HomePage from "./components/HomePage"
 import ListingDetailPage from "./components/ListingDetailPage";
 import BookingsPage from "./components/BookingsPage";
-import UserProfile from "./components/Navigation/UserProfile";
 import UserListingsPage from "./components/UserListingsPage";
 import PageNotFound from "./components/PageNotFound"
 import "./index.css"
