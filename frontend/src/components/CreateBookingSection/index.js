@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { createOneBooking } from "../../store/booking";
+import BookingLogin from "./BookingLogin";
 import './CreateBooking.css'
 
 const CreateBookingPage = ({currentSessionUser, currentListing}) => {
@@ -25,7 +26,8 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
     // console.log("THIS IS CHECKIN DATE", checkInDate)
     // console.log("THIS IS CHECKIN DATE", checkOutDate)
     const night = (checkOutDate-checkInDate)/(1000*3600*24)
-
+    console.log("11", currentSessionUser.id)
+    console.log("22",currentListing.userId)
     //-----------------DISPATCHING ACTION AND HANDLE SUBMIT----------------------
     let createdBooking;
     const handleSubmit = (e) => {
@@ -87,50 +89,64 @@ const CreateBookingPage = ({currentSessionUser, currentListing}) => {
         }
 
     return (
-        <div className='detail-page-booking-container'>
-            <h1 className='booking-modal-title'>Reserve Your Booking</h1>
-            { hasSubmitted && errors &&
-                <div>
-                    {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
-                </div>
-            }
-            <form className='Booking-form' onSubmit={handleSubmit}>
-                <div className="checkin-checkout-div">
-                    <label>
-                        Check In:
-                        <input
-                            className='checkin-checkout-input'
-                            placeholder='CHECK-IN'
-                            type='date'
-                            value={checkIn}
-                            min={`${yyyy}-${mm}-${dd}`}
-                            onChange={(e) => setCheckIn(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <hr></hr>
-                    <label>
-                        Check Out:
-                        <input
-                            className='checkin-checkout-input'
-                            type='date'
-                            placeholder='CHECK-OUT'
-                            value={checkOut}
-                            onChange={(e) => setCheckOut(e.target.value)}
-                            required
-                        />
-                    </label>
-                </div>
-                {calculationCard}
-                <div className='Booking-form-btns-div'>
-                    <button className="booking-reserve-btn btn-hov" type='submit' >
-                            Reserve
-                    </button>
+        <> 
+             <div className='detail-page-booking-container'>
+                    <h1 className='booking-modal-title'>Reserve Your Booking</h1>
+                    { hasSubmitted && errors &&
+                        <div>
+                            {errors.map((error, idx) => <p className='error-text' key={idx}>* {error}</p>)}
+                        </div>
+                    }
+                    <form className='Booking-form' onSubmit={handleSubmit}>
+                        <div className="checkin-checkout-div">
+                            <label>
+                                Check In:
+                                <input
+                                    className='checkin-checkout-input'
+                                    placeholder='CHECK-IN'
+                                    type='date'
+                                    value={checkIn}
+                                    min={`${yyyy}-${mm}-${dd}`}
+                                    onChange={(e) => setCheckIn(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <hr></hr>
+                            <label>
+                                Check Out:
+                                <input
+                                    className='checkin-checkout-input'
+                                    type='date'
+                                    placeholder='CHECK-OUT'
+                                    value={checkOut}
+                                    onChange={(e) => setCheckOut(e.target.value)}
+                                    required
+                                />
+                            </label>
+                        </div>
+                        {calculationCard}
+                        { currentSessionUser !== currentListing.userId && <div className='Booking-form-btns-div'>
+                            <button className="booking-reserve-btn btn-hov" type='submit' >
+                                    Reserve
+                            </button>
 
+
+                        </div>}
+                        { currentSessionUser === currentListing.userId && <div className='Booking-form-btns-div'>
+                            <button className="booking-reserve-btn btn-hov" disabled>
+                                    Reserve 
+                            </button>
+                            <p style={{textAlign:"center"}}>Owner can't make reservation for owned listing. <br></br>This is how your booking card appears for guest</p>
+
+                        </div>}
+
+                    </form>
+                    {!currentSessionUser && <div className='Booking-form-btns-div'>
+                    <BookingLogin listingId={currentListing.id}/>
+                    </div>}
                 </div>
 
-            </form>
-        </div>
+        </>
     )
 }
 
