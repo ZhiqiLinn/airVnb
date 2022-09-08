@@ -13,7 +13,7 @@ import "./ListingDetail.css"
 
 
 const ListingDetailPage = () => {
-    const sessionUser = useSelector(state => state.session.user);    
+    const sessionUser = useSelector(state => state.session?.user);    
 
     const dispatch = useDispatch();
     const {id} = useParams();
