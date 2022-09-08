@@ -17,7 +17,7 @@ const ListingDetailPage = () => {
 
     const dispatch = useDispatch();
     const {id} = useParams();
-    const currentSessionUser = sessionUser.id
+    const currentSessionUser = sessionUser?.id
     // console.log("-----THIS IS LISTING ID", id) 
     const currentListing = useSelector(state => state.listingState.listingData[id]) 
     // console.log("THIS IS CURR LISTING", currentListing)
