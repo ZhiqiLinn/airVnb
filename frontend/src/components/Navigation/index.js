@@ -27,6 +27,12 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
       <div>
+        <NavLink className="navbar-navlink" exact to="/listings">Check All Listings</NavLink>
+      </div>
+      <div>
+        <NavLink className="navbar-navlink" exact to="/about-me">About</NavLink>
+      </div>
+      <div>
         <NavLink exact className="navbar-navlink" to="/listings/new">Become a Host</NavLink>
       </div>
 
@@ -54,16 +60,11 @@ function Navigation({ isLoaded }){
           {/* <img src={icon} height="70px" width="140px"></img> */}
           <span style={{color:"#FF5A5F", fontSize:"45px", marginLeft:'45%'}}>  airvnb</span>
         </div>
-          <div>
+          {sessionUser && <div>
             <SearchBarPage />
-          </div>
+          </div>}
         <div className='navi-right'>
-          <div>
-            <NavLink className="navbar-navlink" exact to="/listings">Check All Listings</NavLink>
-          </div>
-          <div>
-            <NavLink className="navbar-navlink" exact to="/about-me">About</NavLink>
-          </div>
+
           {isLoaded && sessionLinks}
         </div>
     </div>

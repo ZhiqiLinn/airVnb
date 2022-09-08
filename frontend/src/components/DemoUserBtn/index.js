@@ -11,7 +11,7 @@ const  DemoUserLogin = () => {
   const password = "password"
   const history = useHistory();
   if (sessionUser) return (
-    <Redirect to="/" />
+    <Redirect to="/listings" />
   );
 
   const handleSubmit = (e) => {

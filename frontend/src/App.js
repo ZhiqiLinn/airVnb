@@ -35,15 +35,15 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route path="/listings" exact >
+          <ProtectedRoute path="/listings" exact >
             <ListingsPage allListings={allListings} sessionUser={sessionUser}/>
-          </Route>
+          </ProtectedRoute>
           <ProtectedRoute path="/listings/new" exact>
             <CreateListingPage sessionUser={sessionUser}/>
           </ProtectedRoute>
-          <Route path="/listings/:id" exact>
+          <ProtectedRoute path="/listings/:id" exact>
             <ListingDetailPage allListings={allListings} sessionUser={sessionUser}/>
-          </Route>
+          </ProtectedRoute>
           {/* <ProtectedRoute path="/users" allListings={allListings} exact>
             <UserProfile/>
           </ProtectedRoute> */}

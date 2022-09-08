@@ -8,8 +8,10 @@ import { useState, useEffect } from "react";
 import "./HomePage.css"
 import { useHistory } from "react-router-dom";
 import Footer from "../Footer";
+import { useDispatch, useSelector} from "react-redux";
 
 const HomePage = () => {
+    const sessionUser = useSelector(state => state.session.user);
 
     const images = [splash1,splash2,splash3,splash4,splash5];
     const history = useHistory();
@@ -46,9 +48,9 @@ const HomePage = () => {
                     borderRadius:"20px"
                 }}>
                     <div className="home-page-listings-div">
-                            <button onClick={linkToAllListings} className="demo-user-btn btn-hov">
+                           { sessionUser && <button onClick={linkToAllListings} className="demo-user-btn btn-hov">
                                 Explore
-                            </button>
+                            </button>}
                     </div>
                     <div className="home-page-demo-user">
                         <DemoUserLogin />
